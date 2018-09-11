@@ -1,6 +1,9 @@
 package com.epam.training.domain;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -70,5 +73,33 @@ public class Round {
                 ", hits=" + Arrays.toString(hits) +
                 ", outcomes=" + Arrays.toString(outcomes) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Round)) return false;
+
+        Round round1 = (Round) o;
+
+        if (getRound() != round1.getRound()) return false;
+        if (getYear() != null ? !getYear().equals(round1.getYear()) : round1.getYear() != null) return false;
+        if (getWeek() != null ? !getWeek().equals(round1.getWeek()) : round1.getWeek() != null) return false;
+        if (getDate() != null ? !getDate().equals(round1.getDate()) : round1.getDate() != null) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        if (!Arrays.equals(getHits(), round1.getHits())) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(getOutcomes(), round1.getOutcomes());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getYear() != null ? getYear().hashCode() : 0;
+        result = 31 * result + (getWeek() != null ? getWeek().hashCode() : 0);
+        result = 31 * result + getRound();
+        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(getHits());
+        result = 31 * result + Arrays.hashCode(getOutcomes());
+        return result;
     }
 }

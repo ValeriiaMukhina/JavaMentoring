@@ -30,16 +30,18 @@ public class InputParser {
             return Outcomes.SECOND_TEAM_WIN;
         } else if (input.toLowerCase().contains("x")) {
             return Outcomes.DRAW;
-        } else return null;
+        } else {
+            System.err.println("Invalid entry found.");
+            return null;
+        }
     }
 
     public static BigDecimal parseCurrencyToBigDecimal(String input) {
-        return new BigDecimal(input.replace("UAH","").replace(" ", ""));
+        return new BigDecimal(input.replace("UAH", "").replace(" ", ""));
     }
 
-
     private static boolean isWeek(String input) {
-        return true;
+        return input.matches("^(5[0-3]|[1-4][0-9]|[1-9])$");
     }
 
     public static Integer parseInteger(String input) {
@@ -83,6 +85,4 @@ public class InputParser {
         NumberFormat formatter = new DecimalFormat("#0.00");
         return formatter.format(input);
     }
-
-
 }

@@ -1,8 +1,5 @@
 package com.epam.training.utils;
 
-//This class reads all input values and returns array of double numbers.
-//Chars are not allowed
-
 import com.epam.training.domain.Outcomes;
 
 import java.time.LocalDate;
@@ -19,31 +16,6 @@ public class ConsoleReader {
         scan = new Scanner(System.in);
     }
 
-    public static double[] readDoublesFromConsole(int length) {
-        // Scanner scan = new Scanner(System.in);
-
-        double[] arr = new double[length];
-        for (int x = 0; x < arr.length; x++) {
-            boolean done = false;
-            while (!done) {
-                System.out.println("Enter a value " + (x + 1) + " :");
-                String str = scan.nextLine();
-                double val;
-                try {
-                    val = Double.parseDouble(str);
-                    if (verifyInput(val)) {
-                        arr[x] = val;
-                        done = true;
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Please enter a number value.");
-                }
-
-            }
-        }
-        // scan.close();
-        return arr;
-    }
 
     public static int[] readIntegersFromConsole(int length) {
         Scanner scan = new Scanner(System.in);
@@ -118,19 +90,22 @@ public class ConsoleReader {
         String str = scan.nextLine();
 
         return str;
-
     }
 
     public static LocalDate readDate() {
         Scanner scan = new Scanner(System.in);
         boolean done = false;
-        LocalDate answer = null;
+        LocalDate localDate = null;
         while (!done) {
             String str = scan.nextLine();
-            answer = parseLocalDate(str);
-            done = true;
+            localDate = parseLocalDate(str);
+            if (localDate != null) {
+                done = true;
+            } else {
+                System.out.println("Please enter a Y/N value.");
+            }
         }
-        return answer;
+        return localDate;
     }
 
     public static Outcomes[] readOutcomes() {

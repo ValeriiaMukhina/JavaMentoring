@@ -1,12 +1,15 @@
 package com.epam.training.runner;
 
 import com.epam.training.domain.Outcomes;
+import com.epam.training.domain.Round;
 import com.epam.training.service.TotoService;
 import com.epam.training.utils.ConsoleReader;
+import com.epam.training.utils.FileUtils;
 import com.epam.training.utils.Printer;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.epam.training.utils.InputParser.convertToCurrency;
 
@@ -25,26 +28,29 @@ public class AppRunner {
             Printer.printToConsole("Choose an option: ");
 
             int choice = ConsoleReader.readOneIntegerFromConsole();
-            TotoService service = new TotoService("toto_limited.csv");
+            List<Round> rounds = FileUtils.readFromCsv("toto_limited.csv");
+            TotoService service = new TotoService();
             switch (choice) {
                 case 1:
                     try {
-                        BigDecimal prize = service.getLargestPrizeEverRecorded();
+                        BigDecimal prize = service.getLargestPrizeEverRecorded(rounds);
+                        Printer.printToConsole("the largest prize ever recorded:");
                         Printer.printToConsole(convertToCurrency(prize));
+                        Printer.printToConsole("==============================");
                     } catch (Throwable throwable) {
                         throwable.printStackTrace();
                     }
                     break;
                 case 2:
-                    service.calculateDistribution();
+                    service.calculateDistribution(rounds);
                     break;
                 case 3:
                     Printer.printToConsole("Enter date in format 'yyyy.MM.dd.': ");
                     LocalDate localDate = ConsoleReader.readDate();
                     Printer.printToConsole("Enter predicted outcomes: ");
                     Outcomes[] predictedOutcomes = ConsoleReader.readOutcomes();
-                    int numberOfHits = service.getNumberOfHits(localDate, predictedOutcomes);
-                    BigDecimal prize = service.getYourPrize(localDate, numberOfHits);
+                    int numberOfHits = service.getNumberOfHits(rounds, localDate, predictedOutcomes);
+                    BigDecimal prize = service.getYourPrize(rounds, localDate, numberOfHits);
                     String result =
                             "\n" +
                                     "Results: " +

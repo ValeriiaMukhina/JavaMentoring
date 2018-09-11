@@ -3,7 +3,6 @@ package com.epam.training.utils;
 import com.epam.training.domain.Hit;
 import com.epam.training.domain.Outcomes;
 import com.epam.training.domain.Round;
-import com.epam.training.exceptions.UnsuppotedOperationException;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -17,10 +16,10 @@ import java.util.Map;
 import static com.epam.training.utils.InputParser.*;
 
 
-public class FileReaderHelper {
+public class FileUtils {
 
-    private FileReaderHelper() {
-        throw new UnsuppotedOperationException("Utility class");
+    private FileUtils() {
+        throw new UnsupportedOperationException("Utility class");
     }
 
     public static List<Round> readFromCsv(String fileName) {
@@ -123,6 +122,6 @@ public class FileReaderHelper {
 
     private static File getFile(String fileName) {
         //  String FILE_NAME = "toto_limited.csv";
-        return new File(FileReaderHelper.class.getClassLoader().getResource(fileName).getFile());
+        return new File(FileUtils.class.getClassLoader().getResource(fileName).getFile());
     }
 }
