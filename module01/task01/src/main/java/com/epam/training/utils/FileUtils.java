@@ -119,7 +119,6 @@ public class FileUtils {
     }
 
     private static File getFile(String fileName) {
-        //  String FILE_NAME = "toto_limited.csv";
         return new File(FileUtils.class.getClassLoader().getResource(fileName).getFile());
     }
 }

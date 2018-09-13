@@ -1,9 +1,5 @@
 package com.epam.training.domain;
 
-
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 

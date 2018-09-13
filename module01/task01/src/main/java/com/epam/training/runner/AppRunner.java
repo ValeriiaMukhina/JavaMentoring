@@ -23,7 +23,7 @@ public class AppRunner {
             Printer.printToConsole("==============================");
             Printer.printToConsole("(1) Print the largest prize ever recorded");
             Printer.printToConsole("(2) calculate the distribution of the 1/2/X results of each round");
-            Printer.printToConsole("(3) the hits and amount for the wager");
+            Printer.printToConsole("(3) Choose date of game, suggest outcomes and calculate the hits and amount for the wager");
             Printer.printToConsole("(4) Exit");
             Printer.printToConsole("Choose an option: ");
 

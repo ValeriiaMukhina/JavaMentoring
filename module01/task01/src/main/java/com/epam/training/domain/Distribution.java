@@ -30,7 +30,7 @@ public class Distribution {
     }
 
     private double getPercentage(long value, int total) {
-        return (double) value / (double) total;
+        return Math.round(((double) value / (double) total) * 10000.0) / 10000.0;
     }
 
     private void calculateWinsNumberForEachTeam() {

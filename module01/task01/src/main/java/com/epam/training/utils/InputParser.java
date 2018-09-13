@@ -13,6 +13,7 @@ import java.time.format.DateTimeParseException;
 public class InputParser {
 
     private InputParser() {
+        throw new UnsupportedOperationException("Utility class");
     }
 
     public static String parseYear(String input) {
@@ -49,14 +50,12 @@ public class InputParser {
     }
 
     public static LocalDate parseLocalDate(String input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.");
-        LocalDate localDate;
         try {
-            localDate = LocalDate.parse(input, formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.");
+            return LocalDate.parse(input, formatter);
         } catch (DateTimeParseException e) {
-            localDate = null;
+            return null;
         }
-        return localDate;
     }
 
     private static boolean isInteger(String strNum) {

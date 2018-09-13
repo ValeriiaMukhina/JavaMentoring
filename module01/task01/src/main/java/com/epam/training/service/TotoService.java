@@ -42,17 +42,18 @@ public class TotoService {
         return getPrizeForHitsNumber(round, hitsNumber);
     }
 
-    public BigDecimal getPrizeForHitsNumber(Round round, int hitsNumber) {
+    public BigDecimal getPrizeForHitsNumber(Round round, Integer hitsNumber) {
+        if(hitsNumber < 10) {return BigDecimal.valueOf(0);}
         Hit[] hits = round.getHits();
-        Hit actualHit = Arrays.stream(hits).filter(hit -> hit.getNumberOfHits() == hitsNumber).findFirst().
-                orElseThrow(IllegalArgumentException::new);
+        Hit actualHit = Arrays.stream(hits).filter(hit -> hitsNumber.equals(hit.getNumberOfHits())).findFirst().
+                orElseThrow(() -> new IllegalArgumentException("For this date information in csv is corrupted"));
         return actualHit.getPrice();
     }
 
 
     public Round getRoundOnDate(List<Round> rounds, LocalDate dateOfGame) {
         return rounds.stream()
-                .filter(round -> round.getDate().equals(dateOfGame))
+                .filter(round -> dateOfGame.equals(round.getDate()))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("No data found for specified date"));
     }
 

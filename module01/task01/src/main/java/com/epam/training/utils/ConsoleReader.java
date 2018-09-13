@@ -102,7 +102,7 @@ public class ConsoleReader {
             if (localDate != null) {
                 done = true;
             } else {
-                System.out.println("Please enter a Y/N value.");
+                System.out.println("Please enter a valid date.");
             }
         }
         return localDate;
@@ -111,9 +111,16 @@ public class ConsoleReader {
     public static Outcomes[] readOutcomes() {
         Scanner scan = new Scanner(System.in);
         Outcomes[] outcomes = new Outcomes[14];
-        String str = scan.nextLine();
-        for (int i = 0; i < outcomes.length; i++) {
-            outcomes[i] = parseOutcome(str.substring(i, i + 1));
+        boolean done = false;
+        while (!done) {
+            String str = scan.nextLine();
+            if (str.length() != 14) {
+                System.out.println("Please enter 14 outcomes:");
+            }
+            for (int i = 0; i < outcomes.length; i++) {
+                outcomes[i] = parseOutcome(str.substring(i, i + 1));
+            }
+            done = true;
         }
         return outcomes;
     }

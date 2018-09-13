@@ -50,9 +50,7 @@ public class Hit {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Hit)) return false;
-
         Hit hit = (Hit) o;
-
         if (getNumberOfHits() != hit.getNumberOfHits()) return false;
         if (getNumberOfGames() != hit.getNumberOfGames()) return false;
         return getPrice() != null ? getPrice().equals(hit.getPrice()) : hit.getPrice() == null;
