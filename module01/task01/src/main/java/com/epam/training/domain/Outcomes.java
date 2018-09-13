@@ -8,7 +8,7 @@ public enum Outcomes {
 
     private String notation;
 
-    private Outcomes(String notation) {
+    Outcomes(String notation) {
         this.notation = notation;
     }
 

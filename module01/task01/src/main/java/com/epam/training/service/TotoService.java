@@ -14,8 +14,7 @@ import java.util.Optional;
 
 public class TotoService {
 
-    public BigDecimal getLargestPrizeEverRecorded(List<Round> rounds) throws Throwable {
-
+    public BigDecimal getLargestPrizeForAllGames(List<Round> rounds) throws Throwable {
         Optional largestPrize = rounds.stream()
                 .flatMap(x -> Arrays.stream(x.getHits()))
                 .map(Hit::getPrice)
@@ -23,20 +22,29 @@ public class TotoService {
         return (BigDecimal) largestPrize.orElseThrow(IllegalArgumentException::new);
     }
 
-    public int getNumberOfHits(List<Round> rounds, LocalDate dateOfGame, Outcomes[] supposedOutcomes) {
-        int numberOfHits = 0;
-        Round round = getRoundOnDate(rounds, dateOfGame);
+    public int getHitsNumber(Round round, Outcomes[] supposedOutcomes) {
+        int hitsNumber = 0;
         Outcomes[] actualOutcomes = round.getOutcomes();
         for (int i = 0; i < supposedOutcomes.length; i++) {
-            if (supposedOutcomes[i].equals(actualOutcomes[i])) numberOfHits++;
+            if (supposedOutcomes[i].equals(actualOutcomes[i])) hitsNumber++;
         }
-        return numberOfHits;
+        return hitsNumber;
     }
 
-    public BigDecimal getYourPrize(List<Round> rounds, LocalDate dateOfGame, int numberOfHits) {
+    public int getHitsNumberForYourBet(List<Round> rounds, LocalDate dateOfGame, Outcomes[] supposedOutcomes) {
         Round round = getRoundOnDate(rounds, dateOfGame);
+        return getHitsNumber(round,supposedOutcomes);
+    }
+
+    public BigDecimal getPrizeForYourBet(List<Round> rounds, LocalDate dateOfGame, Outcomes[] supposedOutcomes) {
+        Round round = getRoundOnDate(rounds, dateOfGame);
+        int hitsNumber = getHitsNumber(round,supposedOutcomes);
+        return getPrizeForHitsNumber(round, hitsNumber);
+    }
+
+    public BigDecimal getPrizeForHitsNumber(Round round, int hitsNumber) {
         Hit[] hits = round.getHits();
-        Hit actualHit = Arrays.stream(hits).filter(hit -> hit.getNumberOfHits() == numberOfHits).findFirst().
+        Hit actualHit = Arrays.stream(hits).filter(hit -> hit.getNumberOfHits() == hitsNumber).findFirst().
                 orElseThrow(IllegalArgumentException::new);
         return actualHit.getPrice();
     }
@@ -48,7 +56,11 @@ public class TotoService {
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("No data found for specified date"));
     }
 
-    public void calculateDistribution(List<Round> rounds) {
+    public void printDistributions(List<Round> rounds) {
         rounds.stream().map(Distribution::new).forEach(System.out::println);
+    }
+
+    public Distribution getDistribution(Round round) {
+        return new Distribution(round);
     }
 }

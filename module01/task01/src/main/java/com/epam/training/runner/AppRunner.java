@@ -33,7 +33,7 @@ public class AppRunner {
             switch (choice) {
                 case 1:
                     try {
-                        BigDecimal prize = service.getLargestPrizeEverRecorded(rounds);
+                        BigDecimal prize = service.getLargestPrizeForAllGames(rounds);
                         Printer.printToConsole("the largest prize ever recorded:");
                         Printer.printToConsole(convertToCurrency(prize));
                         Printer.printToConsole("==============================");
@@ -42,20 +42,20 @@ public class AppRunner {
                     }
                     break;
                 case 2:
-                    service.calculateDistribution(rounds);
+                    service.printDistributions(rounds);
                     break;
                 case 3:
                     Printer.printToConsole("Enter date in format 'yyyy.MM.dd.': ");
-                    LocalDate localDate = ConsoleReader.readDate();
-                    Printer.printToConsole("Enter predicted outcomes: ");
+                    LocalDate gameDate = ConsoleReader.readDate();
+                    Printer.printToConsole("Enter predicted outcomes (for example, 21xx11x221x122): ");
                     Outcomes[] predictedOutcomes = ConsoleReader.readOutcomes();
-                    int numberOfHits = service.getNumberOfHits(rounds, localDate, predictedOutcomes);
-                    BigDecimal prize = service.getYourPrize(rounds, localDate, numberOfHits);
+                    int hitsNumber = service.getHitsNumberForYourBet(rounds, gameDate, predictedOutcomes);
+                    BigDecimal prize = service.getPrizeForYourBet(rounds, gameDate, predictedOutcomes);
                     String result =
                             "\n" +
                                     "Results: " +
                                     "Hits " +
-                                     + numberOfHits +
+                                     + hitsNumber +
                                     " Prize: " +
                                     convertToCurrency(prize)+
                                     "\n";

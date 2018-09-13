@@ -111,8 +111,6 @@ public class FileUtils {
                 round.setOutcomes(outcomes);
                 linesFromCsv.add(round);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
