@@ -16,7 +16,6 @@ import static com.epam.training.utils.InputParser.convertToCurrency;
 public class AppRunner {
 
     public void start() {
-
         boolean exit = false;
         while (!exit) {
             Printer.printToConsole("Welcome");
@@ -29,41 +28,49 @@ public class AppRunner {
 
             int choice = ConsoleReader.readOneIntegerFromConsole();
             List<Round> rounds = FileUtils.readFromCsv("toto_limited.csv");
-            TotoService service = new TotoService();
             switch (choice) {
                 case 1:
-                    try {
-                        BigDecimal prize = service.getLargestPrizeForAllGames(rounds);
-                        Printer.printToConsole("the largest prize ever recorded:");
-                        Printer.printToConsole(convertToCurrency(prize));
-                        Printer.printToConsole("==============================");
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
+                    performLargestPrizeTask(rounds);
                     break;
                 case 2:
-                    service.printDistributions(rounds);
+                    new TotoService().printDistributions(rounds);
                     break;
                 case 3:
-                    Printer.printToConsole("Enter date in format 'yyyy.MM.dd.': ");
-                    LocalDate gameDate = ConsoleReader.readDate();
-                    Printer.printToConsole("Enter predicted outcomes (for example, 21xx11x221x122): ");
-                    Outcomes[] predictedOutcomes = ConsoleReader.readOutcomes();
-                    int hitsNumber = service.getHitsNumberForYourBet(rounds, gameDate, predictedOutcomes);
-                    BigDecimal prize = service.getPrizeForYourBet(rounds, gameDate, predictedOutcomes);
-                    String result =
-                            "\n" +
-                                    "Results: " +
-                                    "Hits " +
-                                     + hitsNumber +
-                                    " Prize: " +
-                                    convertToCurrency(prize)+
-                                    "\n";
-                    Printer.printToConsole(result);
+                    performBettingTask(rounds);
                     break;
                 case 4:
                     exit = true;
+                    break;
+                default:
+                    exit = true;
             }
         }
+    }
+
+    private void performBettingTask(List<Round> rounds) {
+        TotoService service = new TotoService();
+        Printer.printToConsole("Enter date in format 'yyyy.MM.dd.': ");
+        LocalDate gameDate = ConsoleReader.readDate();
+        Printer.printToConsole("Enter predicted outcomes (for example, 21xx11x221x122): ");
+        Outcomes[] predictedOutcomes = ConsoleReader.readOutcomes();
+        int hitsNumber = service.getHitsNumberForYourBet(rounds, gameDate, predictedOutcomes);
+        BigDecimal prize = service.getPrizeForYourBet(rounds, gameDate, predictedOutcomes);
+        String result =
+                "\n" +
+                        "Results: " +
+                        "Hits " +
+                        +hitsNumber +
+                        " Prize: " +
+                        convertToCurrency(prize) +
+                        "\n";
+        Printer.printToConsole(result);
+    }
+
+    private void performLargestPrizeTask(List<Round> rounds) {
+            TotoService service = new TotoService();
+            BigDecimal prize = service.getLargestPrizeForAllGames(rounds);
+            Printer.printToConsole("the largest prize ever recorded:");
+            Printer.printToConsole(convertToCurrency(prize));
+            Printer.printToConsole("==============================");
     }
 }

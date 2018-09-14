@@ -4,6 +4,7 @@ import com.epam.training.domain.Distribution;
 import com.epam.training.domain.Hit;
 import com.epam.training.domain.Outcomes;
 import com.epam.training.domain.Round;
+import com.epam.training.exception.ExpectedDataNotFoundException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,12 +15,12 @@ import java.util.Optional;
 
 public class TotoService {
 
-    public BigDecimal getLargestPrizeForAllGames(List<Round> rounds) throws Throwable {
+    public BigDecimal getLargestPrizeForAllGames(List<Round> rounds) {
         Optional largestPrize = rounds.stream()
                 .flatMap(x -> Arrays.stream(x.getHits()))
                 .map(Hit::getPrice)
                 .max(Comparator.naturalOrder());
-        return (BigDecimal) largestPrize.orElseThrow(IllegalArgumentException::new);
+        return (BigDecimal) largestPrize.<ExpectedDataNotFoundException>orElseThrow(() -> new ExpectedDataNotFoundException("Largest prize cannot be found. Something wrong with input data"));
     }
 
     public int getHitsNumber(Round round, Outcomes[] supposedOutcomes) {
@@ -33,20 +34,22 @@ public class TotoService {
 
     public int getHitsNumberForYourBet(List<Round> rounds, LocalDate dateOfGame, Outcomes[] supposedOutcomes) {
         Round round = getRoundOnDate(rounds, dateOfGame);
-        return getHitsNumber(round,supposedOutcomes);
+        return getHitsNumber(round, supposedOutcomes);
     }
 
     public BigDecimal getPrizeForYourBet(List<Round> rounds, LocalDate dateOfGame, Outcomes[] supposedOutcomes) {
         Round round = getRoundOnDate(rounds, dateOfGame);
-        int hitsNumber = getHitsNumber(round,supposedOutcomes);
+        int hitsNumber = getHitsNumber(round, supposedOutcomes);
         return getPrizeForHitsNumber(round, hitsNumber);
     }
 
     public BigDecimal getPrizeForHitsNumber(Round round, Integer hitsNumber) {
-        if(hitsNumber < 10) {return BigDecimal.valueOf(0);}
+        if (hitsNumber < 10) {
+            return BigDecimal.valueOf(0);
+        }
         Hit[] hits = round.getHits();
         Hit actualHit = Arrays.stream(hits).filter(hit -> hitsNumber.equals(hit.getNumberOfHits())).findFirst().
-                orElseThrow(() -> new IllegalArgumentException("For this date information in csv is corrupted"));
+                orElseThrow(() -> new ExpectedDataNotFoundException("For this date information in csv is corrupted"));
         return actualHit.getPrice();
     }
 
@@ -54,7 +57,7 @@ public class TotoService {
     public Round getRoundOnDate(List<Round> rounds, LocalDate dateOfGame) {
         return rounds.stream()
                 .filter(round -> dateOfGame.equals(round.getDate()))
-                .findFirst().orElseThrow(() -> new IllegalArgumentException("No data found for specified date"));
+                .findFirst().orElseThrow(() -> new ExpectedDataNotFoundException("No data found for specified date"));
     }
 
     public void printDistributions(List<Round> rounds) {
