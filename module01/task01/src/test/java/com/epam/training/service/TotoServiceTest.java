@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TotoServiceTest {
 
-    public List<Round> rounds;
+    private List<Round> rounds;
 
     @Before
     public void setUpTestData() {
@@ -57,12 +57,12 @@ public class TotoServiceTest {
         round2.setWeek("43");
         round2.setRound(2);
         round2.setDate(parseLocalDate("2015.10.26."));
-        Hit hit14_2 = new Hit(14, 99, parseCurrencyToBigDecimal("164 630 UAH"));
-        Hit hit13_2 = new Hit(13, 23, parseCurrencyToBigDecimal("16 415 UAH"));
-        Hit hit12_2 = new Hit(12, 1738, parseCurrencyToBigDecimal("865 UAH"));
-        Hit hit11_2 = new Hit(11, 10187, parseCurrencyToBigDecimal("145 UAH"));
-        Hit hit10_2 = new Hit(10, 32184, parseCurrencyToBigDecimal("90 UAH"));
-        round2.setHits(new Hit[]{hit14_2, hit13_2, hit12_2, hit11_2, hit10_2});
+        Hit hit142 = new Hit(14, 99, parseCurrencyToBigDecimal("164 630 UAH"));
+        Hit hit132 = new Hit(13, 23, parseCurrencyToBigDecimal("16 415 UAH"));
+        Hit hit122 = new Hit(12, 1738, parseCurrencyToBigDecimal("865 UAH"));
+        Hit hit112 = new Hit(11, 10187, parseCurrencyToBigDecimal("145 UAH"));
+        Hit hit102 = new Hit(10, 32184, parseCurrencyToBigDecimal("90 UAH"));
+        round2.setHits(new Hit[]{hit142, hit132, hit122, hit112, hit102});
         Outcomes[] outcomes2 = new Outcomes[]{
                 Outcomes.FIRST_TEAM_WIN,
                 Outcomes.FIRST_TEAM_WIN,
@@ -82,11 +82,10 @@ public class TotoServiceTest {
         rounds = new ArrayList<>();
         rounds.add(round1);
         rounds.add(round2);
-
     }
 
     @Test
-    public void testGetLargestPrizeEverRecorded() throws Throwable {
+    public void testGetLargestPrizeEverRecorded() {
         assertEquals(new BigDecimal("164630"), new TotoService().getLargestPrizeForAllGames(rounds));
     }
 
@@ -127,5 +126,4 @@ public class TotoServiceTest {
         assertEquals(0.43, new TotoService().getDistribution(rounds.get(0)).getSecondTeamWinsPercentage(), 0.1);
         assertEquals(0, new TotoService().getDistribution(rounds.get(0)).getDrawPercentage(), 0.1);
     }
-
 }
