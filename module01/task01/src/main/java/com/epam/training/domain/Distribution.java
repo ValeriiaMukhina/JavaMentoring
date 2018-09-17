@@ -1,6 +1,7 @@
 package com.epam.training.domain;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static com.epam.training.utils.InputParser.formatDoubles;
 
@@ -68,35 +69,20 @@ public class Distribution {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Distribution)) return false;
-
+        if (o == null || getClass() != o.getClass()) return false;
         Distribution that = (Distribution) o;
-
-        if (firstTeamWinsNumber != that.firstTeamWinsNumber) return false;
-        if (secondTeamWinsNumber != that.secondTeamWinsNumber) return false;
-        if (drawsNumber != that.drawsNumber) return false;
-        if (totalNumberOfGames != that.totalNumberOfGames) return false;
-        if (Double.compare(that.getFirstTeamWinsPercentage(), getFirstTeamWinsPercentage()) != 0) return false;
-        if (Double.compare(that.getSecondTeamWinsPercentage(), getSecondTeamWinsPercentage()) != 0) return false;
-        if (Double.compare(that.getDrawPercentage(), getDrawPercentage()) != 0) return false;
-        return round.equals(that.round);
+        return firstTeamWinsNumber == that.firstTeamWinsNumber &&
+                secondTeamWinsNumber == that.secondTeamWinsNumber &&
+                drawsNumber == that.drawsNumber &&
+                totalNumberOfGames == that.totalNumberOfGames &&
+                Double.compare(that.firstTeamWinsPercentage, firstTeamWinsPercentage) == 0 &&
+                Double.compare(that.secondTeamWinsPercentage, secondTeamWinsPercentage) == 0 &&
+                Double.compare(that.drawPercentage, drawPercentage) == 0 &&
+                Objects.equals(round, that.round);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = round.hashCode();
-        result = 31 * result + (int) (firstTeamWinsNumber ^ (firstTeamWinsNumber >>> 32));
-        result = 31 * result + (int) (secondTeamWinsNumber ^ (secondTeamWinsNumber >>> 32));
-        result = 31 * result + (int) (drawsNumber ^ (drawsNumber >>> 32));
-        result = 31 * result + totalNumberOfGames;
-        temp = Double.doubleToLongBits(getFirstTeamWinsPercentage());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getSecondTeamWinsPercentage());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getDrawPercentage());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        return Objects.hash(round, firstTeamWinsNumber, secondTeamWinsNumber, drawsNumber, totalNumberOfGames, firstTeamWinsPercentage, secondTeamWinsPercentage, drawPercentage);
     }
 }

@@ -2,6 +2,7 @@ package com.epam.training.domain;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Round {
     private String year;
@@ -74,28 +75,21 @@ public class Round {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Round)) return false;
-
+        if (o == null || getClass() != o.getClass()) return false;
         Round round1 = (Round) o;
-
-        if (getRound() != round1.getRound()) return false;
-        if (getYear() != null ? !getYear().equals(round1.getYear()) : round1.getYear() != null) return false;
-        if (getWeek() != null ? !getWeek().equals(round1.getWeek()) : round1.getWeek() != null) return false;
-        if (getDate() != null ? !getDate().equals(round1.getDate()) : round1.getDate() != null) return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        if (!Arrays.equals(getHits(), round1.getHits())) return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(getOutcomes(), round1.getOutcomes());
+        return round == round1.round &&
+                Objects.equals(year, round1.year) &&
+                Objects.equals(week, round1.week) &&
+                Objects.equals(date, round1.date) &&
+                Arrays.equals(hits, round1.hits) &&
+                Arrays.equals(outcomes, round1.outcomes);
     }
 
     @Override
     public int hashCode() {
-        int result = getYear() != null ? getYear().hashCode() : 0;
-        result = 31 * result + (getWeek() != null ? getWeek().hashCode() : 0);
-        result = 31 * result + getRound();
-        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(getHits());
-        result = 31 * result + Arrays.hashCode(getOutcomes());
+        int result = Objects.hash(year, week, round, date);
+        result = 31 * result + Arrays.hashCode(hits);
+        result = 31 * result + Arrays.hashCode(outcomes);
         return result;
     }
 }
