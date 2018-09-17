@@ -85,7 +85,7 @@ public class TotoServiceTest {
     }
 
     @Test
-    public void testGetLargestPrizeEverRecorded() {
+    public void testGetLargestPrizeEverRecorded() throws Throwable {
         assertEquals(new BigDecimal("164630"), new TotoService().getLargestPrizeForAllGames(rounds));
     }
 

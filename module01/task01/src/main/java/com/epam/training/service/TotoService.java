@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class TotoService {
 
-    public BigDecimal getLargestPrizeForAllGames(List<Round> rounds) {
+    public BigDecimal getLargestPrizeForAllGames(List<Round> rounds) throws Throwable{
         Optional largestPrize = rounds.stream()
                 .flatMap(x -> Arrays.stream(x.getHits()))
                 .map(Hit::getPrice)

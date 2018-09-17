@@ -68,8 +68,13 @@ public class AppRunner {
 
     private void performLargestPrizeTask(List<Round> rounds) {
             TotoService service = new TotoService();
-            BigDecimal prize = service.getLargestPrizeForAllGames(rounds);
-            Printer.printToConsole("the largest prize ever recorded:");
+        BigDecimal prize = null;
+        try {
+            prize = service.getLargestPrizeForAllGames(rounds);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        Printer.printToConsole("the largest prize ever recorded:");
             Printer.printToConsole(convertToCurrency(prize));
             Printer.printToConsole("==============================");
     }
