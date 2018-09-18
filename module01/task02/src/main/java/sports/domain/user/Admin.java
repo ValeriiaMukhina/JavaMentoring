@@ -1,4 +1,4 @@
 package sports.domain.user;
 
-public class Admin {
+public class Admin extends User {
 }

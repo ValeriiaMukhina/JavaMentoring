@@ -1,4 +1,4 @@
 package sports.domain.betting;
 
-public class FootballSportEvent {
+public class FootballSportEvent extends SportEvent{
 }

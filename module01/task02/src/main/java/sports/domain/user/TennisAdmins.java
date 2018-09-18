@@ -1,4 +1,4 @@
 package sports.domain.user;
 
-public class TennisAdmins {
+public class TennisAdmins extends UserGroup{
 }
