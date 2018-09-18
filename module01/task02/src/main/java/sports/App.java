@@ -1,5 +1,7 @@
 package sports;
 
+import sports.runner.AppRunner;
+
 /**
  * Hello world!
  *
@@ -8,6 +10,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        new AppRunner().start();
     }
 }

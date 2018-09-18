@@ -3,6 +3,7 @@ package sports.utils;
 import sports.domain.betting.Currency;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 
@@ -151,9 +152,12 @@ public class ConsoleReader {
         Scanner scan = new Scanner(System.in);
         boolean done = false;
         LocalDate localDate = null;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         while (!done) {
             String str = scan.nextLine();
-          //  localDate = parseLocalDate(str);
+            localDate = LocalDate.parse(str, formatter);
             if (localDate != null) {
                 done = true;
             } else {

@@ -9,6 +9,7 @@ public abstract class SportEvent {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+
     public String getTitle() {
         return title;
     }

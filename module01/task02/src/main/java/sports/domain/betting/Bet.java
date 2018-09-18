@@ -67,4 +67,39 @@ public class Bet {
                 ", type=" + type +
                 '}';
     }
+
+    private Bet() {}
+
+    public static Builder newBuilder() {
+        return new Bet().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() {}
+
+        public Builder setSportEvent(SportEvent sportEvent) {
+            Bet.this.sportEvent = sportEvent;
+            return this;
+        }
+
+        public Builder setDescription(String description) {
+            Bet.this.description = description;
+            return this;
+        }
+
+        public Builder setOutcome(Outcome outcome) {
+            Bet.this.outcomes.add(outcome);
+            return this;
+        }
+
+        public Builder setBetType(BetTypes betType) {
+            Bet.this.type = betType;
+            return this;
+        }
+
+        public Bet build() {
+            return Bet.this;
+        }
+    }
 }
