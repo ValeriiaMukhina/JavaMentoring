@@ -1,12 +1,10 @@
 package sports.utils;
 
-import com.epam.training.domain.Outcomes;
+import sports.domain.betting.Currency;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import static com.epam.training.utils.InputParser.parseLocalDate;
-import static com.epam.training.utils.InputParser.parseOutcome;
 
 public class ConsoleReader {
 
@@ -46,8 +44,41 @@ public class ConsoleReader {
         return arr;
     }
 
+    public static double[] readDoublesFromConsole(int length) {
+        Scanner scan = new Scanner(System.in);
+
+        double[] arr = new double[length];
+        for (int x = 0; x < arr.length; x++) {
+            boolean done = false;
+            while (!done) {
+                if (length > 1) {
+                    System.out.println("Enter a value " + (x + 1) + " :");
+                }
+
+                String str = scan.nextLine();
+                double val;
+                try {
+                    val = Double.parseDouble(str);
+                    if (verifyInput(val)) {
+                        arr[x] = val;
+                        done = true;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a number value.");
+                }
+
+            }
+        }
+        // scan.close();
+        return arr;
+    }
+
     public static int readOneIntegerFromConsole() {
         return readIntegersFromConsole(1)[0];
+    }
+
+    public static double readOneDoubleFromConsole() {
+        return readDoublesFromConsole(1)[0];
     }
 
     public static boolean readYNFromConsole() {
@@ -68,6 +99,30 @@ public class ConsoleReader {
         }
         return answer;
     }
+
+
+    public static Currency readCurrencyFromConsole() {
+        boolean done = false;
+        Currency answer = null;
+        while (!done) {
+
+            String str = scan.nextLine();
+            if (str.equalsIgnoreCase("EUR")) {
+                answer = Currency.EUR;
+                done = true;
+            } else if (str.equalsIgnoreCase("HUF")) {
+                answer = Currency.HUF;
+                done = true;
+            } else if (str.equalsIgnoreCase("USD")) {
+                answer = Currency.USD;
+                done = true;
+            } else {
+                System.out.println("Please enter EUR/HUF/USD value.");
+            }
+        }
+        return answer;
+    }
+
 
     public void close() {
         scan.close();
@@ -98,7 +153,7 @@ public class ConsoleReader {
         LocalDate localDate = null;
         while (!done) {
             String str = scan.nextLine();
-            localDate = parseLocalDate(str);
+          //  localDate = parseLocalDate(str);
             if (localDate != null) {
                 done = true;
             } else {
@@ -108,20 +163,5 @@ public class ConsoleReader {
         return localDate;
     }
 
-    public static Outcomes[] readOutcomes() {
-        Scanner scan = new Scanner(System.in);
-        Outcomes[] outcomes = new Outcomes[14];
-        boolean done = false;
-        while (!done) {
-            String str = scan.nextLine();
-            if (str.length() != 14) {
-                System.out.println("Please enter 14 outcomes:");
-            }
-            for (int i = 0; i < outcomes.length; i++) {
-                outcomes[i] = parseOutcome(str.substring(i, i + 1));
-            }
-            done = true;
-        }
-        return outcomes;
-    }
+
 }
