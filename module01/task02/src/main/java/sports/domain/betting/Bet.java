@@ -1,13 +1,70 @@
 package sports.domain.betting;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Bet {
 
-    private SportEvent SportEvent;
+    private SportEvent sportEvent;
     private String description;
-    private List<String> outcomes;
+    private List<Outcome> outcomes;
     private BetTypes type;
 
+    public SportEvent getSportEvent() {
+        return sportEvent;
+    }
 
+    public void setSportEvent(SportEvent sportEvent) {
+        this.sportEvent = sportEvent;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Outcome> getOutcomes() {
+        return outcomes;
+    }
+
+    public void setOutcomes(List<Outcome> outcomes) {
+        this.outcomes = outcomes;
+    }
+
+    public BetTypes getType() {
+        return type;
+    }
+
+    public void setType(BetTypes type) {
+        this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bet bet = (Bet) o;
+        return Objects.equals(sportEvent, bet.sportEvent) &&
+                Objects.equals(description, bet.description) &&
+                Objects.equals(outcomes, bet.outcomes) &&
+                type == bet.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sportEvent, description, outcomes, type);
+    }
+
+    @Override
+    public String toString() {
+        return "Bet{" +
+                "sportEvent=" + sportEvent +
+                ", description='" + description + '\'' +
+                ", outcomes=" + outcomes +
+                ", type=" + type +
+                '}';
+    }
 }
