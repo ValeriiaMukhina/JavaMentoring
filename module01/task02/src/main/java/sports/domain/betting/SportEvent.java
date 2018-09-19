@@ -1,6 +1,7 @@
 package sports.domain.betting;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class SportEvent {
@@ -8,6 +9,8 @@ public abstract class SportEvent {
     private String title;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private List<Bet> bets;
+    private Result eventResult;
 
 
     public String getTitle() {
@@ -34,6 +37,22 @@ public abstract class SportEvent {
         this.endDate = endDate;
     }
 
+    public List<Bet> getBets() {
+        return bets;
+    }
+
+    public void setBets(List<Bet> bets) {
+        this.bets = bets;
+    }
+
+    public Result getEventResult() {
+        return eventResult;
+    }
+
+    public void setEventResult(Result eventResult) {
+        this.eventResult = eventResult;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,12 +60,13 @@ public abstract class SportEvent {
         SportEvent that = (SportEvent) o;
         return Objects.equals(title, that.title) &&
                 Objects.equals(startDate, that.startDate) &&
-                Objects.equals(endDate, that.endDate);
+                Objects.equals(endDate, that.endDate) &&
+                Objects.equals(bets, that.bets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, startDate, endDate);
+        return Objects.hash(title, startDate, endDate, bets);
     }
 
     @Override
@@ -55,6 +75,7 @@ public abstract class SportEvent {
                 "title='" + title + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", bets=" + bets +
                 '}';
     }
 }

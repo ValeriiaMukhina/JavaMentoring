@@ -2,11 +2,14 @@ package sports.runner;
 
 import sports.domain.betting.*;
 import sports.domain.user.Player;
+import sports.service.Service;
 import sports.utils.ConsoleReader;
 import sports.utils.Printer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppRunner {
 
@@ -17,12 +20,16 @@ public class AppRunner {
         Player player = getPlayer();
         salutateNewPlayer(player);
 
-        boolean exit = false;
-        while (!exit) {
+        List<SportEvent> sportEvents = createTestData();
+        Service service = new Service();
+       service.listAllBets(sportEvents).forEach(possibleBet -> System.out.println(possibleBet.toString()));
 
-
-
-        }
+//        boolean exit = false;
+//        while (!exit) {
+//
+//
+//
+//        }
     }
 
     private void salutateNewPlayer(Player player) {
@@ -46,7 +53,9 @@ public class AppRunner {
     }
 
 
-    private void createTestData() {
+
+    public static List<SportEvent> createTestData() {
+        List<SportEvent> sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
                 .setTitle("Southampton v Bournemoth")
                 .setStartDate(LocalDateTime.of(2016, 10,7,19,0))
@@ -83,6 +92,8 @@ public class AppRunner {
                 .setOutcome(outcome113)
                 .build();
 
+        footballSportEvent.getBets().add(betFootball1);
+
         Outcome outcome121 = Outcome.newBuilder()
                 .setValue("0")
                 .setOdd(new OutcomeOdd(1.75, LocalDateTime.of(2016, 9,27,19,0)))
@@ -106,6 +117,7 @@ public class AppRunner {
                 .setOutcome(outcome123)
                 .build();
 
+        footballSportEvent.getBets().add(betFootball2);
 
         TennisSportEvent tennisSportEvent = TennisSportEvent.newBuilder()
                 .setTitle("Rafael Nadal vs. Alexander Zverev, Indian Wells 4th Round")
@@ -130,6 +142,11 @@ public class AppRunner {
                 .setOutcome(outcome212)
                 .build();
 
+        tennisSportEvent.getBets().add(betTennis1);
+        sportEvents.add(tennisSportEvent);
+        sportEvents.add(footballSportEvent);
+
+        return sportEvents;
     }
 
 

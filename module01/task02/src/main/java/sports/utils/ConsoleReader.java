@@ -103,6 +103,7 @@ public class ConsoleReader {
 
 
     public static Currency readCurrencyFromConsole() {
+        Scanner scan = new Scanner(System.in);
         boolean done = false;
         Currency answer = null;
         while (!done) {
@@ -139,7 +140,7 @@ public class ConsoleReader {
 
 
     public static String readFromConsole() {
-        //Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         //boolean done = false;
 
         System.out.println("Enter a string: ");
