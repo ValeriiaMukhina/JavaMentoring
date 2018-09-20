@@ -1,9 +1,6 @@
 package sports.service;
 
-import sports.domain.betting.Bet;
-import sports.domain.betting.Outcome;
-import sports.domain.betting.OutcomeOdd;
-import sports.domain.betting.SportEvent;
+import sports.domain.betting.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,8 +46,18 @@ public class Service {
             StringBuilder descriptionBuilder = new StringBuilder( "Bet on ")
                     .append(sportEvent.getTitle())
                     .append(", ")
-                    .append(bet.getDescription())
-                    .append(outcome.getValue())
+                    .append(bet.getDescription());
+                    if(BetTypes.BETTING_FOR_WINNER.equals(bet.getType())) {
+                        descriptionBuilder.append("The winner will be ");
+                    }
+                    else if(BetTypes.BETTING_FOR_PLAYERS_SCORE.equals(bet.getType()))
+                    {
+
+                    }
+                    else if(BetTypes.BETTING_FOR_GOALS.equals(bet.getType())){
+
+            }
+                        descriptionBuilder.append(outcome.getValue())
                     .append( ". The odd on this is ")
                     .append(outcomeOdd.getOddValue())
                     .append(", valid from ")
