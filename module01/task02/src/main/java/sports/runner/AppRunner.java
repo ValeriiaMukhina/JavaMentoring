@@ -17,8 +17,8 @@ public class AppRunner {
 
         Printer.printToConsole("Welcome");
         Printer.printToConsole("==============================");
-        Player player = getPlayer();
-        salutateNewPlayer(player);
+       // Player player = getPlayer();
+      //  salutateNewPlayer(player);
 
         List<SportEvent> sportEvents = createTestData();
         Service service = new Service();

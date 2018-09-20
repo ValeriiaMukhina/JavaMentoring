@@ -1,12 +1,13 @@
 package sports.domain.betting;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Outcome {
 
     private String value;
-    private List<OutcomeOdd> outcomeOdds;
+    private List<OutcomeOdd> outcomeOdds = new ArrayList<>();
 
     public String getValue() {
         return value;

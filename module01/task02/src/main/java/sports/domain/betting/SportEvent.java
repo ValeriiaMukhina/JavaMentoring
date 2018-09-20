@@ -1,6 +1,7 @@
 package sports.domain.betting;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public abstract class SportEvent {
     private String title;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private List<Bet> bets;
+    private List<Bet> bets = new ArrayList<>();
     private Result eventResult;
 
 

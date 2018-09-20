@@ -1,5 +1,6 @@
 package sports.domain.betting;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ public class Bet {
 
     private SportEvent sportEvent;
     private String description;
-    private List<Outcome> outcomes;
+    private List<Outcome> outcomes = new ArrayList<>();
     private BetTypes type;
 
     public SportEvent getSportEvent() {
