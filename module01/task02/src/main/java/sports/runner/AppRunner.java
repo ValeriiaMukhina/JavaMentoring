@@ -57,7 +57,7 @@ public class AppRunner {
     public static List<SportEvent> createTestData() {
         List<SportEvent> sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
-                .setTitle("Southampton v Bournemoth")
+                .setTitle("Southampton vs Bournemoth")
                 .setStartDate(LocalDateTime.of(2016, 10,7,19,0))
                 .setEndDate(LocalDateTime.of(2016, 10,7,21,0))
                 .build();
@@ -105,7 +105,7 @@ public class AppRunner {
                 .build();
 
         Outcome outcome123 = Outcome.newBuilder()
-                .setValue(">2")
+                .setValue(" > 2")
                 .setOdd(new OutcomeOdd(1.05, LocalDateTime.of(2016, 9,27,19,0)))
                 .build();
 
