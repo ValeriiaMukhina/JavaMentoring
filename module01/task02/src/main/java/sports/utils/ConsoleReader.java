@@ -4,6 +4,7 @@ import sports.domain.betting.Currency;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 
@@ -60,10 +61,8 @@ public class ConsoleReader {
                 double val;
                 try {
                     val = Double.parseDouble(str);
-                    if (verifyInput(val)) {
                         arr[x] = val;
                         done = true;
-                    }
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a number value.");
                 }
@@ -139,6 +138,7 @@ public class ConsoleReader {
     }
 
 
+
     public static String readFromConsole() {
         Scanner scan = new Scanner(System.in);
         //boolean done = false;
@@ -147,6 +147,27 @@ public class ConsoleReader {
         String str = scan.nextLine();
 
         return str;
+    }
+
+    public static int readOption(int maxValue) {
+        Scanner scan = new Scanner(System.in);
+        boolean done = false;
+        int val = 0;
+
+        while (!done) {
+            String str = scan.nextLine();
+            if("q".equals(str)) {return val;}
+            try {
+                val = Integer.parseInt(str);
+                if (val <= maxValue) {
+                    done = true;
+                }
+                else {System.out.println("Please enter a valid number from 1 to " + maxValue + " or q.");}
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number from 1 to" + maxValue + " or q.");
+            }
+        }
+        return val;
     }
 
     public static LocalDate readDate() {
@@ -158,15 +179,19 @@ public class ConsoleReader {
 
         while (!done) {
             String str = scan.nextLine();
-            localDate = LocalDate.parse(str, formatter);
+            try {
+                localDate = LocalDate.parse(str, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Please enter a valid date.");
+            }
             if (localDate != null) {
                 done = true;
-            } else {
-                System.out.println("Please enter a valid date.");
             }
         }
         return localDate;
     }
+
+
 
 
 }

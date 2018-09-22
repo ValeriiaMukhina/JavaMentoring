@@ -50,4 +50,5 @@ public class Player extends User{
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
 }

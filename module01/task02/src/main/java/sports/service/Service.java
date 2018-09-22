@@ -3,13 +3,16 @@ package sports.service;
 import sports.domain.betting.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Service {
 
     public List<PossibleBetDescription> listAllBets(List<SportEvent> sportEvents) {
+        AtomicInteger numberOfBet = new AtomicInteger(1);
         List<PossibleBetDescription> possibleBets = new LinkedList<>();
         sportEvents.forEach(
 
@@ -23,6 +26,7 @@ public class Service {
                                         ).forEach(
                                                 outcomeOdd -> possibleBets.add(
                                                         new PossibleBetDescription(
+                                                                numberOfBet.getAndIncrement(),
                                                                 event,
                                                                 bet,
                                                                 outcome,
@@ -37,38 +41,49 @@ public class Service {
     }
 
 
-    public class PossibleBetDescription {
-        private String description;
+    public void generateResults(List<SportEvent> sportEvents) {
+        Random rand = new Random();
+        sportEvents.forEach(
+                sportEvent -> {
+                    List<Outcome> realOutcomes = new ArrayList<>();
 
-        private PossibleBetDescription(SportEvent sportEvent, Bet bet, Outcome outcome, OutcomeOdd outcomeOdd) {
-            StringBuilder descriptionBuilder = new StringBuilder("Bet on ")
-                    .append(sportEvent.getTitle())
-                    .append(" sport event, ")
-                    .append(bet.getDescription());
-            if (BetTypes.BETTING_FOR_WINNER.equals(bet.getType())) {
-                descriptionBuilder.append("The winner will be ");
-            } else if (BetTypes.BETTING_FOR_PLAYERS_SCORE.equals(bet.getType())) {
-                descriptionBuilder.append("The player will score ");
-            } else if (BetTypes.BETTING_FOR_GOALS.equals(bet.getType())) {
-                descriptionBuilder.append("The number of scored goals will be ");
-            }
-            descriptionBuilder.append(outcome.getValue())
-                    .append(". The odd on this is ")
-                    .append(outcomeOdd.getOddValue())
-                    .append(", valid from ")
-                    .append(outcomeOdd.getValidFrom().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM")));
-            if (outcomeOdd.getValidTo() != null) {
-                descriptionBuilder.append(" to ")
-                        .append(outcomeOdd.getValidTo().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:MM")));
-            }
-            description = descriptionBuilder.toString();
-        }
+                    sportEvent.getBets().forEach(
+                            bet -> {
+                                int winOutcome = rand.nextInt(bet.getOutcomes().size());
+                                realOutcomes.add(bet.getOutcomes().get(winOutcome));
+                            }
 
-        @Override
-        public String toString() {
-            return description;
-        }
+                    );
+                    sportEvent.setEventResult(new Result(realOutcomes));
+                }
+        );
     }
 
 
+    public PossibleBetDescription getPossibleBetDescriptionByIndex(List<PossibleBetDescription> bets, int index) {
+        return bets.get(index - 1);
+    }
+
+
+    public double calculatePrize(List<SportEvent> sportEvents, List<Wager> wagers) {
+        final double[] prize = {0};
+        sportEvents.stream().filter(sportEvent -> sportEvent.getEventResult() != null).forEach(
+                sportEvent -> {
+                    sportEvent.getEventResult().getRealOutcomes().forEach(
+                            outcome -> {
+                                System.out.println(outcome + " has won");
+                                wagers.forEach(
+                                        wager -> {
+                                            if (wager.processWin(outcome.getOutcomeOdd())) {
+                                                System.out.println("You have won " + wager.getAmount() + " " + wager.getPlayer().getCurrency());
+                                                prize[0] = wager.getAmount();
+                                            }
+                                        }
+                                );
+                            });
+                }
+
+        );
+        return prize[0];
+    }
 }

@@ -41,12 +41,8 @@ public class Outcome {
 
     @Override
     public String toString() {
-        return "Outcome{" +
-                "value='" + value + '\'' +
-                ", outcomeOdd=" + outcomeOdds +
-                '}';
+        return "Outcome with value " + value;
     }
-
 
     private Outcome() {}
 

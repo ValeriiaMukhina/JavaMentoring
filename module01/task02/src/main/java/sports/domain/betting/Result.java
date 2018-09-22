@@ -1,6 +1,18 @@
 package sports.domain.betting;
 
+import java.util.List;
+
 public class Result {
 
-    //multiple outcomes of a match, e.g.: 5 goals shot, the arsenal won, Oliver Giroud scored 2 goals
+    private String description;
+    private List<Outcome> realOutcomes;
+
+    public List<Outcome> getRealOutcomes() {
+        return realOutcomes;
+    }
+
+    public Result(List<Outcome> realOutcomes) {
+        this.realOutcomes = realOutcomes;
+
+    }
 }
