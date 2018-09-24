@@ -32,7 +32,7 @@ public class ConsoleReader {
                 int val;
                 try {
                     val = Integer.parseInt(str);
-                    if (verifyInput(val)) {
+                    if (true) {
                         arr[x] = val;
                         done = true;
                     }
@@ -129,14 +129,6 @@ public class ConsoleReader {
         scan.close();
     }
 
-    public static boolean verifyInput(double val) {
-        if (val < 1 || val > 4) {
-            System.out.println("Error : Choose an option between 1 and 4");
-            return false;
-        }
-        return true;
-    }
-
 
 
     public static String readFromConsole() {
@@ -164,7 +156,7 @@ public class ConsoleReader {
                 }
                 else {System.out.println("Please enter a valid number from 1 to " + maxValue + " or q.");}
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number from 1 to" + maxValue + " or q.");
+                System.out.println("Please enter a valid number from 1 to " + maxValue + " or q.");
             }
         }
         return val;
@@ -190,8 +182,4 @@ public class ConsoleReader {
         }
         return localDate;
     }
-
-
-
-
 }

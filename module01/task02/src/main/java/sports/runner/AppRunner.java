@@ -30,11 +30,11 @@ public class AppRunner {
         List<PossibleBetDescription> possibleBetDescriptions = service.listAllBets(sportEvents);
 
         while (!exit) {
-            int answer = askForABet(possibleBetDescriptions);
+            int answer = askToChooseBet(possibleBetDescriptions);
             if (answer == 0) {
                 exit = true;
-                getResults(sportEvents, service);
-                double prize = service.calculatePrize(sportEvents, wagers);
+                service.generateResults(sportEvents);
+                service.calculatePrize(sportEvents, wagers);
             } else {
                 createNewWage(wagers, service, player, possibleBetDescriptions, answer);
             }
@@ -58,15 +58,9 @@ public class AppRunner {
         }
     }
 
-    private void getResults(List<SportEvent> sportEvents, Service service) {
-        Printer.printToConsole("Results: ");
-        service.generateResults(sportEvents);
-    }
-
-    private int askForABet(List<PossibleBetDescription> possibleBetDescriptions) {
+    private int askToChooseBet(List<PossibleBetDescription> possibleBetDescriptions) {
         Printer.printToConsole("> Please choose an outcome to bet on! (choose a number or press q for quit)");
         possibleBetDescriptions.forEach(possibleBet -> System.out.println(possibleBet.toString()));
-
         return ConsoleReader.readOption(possibleBetDescriptions.size());
     }
 
