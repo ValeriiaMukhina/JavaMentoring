@@ -69,7 +69,8 @@ public class Bet {
                 '}';
     }
 
-    private Bet() {}
+    private Bet() {
+    }
 
     public static Builder newBuilder() {
         return new Bet().new Builder();
@@ -77,7 +78,8 @@ public class Bet {
 
     public class Builder {
 
-        private Builder() {}
+        private Builder() {
+        }
 
         public Builder setSportEvent(SportEvent sportEvent) {
             Bet.this.sportEvent = sportEvent;

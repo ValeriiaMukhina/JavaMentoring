@@ -44,7 +44,8 @@ public class Outcome {
         return "Outcome with value " + value;
     }
 
-    private Outcome() {}
+    private Outcome() {
+    }
 
     public static Builder newBuilder() {
         return new Outcome().new Builder();
@@ -52,7 +53,8 @@ public class Outcome {
 
     public class Builder {
 
-        private Builder() {}
+        private Builder() {
+        }
 
         public Builder setValue(String value) {
             Outcome.this.value = value;

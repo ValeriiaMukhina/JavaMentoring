@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import sports.domain.betting.*;
 import sports.domain.user.Player;
-import sports.runner.TestDataGenerator;
 import sports.service.Service;
 
 import java.time.LocalDateTime;
@@ -12,22 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for Service
  */
-public class ServiceTest
-{
-    List<SportEvent> sportEvents;
-    Outcome outcome;
-    Bet betFootball;
-    Service service;
-    Player player;
+public class ServiceTest {
+    private List<SportEvent> sportEvents;
+    private Outcome outcome;
+    private Service service;
+    private Player player;
 
     @Before
     public void generateTestData() {
-       sportEvents = new ArrayList<>();
+        sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
                 .setTitle("Test Sport Event")
                 .setStartDate(LocalDateTime.of(2016, 10, 7, 19, 0))
@@ -37,7 +33,7 @@ public class ServiceTest
                 .setValue("test outcome")
                 .setOdd(new OutcomeOdd(5.0, LocalDateTime.of(2016, 9, 30, 19, 0)))
                 .build();
-        betFootball = Bet.newBuilder()
+        Bet betFootball = Bet.newBuilder()
                 .setBetType(BetTypes.BETTING_FOR_WINNER)
                 .setDescription("--")
                 .setOutcome(outcome)
@@ -53,8 +49,7 @@ public class ServiceTest
     }
 
     @Test
-    public void testCalculatePrize()
-    {
+    public void testCalculatePrize() {
         List<Wager> wagers = new ArrayList<>();
         List<Outcome> outcomes = new ArrayList<>();
         outcomes.add(outcome);

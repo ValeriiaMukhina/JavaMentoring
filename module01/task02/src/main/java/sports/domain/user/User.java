@@ -1,5 +1,7 @@
 package sports.domain.user;
 
+import java.util.Objects;
+
 public class User {
     private String email;
     private String password;
@@ -36,5 +38,31 @@ public class User {
 
     public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return isEnabled == user.isEnabled &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(userGroup, user.userGroup);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password, isEnabled, userGroup);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", isEnabled=" + isEnabled +
+                ", userGroup=" + userGroup +
+                '}';
     }
 }

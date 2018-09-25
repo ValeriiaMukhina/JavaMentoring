@@ -2,10 +2,10 @@ package sports.domain.betting;
 
 import java.time.LocalDateTime;
 
-public class TennisSportEvent extends SportEvent{
+public class TennisSportEvent extends SportEvent {
 
-    private TennisSportEvent() {}
-
+    private TennisSportEvent() {
+    }
 
     public static Builder newBuilder() {
         return new TennisSportEvent().new Builder();
@@ -13,7 +13,8 @@ public class TennisSportEvent extends SportEvent{
 
     public class Builder {
 
-        private Builder() {}
+        private Builder() {
+        }
 
         public Builder setTitle(String title) {
             TennisSportEvent.this.setTitle(title);

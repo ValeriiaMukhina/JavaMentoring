@@ -3,6 +3,7 @@ package sports.domain.user;
 import sports.domain.betting.Currency;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Player extends User{
     private String name;
@@ -51,4 +52,31 @@ public class Player extends User{
         this.dateOfBirth = dateOfBirth;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Double.compare(player.balance, balance) == 0 &&
+                Objects.equals(name, player.name) &&
+                Objects.equals(accountNumber, player.accountNumber) &&
+                currency == player.currency &&
+                Objects.equals(dateOfBirth, player.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, accountNumber, balance, currency, dateOfBirth);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", balance=" + balance +
+                ", currency=" + currency +
+                ", dateOfBirth=" + dateOfBirth +
+                "} " + super.toString();
+    }
 }

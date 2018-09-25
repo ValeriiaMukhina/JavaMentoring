@@ -1,6 +1,7 @@
 package sports.service;
 
 import sports.domain.betting.*;
+import sports.utils.Printer;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -71,11 +72,11 @@ public class Service {
                 sportEvent -> {
                     sportEvent.getEventResult().getRealOutcomes().forEach(
                             outcome -> {
-                                System.out.println(outcome + " has won");
+                                Printer.printToConsole(outcome + " has won");
                                 wagers.forEach(
                                         wager -> {
                                             if (wager.processWin(outcome.getOutcomeOdd())) {
-                                                System.out.println("You have won " + wager.getAmount() + " " + wager.getPlayer().getCurrency());
+                                                Printer.printToConsole("You have won " + wager.getAmount() + " " + wager.getPlayer().getCurrency());
                                                 prize[0] = wager.getAmount();
                                             }
                                         }

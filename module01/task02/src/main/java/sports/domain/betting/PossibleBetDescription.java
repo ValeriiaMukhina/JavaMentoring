@@ -1,6 +1,7 @@
 package sports.domain.betting;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class PossibleBetDescription {
 
@@ -47,5 +48,23 @@ public class PossibleBetDescription {
     @Override
     public String toString() {
         return description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PossibleBetDescription that = (PossibleBetDescription) o;
+        return numberOfBet == that.numberOfBet &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(sportEvent, that.sportEvent) &&
+                Objects.equals(bet, that.bet) &&
+                Objects.equals(outcome, that.outcome) &&
+                Objects.equals(outcomeOdd, that.outcomeOdd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, numberOfBet, sportEvent, bet, outcome, outcomeOdd);
     }
 }

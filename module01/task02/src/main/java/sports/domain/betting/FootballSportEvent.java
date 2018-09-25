@@ -2,10 +2,10 @@ package sports.domain.betting;
 
 import java.time.LocalDateTime;
 
-public class FootballSportEvent extends SportEvent{
+public class FootballSportEvent extends SportEvent {
 
-    private FootballSportEvent() {}
-
+    private FootballSportEvent() {
+    }
 
     public static Builder newBuilder() {
         return new FootballSportEvent().new Builder();
@@ -13,7 +13,8 @@ public class FootballSportEvent extends SportEvent{
 
     public class Builder {
 
-        private Builder() {}
+        private Builder() {
+        }
 
         public Builder setTitle(String title) {
             FootballSportEvent.this.setTitle(title);
@@ -33,7 +34,6 @@ public class FootballSportEvent extends SportEvent{
         public FootballSportEvent build() {
             return FootballSportEvent.this;
         }
-
     }
 
     @Override

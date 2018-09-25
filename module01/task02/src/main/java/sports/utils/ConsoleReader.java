@@ -25,24 +25,21 @@ public class ConsoleReader {
             boolean done = false;
             while (!done) {
                 if (length > 1) {
-                    System.out.println("Enter a value " + (x + 1) + " :");
+                    Printer.printToConsole("Enter a value " + (x + 1) + " :");
                 }
 
                 String str = scan.nextLine();
                 int val;
                 try {
                     val = Integer.parseInt(str);
-                    if (true) {
                         arr[x] = val;
                         done = true;
-                    }
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a number value.");
+                    Printer.printToConsole("Please enter a number value.");
                 }
 
             }
         }
-        // scan.close();
         return arr;
     }
 
@@ -54,22 +51,21 @@ public class ConsoleReader {
             boolean done = false;
             while (!done) {
                 if (length > 1) {
-                    System.out.println("Enter a value " + (x + 1) + " :");
+                    Printer.printToConsole("Enter a value " + (x + 1) + " :");
                 }
 
                 String str = scan.nextLine();
                 double val;
                 try {
                     val = Double.parseDouble(str);
-                        arr[x] = val;
-                        done = true;
+                    arr[x] = val;
+                    done = true;
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a number value.");
+                    Printer.printToConsole("Please enter a number value.");
                 }
 
             }
         }
-        // scan.close();
         return arr;
     }
 
@@ -91,10 +87,9 @@ public class ConsoleReader {
                 answer = true;
                 done = true;
             } else if (str.equals("N")) {
-                answer = false;
                 done = true;
             } else {
-                System.out.println("Please enter a Y/N value.");
+                Printer.printToConsole("Please enter a Y/N value.");
             }
         }
         return answer;
@@ -118,7 +113,7 @@ public class ConsoleReader {
                 answer = Currency.USD;
                 done = true;
             } else {
-                System.out.println("Please enter EUR/HUF/USD value.");
+                Printer.printToConsole("Please enter EUR/HUF/USD value.");
             }
         }
         return answer;
@@ -130,15 +125,10 @@ public class ConsoleReader {
     }
 
 
-
     public static String readFromConsole() {
         Scanner scan = new Scanner(System.in);
-        //boolean done = false;
-
-        System.out.println("Enter a string: ");
-        String str = scan.nextLine();
-
-        return str;
+        Printer.printToConsole("Enter a string: ");
+        return scan.nextLine();
     }
 
     public static int readOption(int maxValue) {
@@ -148,15 +138,18 @@ public class ConsoleReader {
 
         while (!done) {
             String str = scan.nextLine();
-            if("q".equals(str)) {return val;}
+            if ("q".equals(str)) {
+                return val;
+            }
             try {
                 val = Integer.parseInt(str);
                 if (val <= maxValue) {
                     done = true;
+                } else {
+                    Printer.printToConsole("Please enter a valid number from 1 to " + maxValue + " or q.");
                 }
-                else {System.out.println("Please enter a valid number from 1 to " + maxValue + " or q.");}
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number from 1 to " + maxValue + " or q.");
+                Printer.printToConsole("Please enter a valid number from 1 to " + maxValue + " or q.");
             }
         }
         return val;
@@ -174,7 +167,7 @@ public class ConsoleReader {
             try {
                 localDate = LocalDate.parse(str, formatter);
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter a valid date.");
+                Printer.printToConsole("Please enter a valid date.");
             }
             if (localDate != null) {
                 done = true;

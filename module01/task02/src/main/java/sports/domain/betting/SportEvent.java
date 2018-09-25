@@ -62,12 +62,13 @@ public abstract class SportEvent {
         return Objects.equals(title, that.title) &&
                 Objects.equals(startDate, that.startDate) &&
                 Objects.equals(endDate, that.endDate) &&
-                Objects.equals(bets, that.bets);
+                Objects.equals(bets, that.bets) &&
+                Objects.equals(eventResult, that.eventResult);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, startDate, endDate, bets);
+        return Objects.hash(title, startDate, endDate, bets, eventResult);
     }
 
     @Override
@@ -77,6 +78,7 @@ public abstract class SportEvent {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", bets=" + bets +
+                ", eventResult=" + eventResult +
                 '}';
     }
 }
