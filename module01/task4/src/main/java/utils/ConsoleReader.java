@@ -1,6 +1,9 @@
 package utils;
 
+import domain.Expression;
+
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 
 public class ConsoleReader {
@@ -90,6 +93,10 @@ public class ConsoleReader {
         return answer;
     }
 
+    public static Expression readExpression() {
+        String line = readFromConsole();
+        return new Expression(line);
+    }
 
 
     public void close() {
