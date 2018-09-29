@@ -32,7 +32,7 @@ public class CircularBuffer<T> {
     }
 
     public void put(T t) {
-        if (head == tail && size > 0) {
+        if (head == tail && size == capacity) {
             throw new RuntimeException("Circular buffer is full. You cannot insert an element.");
         }
         elementData[head] = t;
@@ -143,7 +143,7 @@ public class CircularBuffer<T> {
         return size == 0;
     }
 
-
+    @SuppressWarnings("unchecked")
     @Override
     public String toString() {
         List<T> list = new ArrayList<>();
