@@ -12,14 +12,4 @@ public class Calculator {
         int result = expression.calculate();
         Printer.printToConsole(String.valueOf(result));
     }
-
-    private static int[] convert(String[] numbers) {
-        int[] numbersConverted = new int[numbers.length];
-        for (int i = 0; i < numbers.length; i++) {
-            numbersConverted[i] = Integer.valueOf(numbers[i]);
-        }
-        return numbersConverted;
-    }
-
-
 }
