@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class CircularBuffer<T> {
+public class CircularBuffer<T extends Comparable<T>> {
 
     private static Logger LOGGER = LoggerFactory.getLogger(CircularBuffer.class);
     private static final Object[] EMPTY_ELEMENTDATA = {};
@@ -129,11 +129,10 @@ public class CircularBuffer<T> {
     public void sort(Comparator<? super T> comparator) {
         List<T> list = this.asList();
         list.sort(comparator);
-        head = list.size();
-        tail = 0;
-        for (int i = tail; i < head; i++) {
-            elementData[i] = list.get(i);
-        }
+        elementData = new Object[capacity];
+        size = 0;
+        tail = head = 0;
+        addAll(list);
         LOGGER.info("Sorted elementData in Circular Buffer : {}  --------", list);
         LOGGER.info("The head of the Circular Buffer is {}", head);
         LOGGER.info("The tail of the Circular Buffer is {}  ---------\n", tail);
