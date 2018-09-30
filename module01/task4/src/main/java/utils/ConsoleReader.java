@@ -14,7 +14,6 @@ public class ConsoleReader {
 
     public static Expression readExpression() {
         String line = readFromConsole();
-        close();
         return new Expression(line);
     }
 

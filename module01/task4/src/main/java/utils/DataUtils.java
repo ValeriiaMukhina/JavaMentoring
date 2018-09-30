@@ -1,5 +1,6 @@
 package utils;
 
+import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
 public class DataUtils {
@@ -18,5 +19,10 @@ public class DataUtils {
 
     public static double[] getNumbers(String input) {
         return convertToDouble(input.split("[" + Pattern.quote("+-*/") + "]"));
+    }
+
+    public static String formatDouble(double number) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(number);
     }
 }
