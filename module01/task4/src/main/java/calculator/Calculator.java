@@ -9,7 +9,7 @@ public class Calculator {
         Printer.printToConsole("Enter an expression: ");
         Expression expression = ConsoleReader.readExpression();
 
-        int result = expression.calculate();
+        double result = expression.calculate();
         Printer.printToConsole(String.valueOf(result));
     }
 }
