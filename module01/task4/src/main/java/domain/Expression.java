@@ -2,6 +2,8 @@ package domain;
 
 import utils.DataUtils;
 
+import static utils.Operation.binaryOperation;
+
 
 public class Expression {
 
@@ -33,17 +35,6 @@ public class Expression {
                 i++;
             }
         }
-    }
-
-    private double binaryOperation(double num1, double num2, String operation) {
-        double result = 0;
-        switch (operation) {
-            case "+": result = num1 + num2; break;
-            case "-": result = num1 - num2; break;
-            case "*": result = num1 * num2; break;
-            case "/": result = num1 / num2; break;
-        }
-        return result;
     }
 
     private void shiftArraysAtIndex(int index) {
