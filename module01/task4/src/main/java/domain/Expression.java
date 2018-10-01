@@ -1,70 +1,47 @@
 package domain;
 
-import java.util.regex.Pattern;
+import utils.DataUtils;
+
+import static utils.Operation.binaryOperation;
+
 
 public class Expression {
 
-    String[] operations;
-    int[] numbers;
+    private String[] operations;
+    private double[] numbers;
+    private int length;
 
     public Expression(String inputExpression) {
-        this.operations = inputExpression.split("[" + Pattern.quote("+-*/") + "]");
-        this.numbers = convert(inputExpression.split("[0-9]+"));
-
+        this.operations = DataUtils.getOperators(inputExpression);
+        this.numbers = DataUtils.getNumbers(inputExpression);
+        this.length = operations.length;
     }
 
-    private static int[] convert(String[] numbers) {
-        int[] numbersConverted = new int[numbers.length];
-
-
-        for (int i = 0; i < numbers.length; i++) {
-            numbersConverted[i] = Integer.valueOf(numbers[i]);
-        }
-        return numbersConverted;
-    }
-
-    public int calculate() {
-        int length = operations.length;
-        int index = 1;
-        while (index < length) {
-            if ("*".equals(operations[index])) { // NEM!!! "*" == operations[i]
-                numbers[index - 1] = numbers[index - 1] * numbers[index];
-                for (int j = index; j < length - 1; j++) {
-                    numbers[j] = numbers[j + 1];
-                    operations[j] = operations[j + 1];
-                }
-                length--;
-            } else if ("/".equals(operations[index])) { // NEM!!! "/" == operations[i]
-                numbers[index - 1] = numbers[index - 1] / numbers[index];
-                for (int j = index; j < length - 1; j++) {
-                    numbers[j] = numbers[j + 1];
-                    operations[j] = operations[j + 1];
-                }
-                length--;
-            } else {
-                index++;
-            }
-        }
-        index = 1;
-        while (index < length) {
-            if ("+".equals(operations[index])) { // NEM!!! "+" == operations[i]
-                numbers[index - 1] = numbers[index - 1] + numbers[index];
-                for (int j = index; j < length - 1; j++) {
-                    numbers[j] = numbers[j + 1];
-                    operations[j] = operations[j + 1];
-                }
-                length--;
-            } else if ("-".equals(operations[index])) { // NEM!!! "-" == operations[i]
-                numbers[index - 1] = numbers[index - 1] - numbers[index];
-                for (int j = index; j < length - 1; j++) {
-                    numbers[j] = numbers[j + 1];
-                    operations[j] = operations[j + 1];
-                }
-                length--;
-            } else {
-                index++;
-            }
-        }
+    public double calculate() {
+        doOperationOnNumbers("*");
+        doOperationOnNumbers("/");
+        doOperationOnNumbers("-");
+        doOperationOnNumbers("+");
         return numbers[0];
+    }
+
+    private void doOperationOnNumbers(String operation) {
+        int i = 1;
+        while (i < length) {
+            if (operation.equals(operations[i])) {
+                numbers[i - 1] = binaryOperation(numbers[i - 1], numbers[i], operations[i]);
+                shiftArraysAtIndex(i);
+            } else {
+                i++;
+            }
+        }
+    }
+
+    private void shiftArraysAtIndex(int index) {
+        for (int j = index; j < length - 1; j++) {
+            numbers[j] = numbers[j + 1];
+            operations[j] = operations[j + 1];
+        }
+        length--;
     }
 }
