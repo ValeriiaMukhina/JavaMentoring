@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Service {
+public class BetCalculationService {
 
     public List<PossibleBetDescription> listAllBets(List<SportEvent> sportEvents) {
         AtomicInteger numberOfBet = new AtomicInteger(1);
@@ -41,7 +41,6 @@ public class Service {
         return possibleBets;
     }
 
-
     public void generateResults(List<SportEvent> sportEvents) {
         Random rand = new Random();
         sportEvents.forEach(
@@ -60,31 +59,28 @@ public class Service {
         );
     }
 
-
     public PossibleBetDescription getPossibleBetDescriptionByIndex(List<PossibleBetDescription> bets, int index) {
         return bets.get(index - 1);
     }
 
-
-    public double calculatePrize(List<SportEvent> sportEvents, List<Wager> wagers) {
-        final double[] prize = {0};
+    public List<Outcome> getRealOutcomes(List<SportEvent> sportEvents) {
+        List<Outcome> realOutcomes = new ArrayList<>();
         sportEvents.stream().filter(sportEvent -> sportEvent.getEventResult() != null).forEach(
-                sportEvent -> {
-                    sportEvent.getEventResult().getRealOutcomes().forEach(
-                            outcome -> {
-                                Printer.printToConsole(outcome + " has won");
-                                wagers.forEach(
-                                        wager -> {
-                                            if (wager.processWin(outcome.getOutcomeOdd())) {
-                                                Printer.printToConsole("You have won " + wager.getAmount() + " " + wager.getPlayer().getCurrency());
-                                                prize[0] = wager.getAmount();
-                                            }
-                                        }
-                                );
-                            });
-                }
+                sportEvent -> realOutcomes.addAll(sportEvent.getEventResult().getRealOutcomes()));
+        return realOutcomes;
+    }
 
-        );
-        return prize[0];
+    public List<Double> calculatedPrizes(List<Outcome> realOutcomes, List<Wager> wagers) {
+        List<Double> prizes = new ArrayList<>();
+        realOutcomes.forEach(
+                outcome -> wagers.forEach(
+                        wager -> {
+                            if (wager.processWin(outcome.getOutcomeOdd())) {
+                                prizes.add(wager.getAmount());
+                            }
+                        }
+                )
+    );
+        return prizes;
     }
 }

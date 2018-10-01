@@ -2,7 +2,7 @@ package sports.runner;
 
 import sports.domain.betting.*;
 import sports.domain.user.Player;
-import sports.service.Service;
+import sports.service.BetCalculationService;
 import sports.utils.ConsoleReader;
 import sports.utils.Printer;
 
@@ -20,7 +20,7 @@ public class AppRunner {
         List<SportEvent> sportEvents = TestDataGenerator.createTestData();
 
         List<Wager> wagers = new ArrayList<>();
-        Service service = new Service();
+        BetCalculationService service = new BetCalculationService();
 
         Player player = getPlayer();
         salutateNewPlayer(player);
@@ -34,7 +34,10 @@ public class AppRunner {
             if (answer == 0) {
                 exit = true;
                 service.generateResults(sportEvents);
-                service.calculatePrize(sportEvents, wagers);
+                List<Outcome> realOutcomes  = service.getRealOutcomes(sportEvents);
+                List<Double> prizes = service.calculatedPrizes(realOutcomes, wagers);
+                Printer.printRealOutcomes(realOutcomes);
+                Printer.printPrizes(prizes);
             } else {
                 createNewWage(wagers, service, player, possibleBetDescriptions, answer);
             }
@@ -42,7 +45,7 @@ public class AppRunner {
         }
     }
 
-    private void createNewWage(List<Wager> wagers, Service service, Player player, List<PossibleBetDescription> possibleBetDescriptions, int answer) {
+    private void createNewWage(List<Wager> wagers, BetCalculationService service, Player player, List<PossibleBetDescription> possibleBetDescriptions, int answer) {
         OutcomeOdd outcomeOdd = service.getPossibleBetDescriptionByIndex(possibleBetDescriptions, answer).getOutcomeOdd();
         Printer.printToConsole("> How much do you want to bet on it? (q for quit)");
         double wage = ConsoleReader.readOneDoubleFromConsole();
@@ -60,7 +63,7 @@ public class AppRunner {
 
     private int askToChooseBet(List<PossibleBetDescription> possibleBetDescriptions) {
         Printer.printToConsole("> Please choose an outcome to bet on! (choose a number or press q for quit)");
-        possibleBetDescriptions.forEach(possibleBet -> System.out.println(possibleBet.toString()));
+        possibleBetDescriptions.forEach(possibleBet -> Printer.printToConsole(possibleBet.toString()));
         return ConsoleReader.readOption(possibleBetDescriptions.size());
     }
 
