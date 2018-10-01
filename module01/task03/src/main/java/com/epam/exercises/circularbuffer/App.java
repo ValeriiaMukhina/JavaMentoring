@@ -1,4 +1,4 @@
-package exercises;
+package com.epam.exercises.circularbuffer;
 
 import java.util.Comparator;
 import java.util.List;

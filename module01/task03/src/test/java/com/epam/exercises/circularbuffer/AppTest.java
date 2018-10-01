@@ -1,4 +1,4 @@
-package exercises;
+package com.epam.exercises.circularbuffer;
 
 import static org.junit.Assert.assertTrue;
 

@@ -1,4 +1,4 @@
-package exercises;
+package com.epam.exercises.circularbuffer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
