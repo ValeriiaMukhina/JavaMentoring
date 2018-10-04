@@ -4,10 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class CircularBuffer<T extends Comparable<T>> {
+public class CircularBuffer<T> {
 
     private static Logger LOGGER = LoggerFactory.getLogger(CircularBuffer.class);
     private static final Object[] EMPTY_ELEMENTDATA = {};
@@ -127,13 +128,14 @@ public class CircularBuffer<T extends Comparable<T>> {
     }
 
     public void sort(Comparator<? super T> comparator) {
-        List<T> list = this.asList();
-        list.sort(comparator);
-        elementData = new Object[capacity];
-        size = 0;
+        Arrays.sort(this.toArray(), comparator);
+//        List<T> list = this.asList();
+//        list.sort(comparator);
+//        elementData = new Object[capacity];
+//        size = 0;
         tail = head = 0;
-        addAll(list);
-        LOGGER.info("Sorted elementData in Circular Buffer : {}  --------", list);
+        //addAll(list);
+        LOGGER.info("Sorted elementData in Circular Buffer : {}  --------", this.toString());
         LOGGER.info("The head of the Circular Buffer is {}", head);
         LOGGER.info("The tail of the Circular Buffer is {}  ---------\n", tail);
     }
