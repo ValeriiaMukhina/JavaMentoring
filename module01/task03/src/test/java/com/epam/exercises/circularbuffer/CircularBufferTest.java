@@ -1,7 +1,7 @@
 package com.epam.exercises.circularbuffer;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -14,8 +14,8 @@ public class CircularBufferTest
     @Test
     public void testCreateBufferWithCapacity(){
         CircularBuffer<Number> buffer = new CircularBuffer<>(9);
-        assertTrue(buffer.getCapacity() == 9);
-        assertTrue(buffer.getSize() == 0);
+        assertEquals(9, buffer.getCapacity());
+        assertEquals(0, buffer.getSize());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -26,7 +26,7 @@ public class CircularBufferTest
     @Test
     public void testBufferWithZeroCapacity(){
         CircularBuffer<Number> buffer = new CircularBuffer<>(0);
-        assertTrue(buffer.getCapacity() == 0);
+        assertEquals(0, buffer.getCapacity());
     }
 
     @Test
@@ -36,9 +36,9 @@ public class CircularBufferTest
         buffer.put(0);
         buffer.put(2.0d);
         buffer.put(1);
-        assertTrue(buffer.getSize() == 4);
-        assertTrue(buffer.getHead() == 4);
-        assertTrue(buffer.getTail() == 0);
+        assertEquals(4, buffer.getSize());
+        assertEquals(4, buffer.getHead());
+        assertEquals(0, buffer.getTail());
     }
 
     @Test(expected = RuntimeException.class)
@@ -62,9 +62,9 @@ public class CircularBufferTest
         buffer.put(2.0d);
         buffer.put(1);
         buffer.get();
-        assertTrue(buffer.getSize() == 3);
-        assertTrue(buffer.getHead() == 4);
-        assertTrue(buffer.getTail() == 1);
+        assertEquals(3, buffer.getSize());
+        assertEquals(4, buffer.getHead());
+        assertEquals(1, buffer.getTail());
     }
 
     @Test
@@ -76,9 +76,9 @@ public class CircularBufferTest
         buffer.put(1);
         buffer.get();
         buffer.get();
-        assertTrue(buffer.getSize() == 2);
-        assertTrue(buffer.getHead() == 4);
-        assertTrue(buffer.getTail() == 2);
+        assertEquals(2, buffer.getSize());
+        assertEquals(4, buffer.getHead());
+        assertEquals(2, buffer.getTail());
     }
 
     @Test
@@ -91,9 +91,9 @@ public class CircularBufferTest
         buffer.get();
         buffer.get();
         buffer.put(11);
-        assertTrue(buffer.getSize() == 3);
-        assertTrue(buffer.getHead() == 0);
-        assertTrue(buffer.getTail() == 2);
+        assertEquals(3, buffer.getSize());
+        assertEquals(0, buffer.getHead());
+        assertEquals(2, buffer.getTail());
     }
 
     @Test
@@ -107,8 +107,8 @@ public class CircularBufferTest
         buffer.get();
         buffer.put(11);
         Number[] numbers = buffer.toArray(Number.class);
-        assertTrue(numbers.length == 3);
-        assertEquals(numbers, new Number[]{2.0d, 1, 11});
+        assertEquals(3, numbers.length);
+        assertArrayEquals(numbers, new Number[]{2.0d, 1, 11});
     }
 
     @Test
@@ -122,7 +122,7 @@ public class CircularBufferTest
         buffer.get();
         buffer.put(11);
         List<Number> list = buffer.asList();
-        assertTrue(list.size() == 3);
+        assertEquals(3, list.size());
         assertEquals(list, Arrays.asList(2.0d, 1, 11));
     }
 
@@ -134,7 +134,7 @@ public class CircularBufferTest
         buffer.put(2.0d);
         buffer.put(1);
         buffer.sort((o1, o2) -> Double.valueOf("" + o1).compareTo(Double.valueOf("" + o2)));
-        assertEquals(buffer.getElementData(), new Object[]{0, 1, 2.0, Long.MAX_VALUE});
+        assertArrayEquals(buffer.getElementData(), new Object[]{0, 1, 2.0, Long.MAX_VALUE});
     }
     // [0, 1, 2.0, 9223372036854775807]
 

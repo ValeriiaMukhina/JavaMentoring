@@ -87,8 +87,6 @@ public class CircularBuffer<T> {
         return array;
     }
 
-
-
     @SuppressWarnings("unchecked")
     public List<T> asList() {
         List<T> list = new LinkedList<>();
