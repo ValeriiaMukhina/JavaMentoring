@@ -2,6 +2,8 @@ package domain;
 
 import utils.DataUtils;
 
+import java.util.Arrays;
+
 import static utils.Operation.binaryOperation;
 
 
@@ -11,10 +13,17 @@ public class Expression {
     private double[] numbers;
     private int length;
 
-    public Expression(String inputExpression) {
-        this.operations = DataUtils.getOperators(inputExpression);
-        this.numbers = DataUtils.getNumbers(inputExpression);
+    private Expression(double[] numbers, String[] operations, int length) {
+        this.numbers = numbers;
+        this.operations = operations;
         this.length = operations.length;
+    }
+
+    public Expression of (String inputExpression) {
+        String[] operations = DataUtils.getOperators(inputExpression);
+        double[] numbers = DataUtils.getNumbers(inputExpression);
+        int length = operations.length;
+        return new Expression(numbers, operations, length);
     }
 
     public double calculate() {
@@ -38,6 +47,7 @@ public class Expression {
     }
 
     private void shiftArraysAtIndex(int index) {
+
         for (int j = index; j < length - 1; j++) {
             numbers[j] = numbers[j + 1];
             operations[j] = operations[j + 1];

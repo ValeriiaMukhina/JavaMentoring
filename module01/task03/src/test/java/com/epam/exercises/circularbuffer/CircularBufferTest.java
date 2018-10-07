@@ -24,12 +24,6 @@ public class CircularBufferTest
     }
 
     @Test
-    public void testBufferWithZeroCapacity(){
-        CircularBuffer<Number> buffer = new CircularBuffer<>(0);
-        assertEquals(0, buffer.getCapacity());
-    }
-
-    @Test
     public void testBufferPut(){
         CircularBuffer<Number> buffer = new CircularBuffer<>(5);
         buffer.put(Long.MAX_VALUE);
@@ -138,5 +132,29 @@ public class CircularBufferTest
     }
     // [0, 1, 2.0, 9223372036854775807]
 
+    @Test
+    public void testBufferSort2() {
+        CircularBuffer<Number> buffer = new CircularBuffer<>(5);
+        buffer.put(Long.MAX_VALUE);
+        buffer.put(0);
+        buffer.put(2.0d);
+        buffer.put(1);
+        buffer.sort2((o1, o2) -> Double.valueOf("" + o1).compareTo(Double.valueOf("" + o2)));
+        assertArrayEquals(buffer.getElementData(), new Object[]{0, 1, 2.0, Long.MAX_VALUE, null});
+    }
 
+    @Test
+    public void testBufferToArray2(){
+        CircularBuffer<Number> buffer = new CircularBuffer<>(5);
+        buffer.put(Long.MAX_VALUE);
+        buffer.put(0);
+        buffer.put(2.0d);
+        buffer.put(1);
+        buffer.get();
+        buffer.get();
+        buffer.put(11);
+        Number[] numbers = buffer.toArray();
+        assertEquals(3, numbers.length);
+        assertArrayEquals(numbers, new Number[]{2.0d, 1, 11});
+    }
 }

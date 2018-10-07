@@ -17,7 +17,7 @@ public class CircularBuffer<T> {
     private int size;
 
     public CircularBuffer(int capacity) {
-        if (capacity >= 0) {
+        if (capacity > 0) {
             this.elementData = new Object[capacity];
             this.capacity = capacity;
         } else {
@@ -88,6 +88,12 @@ public class CircularBuffer<T> {
     }
 
     @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        Object[] objectArray = toObjectArray();
+        return (T[]) Arrays.copyOf(objectArray, size);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<T> asList() {
         List<T> list = new LinkedList<>();
 
@@ -117,12 +123,20 @@ public class CircularBuffer<T> {
     }
 
     public void sort(Comparator<? super T> comparator) {
-        List<T> list = this.asList();
-        list.sort(comparator);
-        elementData = new Object[size];
-        size = 0;
+      List<T> list = this.asList();
+       list.sort(comparator);
+       elementData = new Object[size];
+       size = 0;
         tail = head = 0;
-        addAll(list);
+       addAll(list);
+        LOGGER.info("Sorted elementData in Circular Buffer : {}  --------", this.toString());
+        LOGGER.info("The head of the Circular Buffer is {}", head);
+        LOGGER.info("The tail of the Circular Buffer is {}  ---------\n", tail);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void sort2(Comparator<? super T> comparator) {
+        Arrays.sort((T[])elementData, tail, head, comparator);
         LOGGER.info("Sorted elementData in Circular Buffer : {}  --------", this.toString());
         LOGGER.info("The head of the Circular Buffer is {}", head);
         LOGGER.info("The tail of the Circular Buffer is {}  ---------\n", tail);
