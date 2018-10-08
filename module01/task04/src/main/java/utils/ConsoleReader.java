@@ -1,6 +1,7 @@
 package utils;
 
 import domain.Expression;
+import exceptions.SyntaxException;
 
 import java.util.Scanner;
 
@@ -14,7 +15,10 @@ public class ConsoleReader {
 
     public static Expression readExpression() {
         String line = readFromConsole();
-        return new Expression(line);
+        if (line.matches(".*[a-zA-Z;~`#$_{}\\[\\]:\\\\;\"',\\.\\?]+.*")) {
+            throw new SyntaxException("Invalid expression : " + line);
+        }
+        return Expression.of(line.replaceAll("\\s+",""));
     }
 
     public static void close() {
@@ -23,7 +27,6 @@ public class ConsoleReader {
 
     public static String readFromConsole() {
         Scanner scan = new Scanner(System.in);
-        Printer.printToConsole("Enter a string: ");
         return scan.nextLine();
     }
 }

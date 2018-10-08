@@ -1,6 +1,7 @@
 package domain;
 
 import utils.DataUtils;
+import utils.Operation;
 
 import java.util.Arrays;
 
@@ -19,7 +20,7 @@ public class Expression {
         this.length = operations.length;
     }
 
-    public Expression of (String inputExpression) {
+    public static Expression of (String inputExpression) {
         String[] operations = DataUtils.getOperators(inputExpression);
         double[] numbers = DataUtils.getNumbers(inputExpression);
         int length = operations.length;
@@ -27,10 +28,10 @@ public class Expression {
     }
 
     public double calculate() {
-        doOperationOnNumbers("*");
-        doOperationOnNumbers("/");
-        doOperationOnNumbers("-");
-        doOperationOnNumbers("+");
+        doOperationOnNumbers(Operation.MULTIPLY.getSymbol());
+        doOperationOnNumbers(Operation.DIVIDE.getSymbol());
+        doOperationOnNumbers(Operation.MINUS.getSymbol());
+        doOperationOnNumbers(Operation.PLUS.getSymbol());
         return numbers[0];
     }
 
@@ -38,7 +39,7 @@ public class Expression {
         int i = 1;
         while (i < length) {
             if (operation.equals(operations[i])) {
-                numbers[i - 1] = binaryOperation(numbers[i - 1], numbers[i], operations[i]);
+                numbers[i - 1] = binaryOperation(numbers[i - 1], numbers[i], new Operation(operations[i]));
                 shiftArraysAtIndex(i);
             } else {
                 i++;
@@ -47,11 +48,8 @@ public class Expression {
     }
 
     private void shiftArraysAtIndex(int index) {
-
-        for (int j = index; j < length - 1; j++) {
-            numbers[j] = numbers[j + 1];
-            operations[j] = operations[j + 1];
-        }
+        System.arraycopy(numbers, index + 1, numbers, index, length - index - 1);
+        System.arraycopy(operations, index + 1, operations, index, length - index - 1);
         length--;
     }
 }
