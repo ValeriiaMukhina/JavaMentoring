@@ -3,8 +3,6 @@ package domain;
 import utils.DataUtils;
 import utils.Operation;
 
-import java.util.Arrays;
-
 import static utils.Operation.binaryOperation;
 
 
@@ -20,7 +18,7 @@ public class Expression {
         this.length = operations.length;
     }
 
-    public static Expression of (String inputExpression) {
+    public static Expression of(String inputExpression) {
         String[] operations = DataUtils.getOperators(inputExpression);
         double[] numbers = DataUtils.getNumbers(inputExpression);
         int length = operations.length;
@@ -28,18 +26,18 @@ public class Expression {
     }
 
     public double calculate() {
-        doOperationOnNumbers(Operation.MULTIPLY.getSymbol());
-        doOperationOnNumbers(Operation.DIVIDE.getSymbol());
-        doOperationOnNumbers(Operation.MINUS.getSymbol());
-        doOperationOnNumbers(Operation.PLUS.getSymbol());
+        doOperationOnNumbers(Operation.MULTIPLY);
+        doOperationOnNumbers(Operation.DIVIDE);
+        doOperationOnNumbers(Operation.MINUS);
+        doOperationOnNumbers(Operation.PLUS);
         return numbers[0];
     }
 
-    private void doOperationOnNumbers(String operation) {
+    private void doOperationOnNumbers(Operation operation) {
         int i = 1;
         while (i < length) {
-            if (operation.equals(operations[i])) {
-                numbers[i - 1] = binaryOperation(numbers[i - 1], numbers[i], new Operation(operations[i]));
+            if (operation.getOperationSign().equals(operations[i])) {
+                numbers[i - 1] = binaryOperation(numbers[i - 1], numbers[i], operations[i]);
                 shiftArraysAtIndex(i);
             } else {
                 i++;

@@ -2,15 +2,12 @@ package utils;
 
 import java.text.DecimalFormat;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class DataUtils {
 
     public static double[] convertToDouble(String[] numbers) {
-        double[] numbersConverted = new double[numbers.length];
-        for (int i = 0; i < numbers.length; i++) {
-            numbersConverted[i] = Double.valueOf(numbers[i]);
-        }
-        return numbersConverted;
+        return Stream.of(numbers).mapToDouble(Double::parseDouble).toArray();
     }
 
     public static String[] getOperators(String input) {
@@ -18,6 +15,7 @@ public class DataUtils {
     }
 
     public static double[] getNumbers(String input) {
+       // input.split("[" + Pattern.quote(Operation.values().) + "]"))
         return convertToDouble(input.split("[" + Pattern.quote("+-*/") + "]"));
     }
 

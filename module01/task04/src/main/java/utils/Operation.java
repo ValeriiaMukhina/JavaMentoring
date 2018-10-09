@@ -1,44 +1,46 @@
 package utils;
 
-import java.util.function.DoubleBinaryOperator;
+import java.util.function.BinaryOperator;
 
-public enum Operation implements DoubleBinaryOperator {
-    PLUS("+", (l, r) -> l + r),
-    MINUS("-", (l, r) -> l - r),
-    MULTIPLY("*", (l, r) -> l * r),
-    DIVIDE("/", (l, r) -> l / r);
-
-    private final String symbol;
-    private final DoubleBinaryOperator binaryOperator;
-
-    private Operation(final String symbol, final DoubleBinaryOperator binaryOperator) {
-        this.symbol = symbol;
-        this.binaryOperator = binaryOperator;
-    }
-
-    Operation(final String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    @Override
-    public double applyAsDouble(final double left, final double right) {
-        return binaryOperator.applyAsDouble(left, right);
-    }
-
-    public static double binaryOperation(double num1, double num2, Operation operation) {
-        double result;
-        switch (operation) {
-            case PLUS : result = PLUS.applyAsDouble(num1, num2); break;
-            case MINUS: result = MINUS.applyAsDouble(num1, num2); break;
-            case MULTIPLY: result =  MULTIPLY.applyAsDouble(num1, num2); ; break;
-            case DIVIDE: result = DIVIDE.applyAsDouble(num1, num2); ; break;
-            default:
-                throw new UnsupportedOperationException("Not implemented: " + operation);
+public enum Operation implements BinaryOperator<Double> {
+    PLUS("+") {
+        public Double apply(Double v1, Double v2) {
+            return v1 + v2;
         }
+    },
+    MINUS("-") {
+        public Double apply(Double v1, Double v2) {
+            return v1 - v2;
+        }
+    },
+    MULTIPLY("*") {
+        public Double apply(Double v1, Double v2) {
+            return v1 * v2;
+        }
+    },
+    DIVIDE("/") {
+        public Double apply(Double v1, Double v2) {
+            return v1 / v2;
+        }
+    };
+
+    private final String operationSign;
+
+    Operation(String operationSign) {
+        this.operationSign = operationSign;
+    }
+
+    public String getOperationSign() {
+        return operationSign;
+    }
+
+    public static double binaryOperation(double num1, double num2, String operationSign) {
+        double result;
+            if (PLUS.operationSign.equals(operationSign)) result = PLUS.apply(num1, num2);
+            else if (MINUS.operationSign.equals(operationSign)) result = MINUS.apply(num1, num2);
+            else if (MULTIPLY.operationSign.equals(operationSign)) result =  MULTIPLY.apply(num1, num2);
+            else if (DIVIDE.operationSign.equals(operationSign)) result = DIVIDE.apply(num1, num2);
+            else throw new UnsupportedOperationException("Not implemented: " + operationSign);
         return result;
     }
 }
