@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.function.BinaryOperator;
+import java.util.stream.Stream;
 
 public enum Operation implements BinaryOperator<Double> {
     PLUS("+") {
@@ -32,6 +33,9 @@ public enum Operation implements BinaryOperator<Double> {
 
     public String getOperationSign() {
         return operationSign;
+    }
+    public static String[] getOperationSigns() {
+        return Stream.of(Operation.values()).map(Operation::getOperationSign).toArray(String[] :: new);
     }
 
     public static double binaryOperation(double num1, double num2, String operationSign) {

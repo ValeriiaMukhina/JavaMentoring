@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import static utils.Operation.getOperationSigns;
+
 public class DataUtils {
 
     public static double[] convertToDouble(String[] numbers) {
@@ -15,8 +17,7 @@ public class DataUtils {
     }
 
     public static double[] getNumbers(String input) {
-       // input.split("[" + Pattern.quote(Operation.values().) + "]"))
-        return convertToDouble(input.split("[" + Pattern.quote("+-*/") + "]"));
+        return convertToDouble(input.split("[" + Pattern.quote(String.join("", getOperationSigns())) + "]"));
     }
 
     public static String formatDouble(double number) {
