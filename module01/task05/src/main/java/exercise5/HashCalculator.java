@@ -1,4 +1,4 @@
-package com.epam.training;
+package exercise5;
 
 import java.nio.charset.StandardCharsets;
 
