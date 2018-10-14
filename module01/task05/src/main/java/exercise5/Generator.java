@@ -20,10 +20,10 @@ public class Generator {
         max = 3; //char max end
     }
 
-    private void generateCombinations(int arraySize, List<String> possibleValues)
+    private void generateCombinations(int combinationLength, List<String> possibleValues)
     {
         int carry;
-        int[] indices = new int[arraySize];
+        int[] indices = new int[combinationLength];
         do
         {
             StringBuffer sb = new StringBuffer();
@@ -52,10 +52,9 @@ public class Generator {
 
     public static void main(String[] args) {
         Generator bruteforce = new Generator();
-        List<String> possibleValues = Arrays.asList("a", "b", "c", "d", "e");
-        bruteforce.generateCombinations(3, possibleValues);
+        List<String> possibleValues = Arrays.asList("a", "b", "c");
 
-        for (int length = bruteforce.min; length < bruteforce.max; length++) // Change bruteforce.min and bruteforce.max for number of characters to bruteforce.
-            bruteforce.generateCombinations(length, possibleValues); //prepend_string, pos, length
+        //for (int length = bruteforce.min; length < possibleValues.size(); length++) // Change bruteforce.min and bruteforce.max for number of characters to bruteforce.
+            bruteforce.generateCombinations(3, possibleValues); //prepend_string, pos, length
     }
 }
