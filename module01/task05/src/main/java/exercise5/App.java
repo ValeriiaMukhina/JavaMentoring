@@ -2,11 +2,11 @@ package exercise5;
 
 public class App {
 
-    private static String password = "cab";
-    private static String hashedPassword = new HashCalculator().hash(password);
-
     public static void main(String[] args) throws InterruptedException {
-        new PasswordCracker(hashedPassword).bruteForce();
+        String password = "cab";
+        int numberOfThreads = Runtime.getRuntime().availableProcessors() * 8;
+        String hashedPassword = new HashCalculator().hash(password);
+        new PasswordCracker(hashedPassword).bruteForce(numberOfThreads);
     }
 
 }

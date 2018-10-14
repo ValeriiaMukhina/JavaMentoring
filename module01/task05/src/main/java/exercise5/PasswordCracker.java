@@ -19,11 +19,11 @@ public class PasswordCracker {
         this.hashedPassword = hashedPassword;
     }
 
-    void bruteForce() throws InterruptedException {
+    void bruteForce(int numberOfThreads) throws InterruptedException {
 
         System.out.println("Hashed password = " + hashedPassword);
 
-        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
 
         System.out.println("Starting ...");
 
@@ -41,6 +41,7 @@ public class PasswordCracker {
             }
 
         executor.shutdown();
+
         try {
             executor.awaitTermination(1, TimeUnit.MINUTES);
             System.out.println("task completed");
@@ -48,11 +49,9 @@ public class PasswordCracker {
             System.out.println("Forcing shutdown...");
             executor.shutdownNow();
         }
+
         long end = System.currentTimeMillis();
-
         System.out.println("Time taken: " + DurationFormatUtils.formatDuration((end - start), "HH:mm:ss.S"));
-
-
     }
 
 
@@ -70,7 +69,7 @@ public class PasswordCracker {
             while (!isCracked) {
                 String value = queue.take();
                 String hash = new HashCalculator().hash(value);
-                System.out.println("I am verifying guess = " + value);
+                System.out.println(Thread.currentThread().getName() + ": I am verifying guess = " + value);
                 if (hashedPassword.equals(hash)) {
                     isCracked = true;
                     System.out.println("Your password = " + value);
@@ -97,7 +96,7 @@ public class PasswordCracker {
                 if(isCracked) return;
                 for (int index : indices)
                     sb.append(possibleValues.get(index));
-                System.out.println(sb.toString());
+                System.out.println(Thread.currentThread().getName() + " combination:" + sb.toString());
                 queue.offer(sb.toString(), 100, TimeUnit.MILLISECONDS);
                 carry = 1;
                 if(isCracked) return;
