@@ -2,36 +2,42 @@ package exercise5;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class PasswordCracker {
 
-    private static BlockingQueue<String> queue = new ArrayBlockingQueue<>(100);
-    private static List<String> possibleValues = Arrays.asList("a", "b", "c", "d");
-    private static volatile boolean isCracked;
-    private static String password = "cab";
-    private static String hashedPassword = new HashCalculator().hash(password);
+    private BlockingQueue<String> queue = new ArrayBlockingQueue<>(100);
+    private String charset = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
+    private  List<String> possibleValues = new ArrayList<>(Arrays.asList(charset.split(",")));
+    private volatile boolean isCracked;
+    private String hashedPassword;
 
+    PasswordCracker(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
 
-
-
-    public static void start() throws InterruptedException {
+    void bruteForce() throws InterruptedException {
 
         System.out.println("Hashed password = " + hashedPassword);
 
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
         System.out.println("Starting ...");
 
         long start = System.currentTimeMillis();
 
-        executor.submit(new Consumer());
+       for (int i = 1; i <= 3; i++) {
+            executor.submit(new PasswordChecker());
+
+       }
 
 
-        for (int i = 1; i <= possibleValues.size(); i++)
+        for (int passwordLength = 1; passwordLength <= possibleValues.size(); passwordLength++)
             if (!isCracked) {
-                executor.submit(new Generator1(i));
+                executor.submit(new Generator(passwordLength));
             }
 
         executor.shutdown();
@@ -50,7 +56,7 @@ public class PasswordCracker {
     }
 
 
-    static class Consumer implements Runnable {
+    class PasswordChecker implements Runnable {
 
         @Override
         public void run() {
@@ -67,7 +73,7 @@ public class PasswordCracker {
                 System.out.println("I am verifying guess = " + value);
                 if (hashedPassword.equals(hash)) {
                     isCracked = true;
-                    System.out.println("You password is " + value);
+                    System.out.println("Your password = " + value);
                     return;
                 }
 
@@ -76,10 +82,10 @@ public class PasswordCracker {
     }
 
 
-    public static class Generator1 implements Runnable {
+    class Generator implements Runnable {
         int length;
 
-        public Generator1(int length) {
+        Generator(int length) {
             this.length = length;
         }
 
@@ -87,13 +93,14 @@ public class PasswordCracker {
             int carry;
             int[] indices = new int[arraySize];
             do {
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
+                if(isCracked) return;
                 for (int index : indices)
                     sb.append(possibleValues.get(index));
-                if (isCracked) return;
                 System.out.println(sb.toString());
                 queue.offer(sb.toString(), 100, TimeUnit.MILLISECONDS);
                 carry = 1;
+                if(isCracked) return;
                 for (int i = indices.length - 1; i >= 0; i--) {
                     if (carry == 0)
                         break;
@@ -102,6 +109,7 @@ public class PasswordCracker {
                     carry = 0;
 
                     if (indices[i] == possibleValues.size()) {
+                        if(isCracked) return;
                         carry = 1;
                         indices[i] = 0;
                     }
@@ -110,14 +118,14 @@ public class PasswordCracker {
             while (carry != 1 && !isCracked);
         }
 
+        @Override
         public void run() {
             try {
-                generateCombinations(length, possibleValues);
+                if(!isCracked) generateCombinations(length, possibleValues);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 }

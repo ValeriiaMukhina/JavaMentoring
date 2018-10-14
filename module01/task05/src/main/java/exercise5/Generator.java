@@ -16,7 +16,7 @@ public class Generator {
         charset = "abc".toCharArray();
 
         //charset = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        min = 1; //char min start
+        min = 1; //char min bruteForce
         max = 3; //char max end
     }
 

@@ -6,7 +6,7 @@ public class App {
     private static String hashedPassword = new HashCalculator().hash(password);
 
     public static void main(String[] args) throws InterruptedException {
-        PasswordCracker.start();
+        new PasswordCracker(hashedPassword).bruteForce();
     }
 
 }
