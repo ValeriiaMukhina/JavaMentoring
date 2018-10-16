@@ -43,7 +43,7 @@ public class PasswordCracker {
         executor.shutdown();
 
         try {
-            executor.awaitTermination(1, TimeUnit.MINUTES);
+            executor.awaitTermination(5, TimeUnit.MINUTES);
             System.out.println("task completed");
         } catch (InterruptedException ex) {
             System.out.println("Forcing shutdown...");
@@ -88,9 +88,9 @@ public class PasswordCracker {
             this.length = length;
         }
 
-        private void generateCombinations(int arraySize, List<String> possibleValues) throws InterruptedException {
-            int carry;
-            int[] indices = new int[arraySize];
+        private void generateCombinations(int possiblePasswordLength, List<String> possibleValues) throws InterruptedException {
+            int flag;
+            int[] indices = new int[possiblePasswordLength];
             do {
                 StringBuilder sb = new StringBuilder();
                 if(isCracked) return;
@@ -98,23 +98,23 @@ public class PasswordCracker {
                     sb.append(possibleValues.get(index));
                 System.out.println(Thread.currentThread().getName() + " combination:" + sb.toString());
                 queue.offer(sb.toString(), 100, TimeUnit.MILLISECONDS);
-                carry = 1;
+                flag = 1;
                 if(isCracked) return;
                 for (int i = indices.length - 1; i >= 0; i--) {
-                    if (carry == 0)
+                    if (flag == 0)
                         break;
 
-                    indices[i] += carry;
-                    carry = 0;
+                    indices[i] += flag;
+                    flag = 0;
 
                     if (indices[i] == possibleValues.size()) {
                         if(isCracked) return;
-                        carry = 1;
+                        flag = 1;
                         indices[i] = 0;
                     }
                 }
             }
-            while (carry != 1 && !isCracked);
+            while (flag != 1 && !isCracked);
         }
 
         @Override
