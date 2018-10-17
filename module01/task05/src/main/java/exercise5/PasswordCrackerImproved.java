@@ -1,6 +1,8 @@
 package exercise5;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +10,8 @@ import java.util.List;
 import java.util.concurrent.*;
 
 public class PasswordCrackerImproved {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(PasswordCrackerImproved.class);
 
     private BlockingQueue<String> queue = new ArrayBlockingQueue<>(100);
     private String charset = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
@@ -21,11 +25,11 @@ public class PasswordCrackerImproved {
 
     void bruteForce(int numberOfThreads) throws InterruptedException {
 
-        System.out.println("Hashed password = " + hashedPassword);
+        LOGGER.info("Hashed password = {}",  hashedPassword);
 
         ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
 
-        System.out.println("Starting ...");
+        LOGGER.info("Starting ...");
 
         long start = System.currentTimeMillis();
         for (int passwordLength = 1; passwordLength <= possibleValues.size(); passwordLength++)
@@ -57,39 +61,38 @@ public class PasswordCrackerImproved {
         }
 
         if (result != null)
-            System.out.println("Your result = " + result);
+            LOGGER.info("Your result = {}", result);
 
         executor.shutdown();
 
         try {
             executor.awaitTermination(5, TimeUnit.MINUTES);
-            System.out.println("task completed");
+            LOGGER.info("task completed");
         } catch (InterruptedException ex) {
-            System.out.println("Forcing shutdown...");
+            LOGGER.info("Forcing shutdown...");
             executor.shutdownNow();
         }
 
         long end = System.currentTimeMillis();
-        System.out.println("Time taken: " + DurationFormatUtils.formatDuration((end - start), "HH:mm:ss.S"));
+        LOGGER.info("Time taken: {}", DurationFormatUtils.formatDuration((end - start), "HH:mm:ss.S"));
     }
 
 
     class PasswordChecker implements Callable<String> {
 
         private String verifyPossiblePassword() throws InterruptedException {
-            String password = null;
             while (!isCracked) {
                 String value = queue.take();
                 String hash = new HashCalculator().hash(value);
-                System.out.println(Thread.currentThread().getName() + ": I am verifying guess = " + value);
+                LOGGER.debug("I am verifying guess = {}",  value);
                 if (hashedPassword.equals(hash)) {
                     isCracked = true;
-                    System.out.println("Your password = " + value);
+                    LOGGER.debug("Your password = {}", value);
                     return value;
                 }
 
             }
-            return password;
+            return null;
         }
 
         @Override
@@ -120,7 +123,7 @@ public class PasswordCrackerImproved {
                 for (int index : indices)
                     sb.append(possibleValues.get(index));
                 if (isCracked) return;
-                System.out.println(Thread.currentThread().getName() + " combination:" + sb.toString());
+                LOGGER.debug("combination:{}", sb.toString());
                 queue.offer(sb.toString(), 100, TimeUnit.MILLISECONDS);
                 flag = 1;
                 if (isCracked) return;
