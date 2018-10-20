@@ -5,7 +5,7 @@ import exercise6.food.extras.ExtraType;
 import exercise6.food.FoodType;
 import exercise6.kitchen.Chef;
 
-public class RestaurantApp
+class RestaurantApp
 {
     public static void main( String[] args )
     {

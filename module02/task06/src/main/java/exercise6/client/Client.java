@@ -10,7 +10,7 @@ import exercise6.restaurant.PendingOrderQueue;
 
 public class Client implements ObservableClient {
 
-    private String name;
+    private final String name;
 
     private double happiness;
 

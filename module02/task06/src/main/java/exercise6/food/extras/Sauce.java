@@ -4,9 +4,9 @@ import exercise6.food.Meal;
 
 public class Sauce implements Meal {
 
-    protected Meal meal;
+    private final Meal meal;
 
-    public Sauce(Meal meal) {
+    Sauce(Meal meal) {
         this.meal = meal;
     }
 

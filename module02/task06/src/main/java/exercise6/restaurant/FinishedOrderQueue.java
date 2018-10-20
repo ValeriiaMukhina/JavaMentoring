@@ -6,11 +6,7 @@ import java.util.LinkedList;
 
 public class FinishedOrderQueue {
 
-    private static LinkedList<Meal> finishedOrders = new LinkedList<>();
-
-    public FinishedOrderQueue() {
-        this.finishedOrders = new LinkedList<>();
-    }
+    private static final LinkedList<Meal> finishedOrders = new LinkedList<>();
 
     public static void placeOrderToTheQueue(Meal meal) {
         finishedOrders.add(meal);

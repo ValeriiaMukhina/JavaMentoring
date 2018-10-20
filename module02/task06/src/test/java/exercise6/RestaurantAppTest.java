@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RestaurantAppTest {
-    Chef chef = new Chef();
+    private final Chef chef = new Chef();
 
     @Test
     public void hotDogIncreasesClientHappinessByTwo() {
@@ -78,4 +78,5 @@ public class RestaurantAppTest {
         //Then
         assertEquals(4, client.getHappiness(), 0.001);
     }
+
 }

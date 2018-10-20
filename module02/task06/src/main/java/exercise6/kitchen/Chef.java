@@ -9,10 +9,10 @@ import exercise6.food.Meal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chef implements Subject{
+public class Chef implements Subject {
 
 
-    private List<ObservableClient> clientsToNotify;
+    private final List<ObservableClient> clientsToNotify;
     private String message;
     private boolean mealIsReady;
     private final Object MUTEX= new Object();
@@ -40,8 +40,7 @@ public class Chef implements Subject{
 
     @Override
     public void notifyOrderCompleted() {
-        List<ObservableClient> clientsLocal = null;
-        //synchronization is used to make sure any observer registered after message is received is not notified
+        List<ObservableClient> clientsLocal;
         synchronized (MUTEX) {
             if (!mealIsReady)
                 return;
@@ -51,7 +50,6 @@ public class Chef implements Subject{
         for (ObservableClient client : clientsLocal) {
             client.update(this);
         }
-
     }
 
     public String getUpdate() {
@@ -74,6 +72,4 @@ public class Chef implements Subject{
             notifyOrderCompleted();
         }
     }
-
-
 }

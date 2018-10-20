@@ -6,9 +6,9 @@ import exercise6.food.FoodType;
 
 public class Order {
 
-    private ObservableClient client;
+    private final ObservableClient client;
 
-    private FoodType orderedFood;
+    private final FoodType orderedFood;
 
     private ExtraType extra;
 

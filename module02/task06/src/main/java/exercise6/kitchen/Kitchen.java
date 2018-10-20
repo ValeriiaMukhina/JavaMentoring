@@ -3,9 +3,9 @@ package exercise6.kitchen;
 import exercise6.food.*;
 import exercise6.food.extras.*;
 
-public class Kitchen {
+class Kitchen {
 
-    public static Cooker getCooker(FoodType foodType) {
+    static Cooker getCooker(FoodType foodType) {
         switch (foodType) {
             case Chips:
                 return new ChipsCooker();
@@ -17,7 +17,7 @@ public class Kitchen {
 
     }
 
-    public static Sauce addSauce(ExtraType type, Meal meal) {
+    static Sauce addSauce(ExtraType type, Meal meal) {
         switch (type) {
             case Ketchup:
                 return new Ketchup(meal);
