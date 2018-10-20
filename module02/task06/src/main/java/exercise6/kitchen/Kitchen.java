@@ -17,7 +17,7 @@ class Kitchen {
 
     }
 
-    static Sauce addSauce(ExtraType type, Meal meal) {
+    static Sauce addSauce(ExtrasType type, Meal meal) {
         switch (type) {
             case Ketchup:
                 return new Ketchup(meal);

@@ -2,7 +2,7 @@ package exercise6.food.extras;
 
 import exercise6.food.Meal;
 
-public class Sauce implements Meal {
+public abstract class Sauce implements Meal {
 
     private final Meal meal;
 

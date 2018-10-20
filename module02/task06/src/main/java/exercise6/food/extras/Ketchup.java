@@ -11,4 +11,9 @@ public class Ketchup extends Sauce {
     public double increaseHappiness(double happiness) {
         return super.increaseHappiness(happiness) * 2;
     }
+
+    @Override
+    public String toString() {
+        return "Ketchup";
+    }
 }

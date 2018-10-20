@@ -11,4 +11,9 @@ public class Mustard extends Sauce {
     public double increaseHappiness(double happiness) {
         return happiness * 1;
     }
+
+    @Override
+    public String toString() {
+        return "Mustard";
+    }
 }

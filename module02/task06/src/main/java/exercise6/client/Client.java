@@ -1,12 +1,14 @@
 package exercise6.client;
 
-import exercise6.food.extras.ExtraType;
+import exercise6.food.extras.ExtrasType;
 import exercise6.food.FoodType;
 import exercise6.food.Meal;
 import exercise6.kitchen.Subject;
 import exercise6.restaurant.FinishedOrderQueue;
 import exercise6.restaurant.Order;
 import exercise6.restaurant.PendingOrderQueue;
+
+import java.util.Objects;
 
 public class Client implements ObservableClient {
 
@@ -48,7 +50,29 @@ public class Client implements ObservableClient {
 
     }
 
-    public void placeOrder(FoodType foodToOrder, ExtraType extra) {
+    public void placeOrder(FoodType foodToOrder, ExtrasType extra) {
         PendingOrderQueue.placeOrderToTheQueue(new Order(this, foodToOrder, extra));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
+        return Double.compare(client.getHappiness(), getHappiness()) == 0 &&
+                Objects.equals(getName(), client.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getHappiness());
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", happiness=" + happiness +
+                '}';
     }
 }

@@ -1,7 +1,7 @@
 package exercise6;
 
 import exercise6.client.Client;
-import exercise6.food.extras.ExtraType;
+import exercise6.food.extras.ExtrasType;
 import exercise6.food.FoodType;
 import exercise6.kitchen.Chef;
 
@@ -17,7 +17,7 @@ class RestaurantApp
         alex.placeOrder(FoodType.Chips);
         viktor.placeOrder(FoodType.Chips);
         lera.placeOrder(FoodType.HotDog);
-        gorg.placeOrder(FoodType.Chips, ExtraType.Ketchup);
+        gorg.placeOrder(FoodType.Chips, ExtrasType.Ketchup);
 
         Chef chef = new Chef();
         chef.prepare();

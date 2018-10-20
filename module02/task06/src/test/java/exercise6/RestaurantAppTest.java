@@ -2,7 +2,7 @@ package exercise6;
 
 import exercise6.client.Client;
 import exercise6.food.FoodType;
-import exercise6.food.extras.ExtraType;
+import exercise6.food.extras.ExtrasType;
 import exercise6.kitchen.Chef;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class RestaurantAppTest {
     }
 
     @Test
-    public void ChipsIncreasesClientHappiness() {
+    public void chipsIncreasesClientHappiness() {
         //Given
         Client client = new Client("Test Client", 1);
         // When
@@ -36,47 +36,46 @@ public class RestaurantAppTest {
     }
 
     @Test
-    public void ChipsWithKetchupIncreasesClientHappiness() {
+    public void chipsWithKetchupIncreasesClientHappiness() {
         //Given
         Client client = new Client("Test Client", 1);
         // When
-        client.placeOrder(FoodType.Chips, ExtraType.Ketchup);
+        client.placeOrder(FoodType.Chips, ExtrasType.Ketchup);
         chef.prepare();
         //Then
         assertEquals(2.1, client.getHappiness(), 0.001);
     }
 
     @Test
-    public void ChipsWithMustardIncreasesClientHappiness() {
+    public void chipsWithMustardIncreasesClientHappiness() {
         //Given
         Client client = new Client("Test Client", 1);
         // When
-        client.placeOrder(FoodType.Chips, ExtraType.Mustard);
+        client.placeOrder(FoodType.Chips, ExtrasType.Mustard);
         chef.prepare();
         //Then
         assertEquals(1, client.getHappiness(), 0.001);
     }
 
     @Test
-    public void HotdogWithMustardIncreasesClientHappiness() {
+    public void hotdogWithMustardIncreasesClientHappiness() {
         //Given
         Client client = new Client("Test Client", 1);
         // When
-        client.placeOrder(FoodType.HotDog, ExtraType.Mustard);
+        client.placeOrder(FoodType.HotDog, ExtrasType.Mustard);
         chef.prepare();
         //Then
         assertEquals(1, client.getHappiness(), 0.001);
     }
 
     @Test
-    public void HotdogWithKetchupIncreasesClientHappiness() {
+    public void hotdogWithKetchupIncreasesClientHappiness() {
         //Given
         Client client = new Client("Test Client", 1);
         // When
-        client.placeOrder(FoodType.HotDog, ExtraType.Ketchup);
+        client.placeOrder(FoodType.HotDog, ExtrasType.Ketchup);
         chef.prepare();
         //Then
         assertEquals(4, client.getHappiness(), 0.001);
     }
-
 }

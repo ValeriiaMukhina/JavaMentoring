@@ -1,5 +1,5 @@
 package exercise6.food.extras;
 
-public enum  ExtraType {
+public enum ExtrasType {
     Ketchup, Mustard
 }
