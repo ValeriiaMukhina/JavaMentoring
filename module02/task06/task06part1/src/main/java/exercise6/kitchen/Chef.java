@@ -56,7 +56,6 @@ public class Chef implements Subject {
         return message;
     }
 
-
     public void prepare() {
         while (PendingOrderQueue.isNotEmpty()) {
             Order orderFromQueue = PendingOrderQueue.getOrderFromQueue();
