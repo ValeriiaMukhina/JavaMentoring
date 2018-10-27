@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestDataGenerator {
+import static sports.domain.betting.Bet.newBuilder;
+
+public class GameDataGenerator {
     public static List<SportEvent> createTestData() {
         List<SportEvent> sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
@@ -37,7 +39,7 @@ public class TestDataGenerator {
                 .setOdd(new OutcomeOdd(3.5, LocalDateTime.of(2016, 9, 30, 19, 0)))
                 .build();
 
-        Bet betFootball1 = Bet.newBuilder()
+        Bet betFootball1 = newBuilder()
                 .setBetType(BetTypes.BETTING_FOR_WINNER)
                 .setDescription("--")
                 .setOutcome(outcome111)
@@ -62,7 +64,7 @@ public class TestDataGenerator {
                 .setOdd(new OutcomeOdd(1.05, LocalDateTime.of(2016, 9, 27, 19, 0)))
                 .build();
 
-        Bet betFootball2 = Bet.newBuilder()
+        Bet betFootball2 = newBuilder()
                 .setBetType(BetTypes.BETTING_FOR_GOALS)
                 .setDescription("--")
                 .setOutcome(outcome121)
@@ -88,7 +90,7 @@ public class TestDataGenerator {
                 .setOdd(new OutcomeOdd(1.7, LocalDateTime.of(2016, 1, 1, 0, 0)))
                 .build();
 
-        Bet betTennis1 = Bet.newBuilder()
+        Bet betTennis1 = newBuilder()
                 .setBetType(BetTypes.BETTING_FOR_WINNER)
                 .setDescription("--")
                 .setOutcome(outcome211)

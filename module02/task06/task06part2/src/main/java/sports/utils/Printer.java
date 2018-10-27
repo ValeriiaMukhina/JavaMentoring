@@ -12,10 +12,10 @@ public class Printer {
     }
 
     public static void printRealOutcomes(List<Outcome> realOutcomes) {
-        realOutcomes.forEach(outcome -> Printer.printToConsole(outcome + " has won"));
+        realOutcomes.forEach(outcome -> printToConsole(outcome + " has won"));
     }
 
     public static void printPrizes(List<Double> prizes) {
-        prizes.forEach(prize -> Printer.printToConsole( "You have won " + prize));
+        prizes.forEach(prize -> printToConsole( "You have won " + prize));
     }
 }

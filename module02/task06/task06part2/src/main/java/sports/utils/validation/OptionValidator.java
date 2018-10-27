@@ -2,7 +2,7 @@ package sports.utils.validation;
 
 public class OptionValidator implements InputValidator {
 
-    int optionMaxValue;
+    private int optionMaxValue;
 
     public OptionValidator(int optionMaxValue) {
         this.optionMaxValue = optionMaxValue;

@@ -4,9 +4,8 @@ public class DoubleValidator implements InputValidator {
 
     @Override
     public boolean isValid(String data) {
-        double val;
         try {
-            val = Double.parseDouble(data);
+            Double.parseDouble(data);
             return true;
         } catch (NumberFormatException e) {
             return false;

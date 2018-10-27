@@ -1,20 +1,18 @@
 package sports;
 
-import static org.junit.Assert.assertTrue;
-
+import org.junit.Assert;
 import org.junit.Test;
+import sports.runner.GameDataGenerator;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
+
     @Test
-    public void shouldAnswerWithTrue()
+    public void testGameDataGenerator()
     {
-        assertTrue( true );
+        Assert.assertTrue(GameDataGenerator.createTestData().size() > 0);
     }
 }

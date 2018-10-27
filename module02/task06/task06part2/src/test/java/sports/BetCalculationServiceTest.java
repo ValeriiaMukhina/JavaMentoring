@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for BetCalculationService
@@ -75,5 +74,29 @@ public class BetCalculationServiceTest {
         service.getRealOutcomes(sportEvents);
         assertEquals(1, service.getRealOutcomes(sportEvents).size());
         assertTrue(service.getRealOutcomes(sportEvents).contains(outcome));
+    }
+
+    @Test
+    public void testListAllBets() {
+        List<PossibleBetDescription> expected = new ArrayList<>();
+        PossibleBetDescription possibleBetDescription =
+                new PossibleBetDescription(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
+        expected.add(possibleBetDescription);
+        assertEquals(expected, service.listAllBets(sportEvents));
+    }
+
+    @Test
+    public void testGenerateResults() {
+        service.generateResults(sportEvents);
+        assertNotNull(sportEvents.get(0).getEventResult());
+    }
+
+    @Test
+    public void testGetPossibleBetDescriptionByIndex() {
+        List<PossibleBetDescription> descriptions = new ArrayList<>();
+        PossibleBetDescription possibleBetDescription =
+                new PossibleBetDescription(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
+        descriptions.add(possibleBetDescription);
+        assertEquals(service.getPossibleBetDescriptionByIndex(descriptions,1), possibleBetDescription);
     }
 }
