@@ -11,10 +11,15 @@ import java.util.List;
 
 public class Chef implements Subject {
 
-
+    //TODO: it looks like Set<> is more reasonable to use instead of List here
     private final List<ObservableClient> clientsToNotify;
+
+    //TODO: Fields: message, mealIsReady - it would be better to create separate class to store Order status.
+    // They have no sense as instance fields of Chef class and might cause an issue withing multithreaded environment.
     private String message;
     private boolean mealIsReady;
+
+    //TODO: not clear the purpose of this MUTEX object here
     private final Object MUTEX= new Object();
 
     public Chef(){
@@ -23,12 +28,14 @@ public class Chef implements Subject {
 
     @Override
     public void register(ObservableClient client) {
+        //TODO: replace with Objects.requireNonNull(client, "Null Observer")
         if(client == null) throw new NullPointerException("Null Observer");
         synchronized (MUTEX) {
             if(!clientsToNotify.contains(client)) clientsToNotify.add(client);
         }
     }
 
+    //TODO: this method is not used anywhere. Why do you need it?
     @Override
     public void unregister(ObservableClient obj) {
         synchronized (MUTEX) {
@@ -36,8 +43,8 @@ public class Chef implements Subject {
         }
     }
 
-
-
+    //TODO: actually you don't need to store list of all clients
+    //Particular client whose order is ready we can get from the order
     @Override
     public void notifyOrderCompleted() {
         List<ObservableClient> clientsLocal;
