@@ -1,7 +1,11 @@
-package exercise6.food.extras;
+package restaurant.food.extras;
 
-import exercise6.food.Meal;
+import restaurant.food.Meal;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class Ketchup extends Sauce {
     public Ketchup(Meal meal) {
         super(meal);

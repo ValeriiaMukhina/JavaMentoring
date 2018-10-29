@@ -51,7 +51,7 @@
         <level value="ERROR"/>
     </logger>
 
-    <logger name="exercise6">
+    <logger name="restaurant">
         <level value="INFO"/>
     </logger>
 

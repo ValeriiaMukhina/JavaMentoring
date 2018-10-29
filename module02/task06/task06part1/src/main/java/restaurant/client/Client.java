@@ -1,15 +1,18 @@
-package exercise6.client;
-
-import exercise6.food.extras.ExtrasType;
-import exercise6.food.FoodType;
-import exercise6.food.Meal;
-import exercise6.kitchen.Subject;
-import exercise6.restaurant.FinishedOrderQueue;
-import exercise6.restaurant.Order;
-import exercise6.restaurant.PendingOrderQueue;
+package restaurant.client;
 
 import java.util.Objects;
+import restaurant.food.FoodType;
+import restaurant.food.Meal;
+import restaurant.food.extras.ExtrasType;
+import restaurant.kitchen.Subject;
+import restaurant.order.FinishedOrderQueue;
+import restaurant.order.Order;
+import restaurant.order.PendingOrderQueue;
 
+/**
+ * @author Valeriia Biruk
+ * @version 1.0
+ */
 public class Client implements ObservableClient {
 
     private final String name;
@@ -38,11 +41,8 @@ public class Client implements ObservableClient {
 
     @Override
     public void update(Subject subject) {
-        String name = subject.getUpdate();
-        if (name.contains(this.name)) {
-            System.out.println(this.name + " : My order is ready!!! I'm starting to eat.");
-            eat(FinishedOrderQueue.getReadyOrderFromQueue());
-        }
+        System.out.println(this.name + " : My order is ready!!! I'm starting to eat.");
+        eat(FinishedOrderQueue.getReadyOrderFromQueue());
     }
 
     public void placeOrder(FoodType foodToOrder) {
@@ -56,8 +56,12 @@ public class Client implements ObservableClient {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Client)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Client)) {
+            return false;
+        }
         Client client = (Client) o;
         return Double.compare(client.getHappiness(), getHappiness()) == 0 &&
                 Objects.equals(getName(), client.getName());

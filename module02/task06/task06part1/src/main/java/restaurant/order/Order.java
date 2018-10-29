@@ -1,11 +1,16 @@
-package exercise6.restaurant;
-
-import exercise6.client.ObservableClient;
-import exercise6.food.extras.ExtrasType;
-import exercise6.food.FoodType;
+package restaurant.order;
 
 import java.util.Objects;
+import restaurant.client.ObservableClient;
+import restaurant.food.FoodType;
+import restaurant.food.extras.ExtrasType;
 
+/**
+ * The order contains information about client, food and extra.
+ *
+ * @author Valeriia Biruk
+ * @version 1.0
+ */
 public class Order {
 
     private final ObservableClient client;
@@ -39,8 +44,12 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Order)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Order)) {
+            return false;
+        }
         Order order = (Order) o;
         return Objects.equals(getClient(), order.getClient()) &&
                 getOrderedFood() == order.getOrderedFood() &&

@@ -1,7 +1,7 @@
-package exercise6.kitchen;
+package restaurant.kitchen;
 
-import exercise6.food.*;
-import exercise6.food.extras.*;
+import restaurant.food.*;
+import restaurant.food.extras.*;
 
 class Kitchen {
 

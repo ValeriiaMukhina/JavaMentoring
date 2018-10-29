@@ -1,14 +1,12 @@
-package exercise6;
+package restaurant;
 
-import exercise6.client.Client;
-import exercise6.food.extras.ExtrasType;
-import exercise6.food.FoodType;
-import exercise6.kitchen.Chef;
+import restaurant.client.Client;
+import restaurant.food.FoodType;
+import restaurant.food.extras.ExtrasType;
+import restaurant.kitchen.Chef;
 
-class RestaurantApp
-{
-    public static void main( String[] args )
-    {
+class RestaurantApp {
+    public static void main(String[] args) {
         Client alex = new Client("Alex", 1);
         Client viktor = new Client("Viktor", 1);
         Client lera = new Client("Lera", 2);

@@ -1,9 +1,9 @@
-package exercise6;
+package restaurant;
 
-import exercise6.client.Client;
-import exercise6.food.FoodType;
-import exercise6.food.extras.ExtrasType;
-import exercise6.kitchen.Chef;
+import restaurant.client.Client;
+import restaurant.food.FoodType;
+import restaurant.food.extras.ExtrasType;
+import restaurant.kitchen.Chef;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
