@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public abstract class SportEvent {
 
     private String title;
@@ -56,8 +60,12 @@ public abstract class SportEvent {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SportEvent that = (SportEvent) o;
         return Objects.equals(title, that.title) &&
                 Objects.equals(startDate, that.startDate) &&

@@ -2,6 +2,10 @@ package sports.domain.betting;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class TennisSportEvent extends SportEvent {
 
     private TennisSportEvent() {
@@ -11,6 +15,9 @@ public class TennisSportEvent extends SportEvent {
         return new TennisSportEvent().new Builder();
     }
 
+    /**
+     *Builder pattern.
+     */
     public class Builder {
 
         private Builder() {

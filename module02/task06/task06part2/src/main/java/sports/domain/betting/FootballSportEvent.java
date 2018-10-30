@@ -2,15 +2,23 @@ package sports.domain.betting;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class FootballSportEvent extends SportEvent {
 
     private FootballSportEvent() {
     }
 
+
     public static Builder newBuilder() {
         return new FootballSportEvent().new Builder();
     }
 
+    /**
+     * Builder pattern.
+     */
     public class Builder {
 
         private Builder() {

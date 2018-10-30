@@ -1,13 +1,15 @@
 package sports.domain.betting;
 
-
-import sports.domain.user.Player;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import sports.domain.user.Player;
 
+/**
+ * @author Valeriia Biruk
+ * @version 1.0
+ */
 public class Wager {
 
     private Player player;
@@ -64,8 +66,12 @@ public class Wager {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Wager wager = (Wager) o;
         return Objects.equals(player, wager.player) &&
                 Objects.equals(outcomeOdd, wager.outcomeOdd) &&

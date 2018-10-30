@@ -3,6 +3,10 @@ package sports.domain.betting;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class OutcomeOdd {
 
     private Double oddValue;
@@ -46,8 +50,12 @@ public class OutcomeOdd {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         OutcomeOdd that = (OutcomeOdd) o;
         return Objects.equals(oddValue, that.oddValue) &&
                 Objects.equals(validFrom, that.validFrom) &&

@@ -3,6 +3,10 @@ package sports.domain.betting;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class PossibleBetDescription {
 
     private String description;
@@ -52,8 +56,12 @@ public class PossibleBetDescription {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         PossibleBetDescription that = (PossibleBetDescription) o;
         return numberOfBet == that.numberOfBet &&
                 Objects.equals(description, that.description) &&

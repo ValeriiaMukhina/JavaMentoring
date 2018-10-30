@@ -3,6 +3,10 @@ package sports.domain.betting;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class Result {
 
     private List<Outcome> realOutcomes;
@@ -17,8 +21,12 @@ public class Result {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Result result = (Result) o;
         return Objects.equals(realOutcomes, result.realOutcomes);
     }

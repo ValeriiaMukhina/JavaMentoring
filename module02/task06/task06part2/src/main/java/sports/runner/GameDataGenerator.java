@@ -1,13 +1,16 @@
 package sports.runner;
 
-import sports.domain.betting.*;
-
+import static sports.domain.betting.Bet.newBuilder;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import sports.domain.betting.*;
 
-import static sports.domain.betting.Bet.newBuilder;
-
+/**
+ * Test data generator with Builder pattern.
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class GameDataGenerator {
     public static List<SportEvent> createTestData() {
         List<SportEvent> sportEvents = new ArrayList<>();

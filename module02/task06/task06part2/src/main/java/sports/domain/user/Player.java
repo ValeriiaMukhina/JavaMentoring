@@ -1,10 +1,13 @@
 package sports.domain.user;
 
-import sports.domain.betting.Currency;
-
 import java.time.LocalDate;
 import java.util.Objects;
+import sports.domain.betting.Currency;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class Player extends User{
     private String name;
     private String accountNumber;
@@ -54,8 +57,12 @@ public class Player extends User{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Player player = (Player) o;
         return Double.compare(player.balance, balance) == 0 &&
                 Objects.equals(name, player.name) &&

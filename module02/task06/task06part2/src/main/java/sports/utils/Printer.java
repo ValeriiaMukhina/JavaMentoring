@@ -1,13 +1,16 @@
 package sports.utils;
 
+import java.util.List;
 import sports.domain.betting.Outcome;
 
-import java.util.List;
-
+/**
+ * Wrapper for system out.
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class Printer {
 
-    public static void printToConsole (String message)
-    {
+    public static void printToConsole (String message) {
         System.out.println(message);
     }
 
@@ -16,6 +19,6 @@ public class Printer {
     }
 
     public static void printPrizes(List<Double> prizes) {
-        prizes.forEach(prize -> printToConsole( "You have won " + prize));
+        prizes.forEach(prize -> printToConsole("You have won " + prize));
     }
 }

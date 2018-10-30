@@ -1,10 +1,12 @@
 package sports.utils;
 
+import java.util.Scanner;
 import sports.utils.validation.InputValidator;
 
-import java.util.Scanner;
-
-
+/**
+ * @author Valeriia Biruk
+ * @version 1.0
+ */
 public class ConsoleReader {
 
     public static String read(InputValidator inputValidator) {

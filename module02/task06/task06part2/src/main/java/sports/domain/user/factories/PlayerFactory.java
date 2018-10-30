@@ -10,6 +10,11 @@ import sports.utils.validation.DateValidator;
 import sports.utils.validation.DoubleValidator;
 import sports.utils.validation.InputValidator;
 
+/**
+ * Abstract factory pattern used for getting players.
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class PlayerFactory implements UserFactory {
 
     @Override

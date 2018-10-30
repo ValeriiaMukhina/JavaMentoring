@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class Bet {
 
     private SportEvent sportEvent;
@@ -45,8 +49,12 @@ public class Bet {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Bet bet = (Bet) o;
         return Objects.equals(sportEvent, bet.sportEvent) &&
                 Objects.equals(description, bet.description) &&
@@ -76,6 +84,9 @@ public class Bet {
         return new Bet().new Builder();
     }
 
+    /**
+     * inner builder.
+     */
     public class Builder {
 
         private Builder() {

@@ -1,15 +1,19 @@
 package sports.service;
 
-import sports.domain.betting.*;
-import sports.utils.Printer;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import sports.domain.betting.*;
 
+/**
+ * Service class.
+ *
+ * @author Valeriia Biruk
+ * @version 1.0
+ */
 public class BetCalculationService {
 
     public List<PossibleBetDescription> listAllBets(List<SportEvent> sportEvents) {
@@ -80,7 +84,7 @@ public class BetCalculationService {
                             }
                         }
                 )
-    );
+        );
         return prizes;
     }
 }

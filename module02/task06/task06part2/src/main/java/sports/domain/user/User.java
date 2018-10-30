@@ -2,6 +2,10 @@ package sports.domain.user;
 
 import java.util.Objects;
 
+/**
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class User {
 
     private String email;
@@ -43,8 +47,12 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
         return isEnabled == user.isEnabled &&
                 Objects.equals(email, user.email) &&

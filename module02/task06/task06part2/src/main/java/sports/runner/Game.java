@@ -1,5 +1,8 @@
 package sports.runner;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import sports.domain.betting.*;
 import sports.domain.user.Player;
 import sports.service.BetCalculationService;
@@ -9,10 +12,10 @@ import sports.utils.Printer;
 import sports.utils.validation.DoubleValidator;
 import sports.utils.validation.OptionValidator;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * @author Valeriia Biruk
+ * @version 1.0
+ */
 public class Game {
 
     private Player player;
@@ -59,7 +62,7 @@ public class Game {
         double wage = Double.parseDouble(ConsoleReader.read(new DoubleValidator()));
 
         if (wage > player.getBalance()) {
-            Printer.printToConsole("> You don't have enough money, your balance is: " + player.getBalance()  + " " + player.getCurrency());
+            Printer.printToConsole("> You don't have enough money, your balance is: " + player.getBalance() + " " + player.getCurrency());
 
         } else {
             player.setBalance(player.getBalance() - wage);

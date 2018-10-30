@@ -1,5 +1,10 @@
 package sports.utils.validation;
 
+/**
+ * Strategy pattern used.
+ * @author  Valeriia Biruk
+ * @version 1.0
+ */
 public class OptionValidator implements InputValidator {
 
     private int optionMaxValue;
