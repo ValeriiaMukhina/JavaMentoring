@@ -1,4 +1,4 @@
-package com.epam.training;
+package exercise7;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,8 @@ public class Application {
 			System.out.println("Correct size");
 		} else {
 			System.out.println("Invalid size");
+			System.out.println(availablePancakes.size());
+			System.out.println("needed size: " + (MAX / 10));
 		}
 	}
 
