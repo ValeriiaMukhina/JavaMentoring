@@ -1,5 +1,7 @@
 package com.epam.training.exercise1;
 
+import com.epam.training.exercise1.exceptions.FileNotFoundException;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -61,7 +63,7 @@ public class Image {
 		try {
 			return ImageIO.read(getClass().getClassLoader().getResource(fileName));
 		} catch (IOException exception) {
-			throw new RuntimeException("File not found!", exception);
+			throw new FileNotFoundException("File not found!", exception);
 		}
 	}
 
