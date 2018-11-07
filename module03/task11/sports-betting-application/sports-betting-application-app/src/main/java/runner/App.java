@@ -1,4 +1,4 @@
-import runner.AppRunner;
+package runner;
 
 /**
  * Class to start application.
