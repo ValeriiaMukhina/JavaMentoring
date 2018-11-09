@@ -3,7 +3,7 @@ package com.epam.training.exercise1;
 public class AdvancedAscii {
 
 	public static void main(String[] args) {
-		Image image = Image.create("pair_hiking.png");
+		Image image = Image.get("pair_hiking.png");
 		char[] charsByDarkness = { '#', '@', 'X', 'L', 'I', ':', '.', ' ' };
 		int max = 0;
 		int min = 255 * 3;

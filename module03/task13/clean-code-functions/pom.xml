@@ -5,17 +5,91 @@
   <groupId>com.epam.training</groupId>
   <artifactId>clean-code-functions</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>7</source>
+          <target>7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   <packaging>jar</packaging>
 
   <name>clean-code-functions</name>
   <url>http://maven.apache.org</url>
 
   <properties>
+    <ristretto.revision>1.1.0-SNAPSHOT</ristretto.revision>
+    <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    <java.source.version>1.8</java.source.version>
+    <java.target.version>1.8</java.target.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.reporting.inputEncoding>UTF-8</project.reporting.inputEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <!-- Code metric and reporting -->
+    <skip.unit.tests>false</skip.unit.tests>
+    <skip.integration.tests>false</skip.integration.tests>
+    <checkstyle.failOnError>true</checkstyle.failOnError>
+    <findbugs.failOnError>false</findbugs.failOnError>
+
+    <org.slf4j.version>1.7.5</org.slf4j.version>
+    <logback.version>1.0.13</logback.version>
+    <junit-version>4.12</junit-version>
+
+    <commons.collections.version>4.2</commons.collections.version>
+    <commons.io.version>2.6</commons.io.version>
+    <commons.lang.version>3.8.1</commons.lang.version>
   </properties>
 
+  <dependencies>
+    <!-- Logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${org.slf4j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>${commons.collections.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons.io.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons.lang.version}</version>
+    </dependency>
+
+    <!-- Test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit-version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
 
   <reporting>

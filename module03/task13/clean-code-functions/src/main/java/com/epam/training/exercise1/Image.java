@@ -16,7 +16,7 @@ public class Image {
     
     private BufferedImage image;
 
-	public static Image create(String fileName) {
+	public static Image get(String fileName) {
 		return new Image(fileName);
 	}
 

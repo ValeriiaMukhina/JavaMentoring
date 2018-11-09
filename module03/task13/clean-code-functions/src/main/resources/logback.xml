@@ -16,7 +16,7 @@
         </layout-->
         <encoder>
             <!-- pattern>%d{HH:mm:ss} %5p [%thread] %-5level %logger{5} - %msg%n</pattern -->
-            <pattern>%d{HH:mm:ss} %5p | %t | %-5level %logger{32} - [%file:%line] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -42,7 +42,7 @@
     </appender>
 
     <root>
-        <level value ="WARN" />
+        <level value ="INFO" />
         <appender-ref ref="console" />
         <appender-ref ref="file" />
     </root>
@@ -51,7 +51,7 @@
         <level value="ERROR"/>
     </logger>
 
-    <logger name="restaurant">
+    <logger name="cleanCode">
         <level value="INFO"/>
     </logger>
 

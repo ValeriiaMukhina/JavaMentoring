@@ -1,5 +1,11 @@
 package com.epam.training.exercise1;
 
+/**
+ * Coordinate.
+ *
+ * @author Valeriia Biruk
+ * @version 1.0
+ */
 public class Coordinate {
 
     private final int x;
