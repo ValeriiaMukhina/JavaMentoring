@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class EightQueens {
 
-	public static void main(String[] args) {
+	public void solve() {
 		ArrayList<char[][]> solutions = new ArrayList<>();
 		
 		char[][] result = new char[8][8];
@@ -28,6 +28,8 @@ public class EightQueens {
 		}
 	}
 
+	/* A recursive utility function to solve N
+        Queen problem */
 	private static void solveAllNQueens(char[][] board, int col, ArrayList<char[][]> solutions) {
 		if (col == board.length) {
 			char[][] copy = new char[board.length][board[0].length];
