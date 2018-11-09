@@ -1,7 +1,8 @@
-package sports.utils;
+package utils;
+
+import utils.validation.InputValidator;
 
 import java.util.Scanner;
-import sports.utils.validation.InputValidator;
 
 /**
  * @author Valeriia Biruk

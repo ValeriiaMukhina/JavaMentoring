@@ -1,8 +1,9 @@
-package sports.utils;
+package utils;
+
+import domain.betting.Currency;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import sports.domain.betting.Currency;
 
 /**
  * Class for transforming different data types.

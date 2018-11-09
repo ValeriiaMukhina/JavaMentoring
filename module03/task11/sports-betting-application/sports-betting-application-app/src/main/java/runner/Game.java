@@ -1,16 +1,18 @@
-package sports.runner;
+package runner;
+
+
+import domain.betting.*;
+import domain.user.Player;
+import service.BetCalculationService;
+import utils.ConsoleReader;
+import utils.DataUtils;
+import utils.Printer;
+import utils.validation.DoubleValidator;
+import utils.validation.OptionValidator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import sports.domain.betting.*;
-import sports.domain.user.Player;
-import sports.service.BetCalculationService;
-import sports.utils.ConsoleReader;
-import sports.utils.DataUtils;
-import sports.utils.Printer;
-import sports.utils.validation.DoubleValidator;
-import sports.utils.validation.OptionValidator;
 
 /**
  * @author Valeriia Biruk

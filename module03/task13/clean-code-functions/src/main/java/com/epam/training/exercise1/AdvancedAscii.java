@@ -1,11 +1,9 @@
 package com.epam.training.exercise1;
 
-import java.io.IOException;
-
 public class AdvancedAscii {
 
-	public static void main(String[] args) throws IOException {
-		Image image = Image.createImage("pair_hiking.png");
+	public static void main(String[] args) {
+		Image image = Image.create("pair_hiking.png");
 		char[] charsByDarkness = { '#', '@', 'X', 'L', 'I', ':', '.', ' ' };
 		int max = 0;
 		int min = 255 * 3;

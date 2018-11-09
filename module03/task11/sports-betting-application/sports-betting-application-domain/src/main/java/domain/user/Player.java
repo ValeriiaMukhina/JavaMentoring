@@ -1,8 +1,9 @@
-package sports.domain.user;
+package domain.user;
+
+import domain.betting.Currency;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import sports.domain.betting.Currency;
 
 /**
  * @author  Valeriia Biruk

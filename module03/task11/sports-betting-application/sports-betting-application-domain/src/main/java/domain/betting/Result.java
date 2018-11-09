@@ -1,4 +1,4 @@
-package sports.domain.betting;
+package domain.betting;
 
 import java.util.List;
 import java.util.Objects;

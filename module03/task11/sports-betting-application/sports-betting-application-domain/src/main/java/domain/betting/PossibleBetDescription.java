@@ -1,4 +1,4 @@
-package sports.domain.betting;
+package domain.betting;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;

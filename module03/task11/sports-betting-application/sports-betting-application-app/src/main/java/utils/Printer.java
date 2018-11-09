@@ -1,7 +1,9 @@
-package sports.utils;
+package utils;
+
+
+import domain.betting.Outcome;
 
 import java.util.List;
-import sports.domain.betting.Outcome;
 
 /**
  * Wrapper for system out.

@@ -1,4 +1,4 @@
-package sports.utils.validation;
+package utils.validation;
 
 /**
  * Strategy pattern used.

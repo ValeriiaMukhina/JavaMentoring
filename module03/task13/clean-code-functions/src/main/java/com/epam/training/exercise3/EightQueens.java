@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class EightQueens {
 
 	public static void main(String[] args) {
-		ArrayList<char[][]> solutions = new ArrayList<char[][]>();
+		ArrayList<char[][]> solutions = new ArrayList<>();
 		
 		char[][] result = new char[8][8];
 		for (int r1 = 0; r1 < 8; r1++)
@@ -38,69 +38,28 @@ public class EightQueens {
 		} else {
 			for (int row = 0; row < board.length; row++) {
 				board[row][col] = 'q';
-				boolean canBeSafe = true;
-				
-				for (int i = 0; i < board.length; i++) {
-					boolean found = false;
-					for (int j = 0; j < board.length; j++) {
-						if (board[i][j] == 'q') {
-							if (found) {
-								canBeSafe = false;
-							}
-							found = true;
-						}
-					}
-				}
-				
-				for (int i = 0; i < board.length; i++) {
-					boolean found = false;
-					for (int j = 0; j < board.length; j++) {
-						if (board[j][i] == 'q') {
-							if (found) {
-								canBeSafe = false;
-							}
-							found = true;
-						}
-					}
-				}
-				
-				for (int offset = -board.length; offset < board.length; offset++) {
-					boolean found = false;
-					for (int i = 0; i < board.length; i++) {
-						if (inbounds(i, i + offset, board)) {
-							if (board[i][i + offset] == 'q') {
-								if (found) {
-									canBeSafe = false;
-								}
-								found = true;
-							}
-						}
-					}
-				}
-				
-				for (int offset = -board.length; offset < board.length; offset++) {
-					boolean found = false;
-					for (int i = 0; i < board.length; i++) {
-						if (inbounds(i, board.length - offset - i - 1, board)) {
-							if (board[i][board.length - offset - i - 1] == 'q') {
-								if (found) {
-									canBeSafe = false;
-								}
-								found = true;
-							}
-						}
-					}
-				}
-				
-				if (canBeSafe)
+				if (canBeSafe(board, row, col))
 					solveAllNQueens(board, col + 1, solutions);
 				board[row][col] = '.';
 			}
 		}
 	}
 
-	private static boolean inbounds(int row, int col, char[][] mat) {
-		return row >= 0 && row < mat.length && col >= 0 && col < mat[0].length;
-	}
+	private static boolean canBeSafe(char board[][], int row, int col) {
+		int i, j;
 
+		// Check row on left side
+		for (i = 0; i < col; i++)
+			if (board[row][i] == 'q') return false;
+
+		// Check major diagonal on left side
+		for (i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
+			if (board[i][j] == 'q') return false;
+
+		// Check minor diagonal on left side
+		for (i = row + 1, j = col - 1; j >= 0 && i < 8; i++, j--)
+			if (board[i][j] == 'q') return false;
+
+		return true;
+	}
 }

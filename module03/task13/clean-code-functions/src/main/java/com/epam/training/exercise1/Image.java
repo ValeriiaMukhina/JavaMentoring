@@ -1,6 +1,7 @@
 package com.epam.training.exercise1;
 
 import com.epam.training.exercise1.exceptions.FileNotFoundException;
+import com.epam.training.exercise1.exceptions.WrongCoordinateException;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -15,8 +16,12 @@ public class Image {
     
     private BufferedImage image;
 
-	public static Image createImage(String fileName) {
+	public static Image create(String fileName) {
 		return new Image(fileName);
+	}
+
+	private Image(String fileName) {
+		this.image = loadImageFromFile(fileName);
 	}
 
 	public int getHeight() {
@@ -45,16 +50,13 @@ public class Image {
 		int rgbValue = getRgbValue(coordinate);
 		return rgbValue & LAST_BYTE;
 	}
-	
-    private Image(String fileName) {
-        this.image = loadImageFromFile(fileName);
-    }
+
     
 	private int getRgbValue(Coordinate coordinate) {
 		if (coordinate.getX() < 0 || coordinate.getX() > image.getWidth()) {
-			throw new RuntimeException("Coordinate x out of range: 0.." + image.getWidth());
+			throw new WrongCoordinateException("Coordinate x out of range: 0.." + image.getWidth());
 		} else if (coordinate.getY() < 0 || coordinate.getY() > image.getHeight()) {
-			throw new RuntimeException("Coordinate y out of range: 0.." + image.getHeight());
+			throw new WrongCoordinateException("Coordinate y out of range: 0.." + image.getHeight());
 		}
 		return image.getRGB(coordinate.getX(), coordinate.getY());
 	}

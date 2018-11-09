@@ -1,8 +1,8 @@
-package sports.runner;
+package runner;
 
-import sports.domain.user.Player;
-import sports.domain.user.factories.PlayerFactory;
-import sports.utils.*;
+
+import domain.user.Player;
+import utils.Printer;
 
 /**
  * Class for obtain player and start a game with player.
@@ -16,7 +16,7 @@ public class AppRunner {
         Printer.printToConsole("Welcome");
         Printer.printToConsole("==============================");
 
-        Player player = (Player) new PlayerFactory().getFromConsole();
+        Player player = GameDataGenerator.getUserFromConsole();
 
         new Game(player, GameDataGenerator.createTestData()).start();
 

@@ -1,8 +1,7 @@
-package sports;
+package runner;
 
 import org.junit.Assert;
 import org.junit.Test;
-import runner.GameDataGenerator;
 
 /**
  * Unit test for simple App.

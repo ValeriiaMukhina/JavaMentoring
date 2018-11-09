@@ -1,7 +1,7 @@
-package sports.domain.user.factories;
+package domain.user.factories;
 
-import sports.domain.user.Admin;
-import sports.domain.user.User;
+import domain.user.Admin;
+import domain.user.User;
 
 /**
  * Abstract Factory pattern used for admin creation.

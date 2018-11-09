@@ -1,10 +1,9 @@
-package sports;
+package service;
 
 import domain.betting.*;
 import domain.user.Player;
 import org.junit.Before;
 import org.junit.Test;
-import service.BetCalculationService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,6 +49,7 @@ public class BetCalculationServiceTest {
 
     @Test
     public void testCalculatePrize() {
+        //Given
         List<Wager> wagers = new ArrayList<>();
         List<Outcome> outcomes = new ArrayList<>();
         outcomes.add(outcome);
@@ -57,13 +57,16 @@ public class BetCalculationServiceTest {
         OutcomeOdd outcomeOdd = sportEvents.get(0).getBets().get(0).getOutcomes().get(0).getOutcomeOdd().get(0);
         Wager wager = new Wager(player, outcomeOdd, 10.0, player.getCurrency(), LocalDateTime.now(), State.UNPROCESSED);
         wagers.add(wager);
+        //When
         List<Double> prizes = service.calculatedPrizes(outcomes, wagers);
+        //Then
         assertEquals(1, prizes.size());
         assertEquals(50.0, prizes.get(0), 0.1);
     }
 
     @Test
     public void testGetRealOutcomes() {
+        //Given
         List<Wager> wagers = new ArrayList<>();
         List<Outcome> outcomes = new ArrayList<>();
         outcomes.add(outcome);
@@ -71,32 +74,40 @@ public class BetCalculationServiceTest {
         OutcomeOdd outcomeOdd = sportEvents.get(0).getBets().get(0).getOutcomes().get(0).getOutcomeOdd().get(0);
         Wager wager = new Wager(player, outcomeOdd, 10.0, player.getCurrency(), LocalDateTime.now(), State.UNPROCESSED);
         wagers.add(wager);
+        //When
         service.getRealOutcomes(sportEvents);
+        //Then
         assertEquals(1, service.getRealOutcomes(sportEvents).size());
         assertTrue(service.getRealOutcomes(sportEvents).contains(outcome));
     }
 
     @Test
     public void testListAllBets() {
+        //Given
         List<PossibleBetDescription> expected = new ArrayList<>();
         PossibleBetDescription possibleBetDescription =
                 new PossibleBetDescription(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
         expected.add(possibleBetDescription);
+        //When Then
         assertEquals(expected, service.listAllBets(sportEvents));
     }
 
     @Test
     public void testGenerateResults() {
+        //When
         service.generateResults(sportEvents);
+        //Then
         assertNotNull(sportEvents.get(0).getEventResult());
     }
 
     @Test
     public void testGetPossibleBetDescriptionByIndex() {
+        //Given
         List<PossibleBetDescription> descriptions = new ArrayList<>();
         PossibleBetDescription possibleBetDescription =
                 new PossibleBetDescription(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
         descriptions.add(possibleBetDescription);
+        //Then
         assertEquals(service.getPossibleBetDescriptionByIndex(descriptions,1), possibleBetDescription);
     }
 }

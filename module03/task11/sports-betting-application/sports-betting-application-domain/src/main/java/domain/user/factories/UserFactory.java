@@ -1,6 +1,7 @@
-package sports.domain.user.factories;
+package domain.user.factories;
 
-import sports.domain.user.User;
+
+import domain.user.User;
 
 /**
  * @author  Valeriia Biruk

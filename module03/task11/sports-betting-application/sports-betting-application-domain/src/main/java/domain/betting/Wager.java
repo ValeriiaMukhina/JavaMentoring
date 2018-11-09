@@ -1,10 +1,11 @@
-package sports.domain.betting;
+package domain.betting;
+
+import domain.user.Player;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import sports.domain.user.Player;
 
 /**
  * @author Valeriia Biruk

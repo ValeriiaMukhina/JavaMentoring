@@ -1,10 +1,22 @@
-package sports.runner;
+package runner;
 
-import static sports.domain.betting.Bet.newBuilder;
+import domain.betting.*;
+import domain.user.Player;
+import domain.user.User;
+import utils.ConsoleReader;
+import utils.DataUtils;
+import utils.Printer;
+import utils.validation.CurrencyValidator;
+import utils.validation.DateValidator;
+import utils.validation.DoubleValidator;
+import utils.validation.InputValidator;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import sports.domain.betting.*;
+
+import static domain.betting.Bet.newBuilder;
+
 
 /**
  * Test data generator with Builder pattern.
@@ -106,4 +118,20 @@ public class GameDataGenerator {
 
         return sportEvents;
     }
-}
+
+    public static Player getUserFromConsole() {
+            Player player = new Player();
+            Printer.printToConsole("> Hi, what is your name?");
+            player.setName(ConsoleReader.read(new InputValidator(){}));
+            Printer.printToConsole("> What is your account number?");
+            player.setAccountNumber(ConsoleReader.read(new InputValidator(){}));
+            Printer.printToConsole("> How much money do you have (more than 0)?");
+            player.setBalance(Double.parseDouble(ConsoleReader.read(new DoubleValidator())));
+            Printer.printToConsole("> What is your currency? (USD, EUR or HUF)");
+            player.setCurrency(DataUtils.getCurrency(ConsoleReader.read(new CurrencyValidator())));
+            Printer.printToConsole("> When were you born? eg.:1990-02-03");
+            player.setDateOfBirth(DataUtils.getDate(ConsoleReader.read(new DateValidator())));
+            return player;
+
+        }
+    }

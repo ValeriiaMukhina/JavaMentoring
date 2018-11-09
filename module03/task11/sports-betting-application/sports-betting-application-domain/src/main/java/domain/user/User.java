@@ -1,4 +1,4 @@
-package sports.domain.user;
+package domain.user;
 
 import java.util.Objects;
 
