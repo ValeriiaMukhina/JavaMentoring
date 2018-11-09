@@ -11,31 +11,19 @@ public class AdvancedAscii {
 		int stepX = image.getWidth() / 200;
 		for (int y = 0; y < image.getHeight(); y += stepY) {
 			for (int x = 0; x < image.getWidth(); x += stepX) {
-				int sum = 0;
-				for (int avgy = 0; avgy < stepY; avgy++) {
-					for (int avgx = 0; avgx < stepX; avgx++) {
-						sum = sum + (image.getRed(new Coordinate(x, y)) + image.getBlue(new Coordinate(x, y)) + image.getGreen(new Coordinate(x, y)));
-					}
+				int intensity = image.getIntensity(new Point(x, y));
+				if (max < intensity) {
+					max = intensity;
 				}
-				sum = sum / stepY / stepX;
-				if (max < sum) {
-					max = sum;
-				}
-				if (min > sum) {
-					min = sum;
+				if (min > intensity) {
+					min = intensity;
 				}
 			}
 		}
-		for (int y = 0; y < image.getHeight() - stepY; y += stepY) {
-			for (int x = 0; x < image.getWidth() - stepX; x += stepX) {
-				int sum = 0;
-				for (int avgy = 0; avgy < stepY; avgy++) {
-					for (int avgx = 0; avgx < stepX; avgx++) {
-                        sum = sum + (image.getRed(new Coordinate(x, y)) + image.getBlue(new Coordinate(x, y)) + image.getGreen(new Coordinate(x, y)));
-					}
-				}
-				sum = sum / stepY / stepX;
-				System.out.print(charsByDarkness[(sum - min) * charsByDarkness.length / (max - min + 1)]);
+		for (int y = 0; y < image.getHeight(); y += stepY) {
+			for (int x = 0; x < image.getWidth(); x += stepX) {
+				int intensity = image.getIntensity(new Point(x, y));
+				System.out.print(charsByDarkness[(intensity - min) * charsByDarkness.length / (max - min + 1)]);
 			}
 			System.out.println();
 		}

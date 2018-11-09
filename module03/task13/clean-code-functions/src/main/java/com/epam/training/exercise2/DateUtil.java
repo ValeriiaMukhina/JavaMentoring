@@ -19,15 +19,8 @@ public final class DateUtil {
      *
      * @param date date
      */
-    public static void nextDay(final Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DATE, 1);
-        calendar.set(Calendar.HOUR, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        date.setTime(calendar.getTime().getTime());
+    public static Date nextDay(Date date) {
+        return addDays(date, 1);
     }
 
     /**
@@ -36,15 +29,23 @@ public final class DateUtil {
      * @param date date
      */
 
-    public static void previousDay(final Date date) {
+    public static Date previousDay(Date date) {
+        return addDays(date, -1);
+    }
+
+    public static Date addDays(Date date, int amount) {
+        Date result = new Date();
         Calendar calendar = Calendar.getInstance();
+
         calendar.setTime(date);
-        calendar.add(Calendar.DATE, -1);
+        calendar.add(Calendar.DATE, amount);
         calendar.set(Calendar.HOUR, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        date.setTime(calendar.getTime().getTime());
+
+        result.setTime(calendar.getTime().getTime());
+        return result;
     }
 
     /**

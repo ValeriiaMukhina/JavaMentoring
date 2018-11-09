@@ -1,72 +1,77 @@
 package com.epam.training.exercise1;
 
-import com.epam.training.exercise1.exceptions.FileNotFoundException;
-import com.epam.training.exercise1.exceptions.WrongCoordinateException;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import com.epam.training.exercise1.exceptions.ReadImageException;
+import com.epam.training.exercise1.exceptions.WrongCoordinateException;
+
 public class Image {
 
-	private static final int LAST_BYTE = 0xFF;
+    private static final int LAST_BYTE = 0xFF;
     private static final int BYTE = 8;
     private static final int TWO_BYTES = 16;
-    
+
     private BufferedImage image;
 
-	public static Image get(String fileName) {
-		return new Image(fileName);
-	}
+    private Image(String fileName) {
+        this.image = loadImageFromFile(fileName);
+    }
 
-	private Image(String fileName) {
-		this.image = loadImageFromFile(fileName);
-	}
+    public static Image get(String fileName) {
+        return new Image(fileName);
+    }
 
-	public int getHeight() {
-		return image.getHeight();
-	}
+    public int getHeight() {
+        return image.getHeight();
+    }
 
-	public int getWidth() {
-		return image.getWidth();
-	}
-	
-	public int getIntensity(Coordinate coordinate) {
-	    return getRed(coordinate) + getBlue(coordinate) + getGreen(coordinate);
-	}
+    public int getWidth() {
+        return image.getWidth();
+    }
 
-	public int getRed(Coordinate coordinate) {
-		int rgbValue = getRgbValue(coordinate);
-		return (rgbValue >> TWO_BYTES) & LAST_BYTE;
-	}
+    public int getIntensity(Point point) {
+        return getRed(point) + getBlue(point) + getGreen(point);
+    }
 
-	public int getGreen(Coordinate coordinate) {
-		int rgbValue = getRgbValue(coordinate);
-		return (rgbValue >> BYTE) & LAST_BYTE;
-	}
+    public int getRed(Point point) {
+        int rgbValue = getRgbValue(point);
+        return (rgbValue >> TWO_BYTES) & LAST_BYTE;
+    }
 
-	public int getBlue(Coordinate coordinate) {
-		int rgbValue = getRgbValue(coordinate);
-		return rgbValue & LAST_BYTE;
-	}
+    public int getGreen(Point point) {
+        int rgbValue = getRgbValue(point);
+        return (rgbValue >> BYTE) & LAST_BYTE;
+    }
 
-    
-	private int getRgbValue(Coordinate coordinate) {
-		if (coordinate.getX() < 0 || coordinate.getX() > image.getWidth()) {
-			throw new WrongCoordinateException("Coordinate x out of range: 0.." + image.getWidth());
-		} else if (coordinate.getY() < 0 || coordinate.getY() > image.getHeight()) {
-			throw new WrongCoordinateException("Coordinate y out of range: 0.." + image.getHeight());
-		}
-		return image.getRGB(coordinate.getX(), coordinate.getY());
-	}
+    public int getBlue(Point point) {
+        int rgbValue = getRgbValue(point);
+        return rgbValue & LAST_BYTE;
+    }
 
-	private BufferedImage loadImageFromFile(String fileName) {
-		try {
-			return ImageIO.read(getClass().getClassLoader().getResource(fileName));
-		} catch (IOException exception) {
-			throw new FileNotFoundException("File not found!", exception);
-		}
-	}
+    private int getRgbValue(Point point) {
+        if (point.getX() < 0 || point.getX() > image.getWidth()) {
+            throw new WrongCoordinateException("Point x out of range: 0.." + image.getWidth());
+        } else if (point.getY() < 0 || point.getY() > image.getHeight()) {
+            throw new WrongCoordinateException("Point y out of range: 0.." + image.getHeight());
+        }
+        return image.getRGB(point.getX(), point.getY());
+    }
+
+    private BufferedImage loadImageFromFile(String fileName) {
+        try {
+            URL file = getClass().getClassLoader().getResource(fileName);
+            if (file != null) {
+                return ImageIO.read(file);
+            } else {
+                throw new ReadImageException("Cannot load image!");
+            }
+        } catch (IOException exception) {
+            throw new ReadImageException("Cannot load image!", exception);
+        }
+    }
 
 }

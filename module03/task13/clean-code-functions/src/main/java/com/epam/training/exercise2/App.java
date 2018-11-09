@@ -1,5 +1,4 @@
 package com.epam.training.exercise2;
-import static com.epam.training.exercise2.DateUtil.previousDay;
 
 import java.util.Date;
 
@@ -28,7 +27,7 @@ final class App {
      */
     public static void main(String[] args) {
         Date date = new Date();
-        previousDay(date);
+        date = DateUtil.previousDay(date);
         logger.info("Date: {}", date);
         final int year = 2014;
         final int month = 10;

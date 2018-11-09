@@ -1,17 +1,17 @@
 package com.epam.training.exercise1;
 
 /**
- * Coordinate.
+ * Point.
  *
  * @author Valeriia Biruk
  * @version 1.0
  */
-public class Coordinate {
+public class Point {
 
     private final int x;
     private final int y;
 
-    public Coordinate(int x, int y) {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }

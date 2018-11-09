@@ -3,6 +3,7 @@ import static java.lang.System.out;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,8 @@ import org.slf4j.LoggerFactory;
 public class QueensPuzzle {
 
     private static Logger logger = LoggerFactory.getLogger(QueensPuzzle.class);
-
     private int boardDimension;
-
-    private ArrayList<char[][]> solutions = new ArrayList<>();
+    private List<char[][]> solutions = new ArrayList<>();
 
     public QueensPuzzle(int boardDimension) {
         this.boardDimension = boardDimension;
@@ -37,29 +36,9 @@ public class QueensPuzzle {
      */
 
     public void solve() {
-        char[][] newBoard = getNewBoard();
-        solveAllNQueens(newBoard, 0);
+        solveAllNQueens(getNewBoard(), 0);
         printSolutionSize();
         printSolutions();
-    }
-
-    private void printSolutions() {
-        for (int i = 0; i < solutions.size(); i++) {
-            logger.info("\nSolution {}", i + 1);
-
-            char[][] board = solutions.get(i);
-
-            for (int row = 0; row < board.length; row++) {
-                for (int column = 0; column < board[row].length; column++) {
-                    out.print(board[row][column]);
-                }
-                out.println();
-            }
-        }
-    }
-
-    private void printSolutionSize() {
-        logger.info("{} solution found", solutions.size());
     }
 
     private char[][] getNewBoard() {
@@ -70,6 +49,21 @@ public class QueensPuzzle {
         return newBoard;
     }
 
+    private void printSolutionSize() {
+        logger.info("{} solution found", solutions.size());
+    }
+
+    private void printSolutions() {
+        for (int i = 0; i < solutions.size(); i++) {
+            logger.info("\nSolution {}", i + 1);
+
+            char[][] board = solutions.get(i);
+            for (char[] row : board) {
+                logger.info(String.valueOf(row));
+            }
+        }
+    }
+
     /* A recursive utility function to solve N
         Queen problem */
     private void solveAllNQueens(char[][] board, int column) {
@@ -77,11 +71,11 @@ public class QueensPuzzle {
             solutions.add(getCopyOfBoard(board));
         } else {
             for (int row = 0; row < board.length; row++) {
-                board[row][column] = 'q';
-                if (canBeSafe(board, row, column)) {
+                if (isSafe(board, row, column)) {
+                    board[row][column] = 'q';
                     solveAllNQueens(board, column + 1);
+                    board[row][column] = '.';
                 }
-                board[row][column] = '.';
             }
         }
     }
@@ -94,34 +88,42 @@ public class QueensPuzzle {
         return copy;
     }
 
-    private boolean canBeSafe(char[][] board, int row, int col) {
-        return isPlaceToTheRowSafe(board, row, col) && isPlaceToTheMajorDiagonalSafe(board, row, col) && isPlaceToTheMinorDiagonalSafe(board, row, col);
+    private boolean isSafe(char[][] board, int row, int column) {
+        return isRowSafe(board, row, column)
+                && isMajorDiagonalSafe(board, row, column)
+                && isMinorDiagonalSafe(board, row, column);
     }
 
-    private boolean isPlaceToTheRowSafe(char[][] board, int row, int col) {
-        for (int i = 0; i < col; i++) {
+    private boolean isRowSafe(char[][] board, int row, int column) {
+        boolean result = true;
+        for (int i = 0; i < column; i++) {
             if (board[row][i] == 'q') {
-                return false;
+                result = false;
+                break;
             }
         }
-        return true;
+        return result;
     }
 
-    private boolean isPlaceToTheMajorDiagonalSafe(char[][] board, int row, int col) {
-        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+    private boolean isMajorDiagonalSafe(char[][] board, int row, int column) {
+        boolean result = true;
+        for (int i = row, j = column; i >= 0 && j >= 0; i--, j--) {
             if (board[i][j] == 'q') {
-                return false;
+                result = false;
+                break;
             }
         }
-        return true;
+        return result;
     }
 
-    private boolean isPlaceToTheMinorDiagonalSafe(char[][] board, int row, int col) {
-        for (int i = row + 1, j = col - 1; j >= 0 && i < boardDimension; i++, j--) {
+    private boolean isMinorDiagonalSafe(char[][] board, int row, int column) {
+        boolean result = true;
+        for (int i = row, j = column; j >= 0 && i < boardDimension; i++, j--) {
             if (board[i][j] == 'q') {
-                return false;
+                result = false;
+                break;
             }
         }
-        return true;
+        return result;
     }
 }
