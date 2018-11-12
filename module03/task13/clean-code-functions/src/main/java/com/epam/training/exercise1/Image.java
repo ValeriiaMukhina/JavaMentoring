@@ -9,7 +9,12 @@ import javax.imageio.ImageIO;
 import com.epam.training.exercise1.exceptions.ReadImageException;
 import com.epam.training.exercise1.exceptions.WrongCoordinateException;
 
-public class Image {
+/**
+ * Image from file.
+ *
+ * @author Valeriia Biruk
+ */
+public final class Image {
 
     private static final int LAST_BYTE = 0xFF;
     private static final int BYTE = 8;
@@ -21,33 +26,59 @@ public class Image {
         this.image = loadImageFromFile(fileName);
     }
 
+    /**
+     * Buffered Image from file.
+     *
+     * @param fileName from console.
+     * @return Buffered Image
+     * @author Valeriia Biruk
+     */
     public static Image get(String fileName) {
         return new Image(fileName);
     }
 
+    /**
+     * Height of image.
+     *
+     * @return height
+     * @author Valeriia Biruk
+     */
     public int getHeight() {
         return image.getHeight();
     }
 
+    /**
+     * Weight of image.
+     *
+     * @return Weight
+     * @author Valeriia Biruk
+     */
     public int getWidth() {
         return image.getWidth();
     }
 
+    /**
+     * Intensity of image.
+     *
+     * @param point with X and Y coordinates
+     * @return Intensity
+     * @author Valeriia Biruk
+     */
     public int getIntensity(Point point) {
         return getRed(point) + getBlue(point) + getGreen(point);
     }
 
-    public int getRed(Point point) {
+    private int getRed(Point point) {
         int rgbValue = getRgbValue(point);
         return (rgbValue >> TWO_BYTES) & LAST_BYTE;
     }
 
-    public int getGreen(Point point) {
+    private int getGreen(Point point) {
         int rgbValue = getRgbValue(point);
         return (rgbValue >> BYTE) & LAST_BYTE;
     }
 
-    public int getBlue(Point point) {
+    private int getBlue(Point point) {
         int rgbValue = getRgbValue(point);
         return rgbValue & LAST_BYTE;
     }
@@ -73,5 +104,4 @@ public class Image {
             throw new ReadImageException("Cannot load image!", exception);
         }
     }
-
 }

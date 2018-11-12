@@ -1,5 +1,4 @@
 package com.epam.training.exercise3;
-import static java.lang.System.out;
 
 import java.util.ArrayList;
 import java.util.Arrays;
