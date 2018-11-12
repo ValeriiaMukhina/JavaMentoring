@@ -18,6 +18,7 @@ public final class DateUtil {
      * returns next day date.
      *
      * @param date date
+     * @return current day + 1 day
      */
     public static Date nextDay(Date date) {
         return addDays(date, 1);
@@ -27,13 +28,14 @@ public final class DateUtil {
      * returns previous day date.
      *
      * @param date date
+     * @return current day - 1 day
      */
 
     public static Date previousDay(Date date) {
         return addDays(date, -1);
     }
 
-    public static Date addDays(Date date, int amount) {
+    private static Date addDays(Date date, int amount) {
         Date result = new Date();
         Calendar calendar = Calendar.getInstance();
 

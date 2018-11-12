@@ -54,11 +54,11 @@ public class QueensPuzzle {
 
     private void printSolutions() {
         for (int i = 0; i < solutions.size(); i++) {
-            logger.info("\nSolution {}", i + 1);
+            logger.info("\nSolution {}\n", i + 1);
 
             char[][] board = solutions.get(i);
             for (char[] row : board) {
-                logger.info(String.valueOf(row));
+                logger.info(String.valueOf(row)+"\n");
             }
         }
     }

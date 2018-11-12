@@ -1,5 +1,8 @@
 package com.epam.training.exercise1;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Converter to Ascii.
  *
@@ -11,6 +14,7 @@ public class AdvancedAscii {
     private static final int STEP_RESOLUTION_Y = 60;
     private static final int STEP_RESOLUTION_X = 200;
     private static final char[] CHARS_BY_DARKNESS = {'#', '@', 'X', 'L', 'I', ':', '.', ' '};
+    private static Logger logger = LoggerFactory.getLogger(AdvancedAscii.class);
 
     private Image image;
     private int max;
@@ -54,9 +58,9 @@ public class AdvancedAscii {
         for (int y = 0; y < image.getHeight(); y += stepY) {
             for (int x = 0; x < image.getWidth(); x += stepX) {
                 int intensity = image.getIntensity(new Point(x, y));
-                System.out.print(CHARS_BY_DARKNESS[(intensity - min) * CHARS_BY_DARKNESS.length / (max - min + 1)]);
+                logger.info(String.valueOf(CHARS_BY_DARKNESS[(intensity - min) * CHARS_BY_DARKNESS.length / (max - min + 1)]));
             }
-            System.out.println();
+            logger.info("\n");
         }
     }
 }
