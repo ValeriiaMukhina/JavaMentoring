@@ -79,4 +79,8 @@ public class Game {
         possibleBetDescriptions.forEach(possibleBet -> Printer.printToConsole(possibleBet.toString()));
         return DataUtils.getOption(ConsoleReader.read(new OptionValidator(possibleBetDescriptions.size())));
     }
+
+    public List<Wager> getWagers() {
+        return wagers;
+    }
 }
