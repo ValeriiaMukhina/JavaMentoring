@@ -1,13 +1,14 @@
 package domain.betting;
 
-import domain.user.Player;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import domain.user.Player;
 /**
+ * wage class.
+ *
  * @author Valeriia Biruk
  * @version 1.0
  */
@@ -21,10 +22,10 @@ public class Wager {
     private State state;
     private Boolean isWin;
 
-    public Wager(Player player, OutcomeOdd outcomeOdd, Double amount, Currency currency, LocalDateTime timestamp, State state) {
+    public Wager(Player player, OutcomeOdd outcomeOdd, double wage, Currency currency, LocalDateTime timestamp, State state) {
         this.player = player;
         this.outcomeOdd = outcomeOdd;
-        this.amount = amount;
+        this.amount = wage;
         this.currency = currency;
         this.timestamp = timestamp;
         this.state = state;
@@ -54,6 +55,39 @@ public class Wager {
         return state;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setOutcomeOdd(OutcomeOdd outcomeOdd) {
+        this.outcomeOdd = outcomeOdd;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public void setWin(Boolean win) {
+        isWin = win;
+    }
+    /**
+     * sets wage status to win or not.
+     *
+     * @param outcomeOdd list of outcomes to process
+     * @return isWin
+     */
     public boolean processWin(List<OutcomeOdd> outcomeOdd) {
         isWin = false;
         Optional<OutcomeOdd> win = outcomeOdd.stream().filter(odd -> odd.equals(this.getOutcomeOdd())).findFirst();
@@ -70,17 +104,13 @@ public class Wager {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Wager)) {
             return false;
         }
         Wager wager = (Wager) o;
-        return Objects.equals(player, wager.player) &&
-                Objects.equals(outcomeOdd, wager.outcomeOdd) &&
-                Objects.equals(amount, wager.amount) &&
-                currency == wager.currency &&
-                Objects.equals(timestamp, wager.timestamp) &&
-                state == wager.state &&
-                Objects.equals(isWin, wager.isWin);
+        return Objects.equals(getPlayer(), wager.getPlayer())
+                && Objects.equals(getOutcomeOdd(), wager.getOutcomeOdd())
+                && Objects.equals(getAmount(), wager.getAmount());
     }
 
     @Override
@@ -90,14 +120,14 @@ public class Wager {
 
     @Override
     public String toString() {
-        return "Wager{" +
-                "player=" + player +
-                ", outcomeOdd=" + outcomeOdd +
-                ", amount=" + amount +
-                ", currency=" + currency +
-                ", timestamp=" + timestamp +
-                ", state=" + state +
-                ", isWin=" + isWin +
-                '}';
+        return "Wager{"
+                + "player=" + player
+                + ", outcomeOdd=" + outcomeOdd
+                + ", amount=" + amount
+                + ", currency=" + currency
+                + ", timestamp=" + timestamp
+                + ", state=" + state
+                + ", isWin=" + isWin
+                + '}';
     }
 }

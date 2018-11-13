@@ -1,12 +1,14 @@
 package domain.betting;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
- * @author  Valeriia Biruk
+ * class with odds for sport event outcome.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public class OutcomeOdd {
@@ -55,13 +57,12 @@ public class OutcomeOdd {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof OutcomeOdd)) {
             return false;
         }
         OutcomeOdd that = (OutcomeOdd) o;
-        return Objects.equals(oddValue, that.oddValue) &&
-                Objects.equals(validFrom, that.validFrom) &&
-                Objects.equals(validTo, that.validTo);
+        return Objects.equals(getOddValue(), that.getOddValue())
+                && Objects.equals(getValidFrom(), that.getValidFrom());
     }
 
     @Override
@@ -71,10 +72,10 @@ public class OutcomeOdd {
 
     @Override
     public String toString() {
-        return "OutcomeOdd{" +
-                ", oddValue=" + oddValue +
-                ", validFrom=" + validFrom +
-                ", validTo=" + validTo +
-                '}';
+        return "OutcomeOdd{"
+                + ", oddValue=" + oddValue
+                + ", validFrom=" + validFrom
+                + ", validTo=" + validTo
+                + '}';
     }
 }

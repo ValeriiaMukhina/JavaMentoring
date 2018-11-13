@@ -1,15 +1,16 @@
 package domain.user;
 
-import domain.betting.Currency;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
+import domain.betting.Currency;
 /**
- * @author  Valeriia Biruk
+ * player dto.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
-public class Player extends User{
+public class Player extends User {
     private String name;
     private String accountNumber;
     private double balance;
@@ -61,15 +62,14 @@ public class Player extends User{
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Player)) {
+            return false;
+        }
+        if (!super.equals(o)) {
             return false;
         }
         Player player = (Player) o;
-        return Double.compare(player.balance, balance) == 0 &&
-                Objects.equals(name, player.name) &&
-                Objects.equals(accountNumber, player.accountNumber) &&
-                currency == player.currency &&
-                Objects.equals(dateOfBirth, player.dateOfBirth);
+        return Objects.equals(getName(), player.getName());
     }
 
     @Override
@@ -79,12 +79,12 @@ public class Player extends User{
 
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", balance=" + balance +
-                ", currency=" + currency +
-                ", dateOfBirth=" + dateOfBirth +
-                "} " + super.toString();
+        return "Player{"
+                + "name='" + name + '\''
+                + ", accountNumber='" + accountNumber + '\''
+                + ", balance=" + balance
+                + ", currency=" + currency
+                + ", dateOfBirth=" + dateOfBirth
+                + "} " + super.toString();
     }
 }

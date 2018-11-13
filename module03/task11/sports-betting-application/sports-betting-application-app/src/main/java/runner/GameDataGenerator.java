@@ -1,8 +1,19 @@
 package runner;
 
-import domain.betting.*;
+import static domain.betting.Bet.newBuilder;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import domain.betting.Bet;
+import domain.betting.BetTypes;
+import domain.betting.FootballSportEvent;
+import domain.betting.Outcome;
+import domain.betting.OutcomeOdd;
+import domain.betting.SportEvent;
+import domain.betting.TennisSportEvent;
 import domain.user.Player;
-import domain.user.User;
 import utils.ConsoleReader;
 import utils.DataUtils;
 import utils.Printer;
@@ -11,19 +22,17 @@ import utils.validation.DateValidator;
 import utils.validation.DoubleValidator;
 import utils.validation.InputValidator;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import static domain.betting.Bet.newBuilder;
-
-
 /**
  * Test data generator with Builder pattern.
- * @author  Valeriia Biruk
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
-public class GameDataGenerator {
+public final class GameDataGenerator {
+
+    private GameDataGenerator() {
+    }
+    //CHECKSTYLE:OFF: checkstyle:magicnumber
     public static List<SportEvent> createTestData() {
         List<SportEvent> sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
@@ -31,7 +40,6 @@ public class GameDataGenerator {
                 .setStartDate(LocalDateTime.of(2016, 10, 7, 19, 0))
                 .setEndDate(LocalDateTime.of(2016, 10, 7, 21, 0))
                 .build();
-
 
         Outcome outcome111 = Outcome.newBuilder()
                 .setValue("Southampton")
@@ -119,19 +127,25 @@ public class GameDataGenerator {
         return sportEvents;
     }
 
+    /**
+     * returns player created from user input.
+     *
+     * @return Player objects
+     */
     public static Player getUserFromConsole() {
-            Player player = new Player();
-            Printer.printToConsole("> Hi, what is your name?");
-            player.setName(ConsoleReader.read(new InputValidator(){}));
-            Printer.printToConsole("> What is your account number?");
-            player.setAccountNumber(ConsoleReader.read(new InputValidator(){}));
-            Printer.printToConsole("> How much money do you have (more than 0)?");
-            player.setBalance(Double.parseDouble(ConsoleReader.read(new DoubleValidator())));
-            Printer.printToConsole("> What is your currency? (USD, EUR or HUF)");
-            player.setCurrency(DataUtils.getCurrency(ConsoleReader.read(new CurrencyValidator())));
-            Printer.printToConsole("> When were you born? eg.:1990-02-03");
-            player.setDateOfBirth(DataUtils.getDate(ConsoleReader.read(new DateValidator())));
-            return player;
-
-        }
+        Player player = new Player();
+        Printer.printToConsole("> Hi, what is your name?");
+        player.setName(ConsoleReader.read(new InputValidator() {
+        }));
+        Printer.printToConsole("> What is your account number?");
+        player.setAccountNumber(ConsoleReader.read(new InputValidator() {
+        }));
+        Printer.printToConsole("> How much money do you have (more than 0)?");
+        player.setBalance(Double.parseDouble(ConsoleReader.read(new DoubleValidator())));
+        Printer.printToConsole("> What is your currency? (USD, EUR or HUF)");
+        player.setCurrency(DataUtils.getCurrency(ConsoleReader.read(new CurrencyValidator())));
+        Printer.printToConsole("> When were you born? eg.:1990-02-03");
+        player.setDateOfBirth(DataUtils.getDate(ConsoleReader.read(new DateValidator())));
+        return player;
     }
+}

@@ -1,19 +1,32 @@
 package domain.betting;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
- * @author  Valeriia Biruk
+ * outcome of sport event.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
-public class Outcome {
+public final class Outcome {
 
     private String value;
     private List<OutcomeOdd> outcomeOdds = new ArrayList<>();
+
+    private Outcome() {
+    }
+
+    /**
+     * inner Builder.
+     *
+     * @return Builder
+     */
+    public static Builder newBuilder() {
+        return new Outcome().new Builder();
+    }
 
     public String getValue() {
         return value;
@@ -40,8 +53,8 @@ public class Outcome {
             return false;
         }
         Outcome outcome = (Outcome) o;
-        return Objects.equals(value, outcome.value) &&
-                Objects.equals(outcomeOdds, outcome.outcomeOdds);
+        return Objects.equals(value, outcome.value)
+                && Objects.equals(outcomeOdds, outcome.outcomeOdds);
     }
 
     @Override
@@ -54,32 +67,42 @@ public class Outcome {
         return "Outcome with value " + value;
     }
 
-    private Outcome() {
-    }
-
-    public static Builder newBuilder() {
-        return new Outcome().new Builder();
-    }
-
     /**
      * inner Builder.
      */
-    public class Builder {
+    public final class Builder {
 
         private Builder() {
         }
 
+        /**
+         * inner Builder.
+         *
+         * @param value of outcome
+         * @return Builder
+         */
         public Builder setValue(String value) {
             Outcome.this.value = value;
             return this;
         }
 
+        /**
+         * inner Builder.
+         *
+         * @param odd of outcome
+         * @return Builder
+         */
         public Builder setOdd(OutcomeOdd odd) {
             checkNotNull(odd);
             Outcome.this.outcomeOdds.add(odd);
             return this;
         }
 
+        /**
+         * inner Builder.
+         *
+         * @return Outcome object.
+         */
         public Outcome build() {
             return Outcome.this;
         }

@@ -2,7 +2,8 @@ package utils.validation;
 
 /**
  * Strategy pattern used.
- * @author  Valeriia Biruk
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public class OptionValidator implements InputValidator {
@@ -16,16 +17,18 @@ public class OptionValidator implements InputValidator {
     @Override
     public boolean isValid(String data) {
         int val;
-            if ("q".equals(data)) {
-                return true;
-            }
-            try {
-                val = Integer.parseInt(data);
-                return val <= optionMaxValue;
-            } catch (NumberFormatException e) {
-                return false;
-            }
+        boolean isValid;
+        if ("q".equals(data)) {
+            isValid = true;
         }
+        try {
+            val = Integer.parseInt(data);
+            isValid = val <= optionMaxValue;
+        } catch (NumberFormatException e) {
+            isValid = false;
+        }
+        return isValid;
+    }
 
     @Override
     public String errorMessage() {

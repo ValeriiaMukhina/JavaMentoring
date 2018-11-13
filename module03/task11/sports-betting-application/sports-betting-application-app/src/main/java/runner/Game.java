@@ -1,7 +1,17 @@
 package runner;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import domain.betting.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import domain.betting.Outcome;
+import domain.betting.OutcomeOdd;
+import domain.betting.PossibleBetDescription;
+import domain.betting.SportEvent;
+import domain.betting.State;
+import domain.betting.Wager;
 import domain.user.Player;
 import service.BetCalculationService;
 import utils.ConsoleReader;
@@ -9,14 +19,7 @@ import utils.DataUtils;
 import utils.Printer;
 import utils.validation.DoubleValidator;
 import utils.validation.OptionValidator;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-
-/**
+/** gambling game class.
  * @author Valeriia Biruk
  * @version 1.0
  */
@@ -31,7 +34,8 @@ public class Game {
         this.player = checkNotNull(player);
         this.sportEvents = checkNotNull(sportEvents);
     }
-
+    /** start game.
+     */
 
     public void start() {
         salutateNewPlayer();

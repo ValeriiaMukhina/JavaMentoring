@@ -1,7 +1,7 @@
 package service;
 
-
-import domain.betting.*;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkPositionIndex;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkPositionIndex;
-
+import domain.betting.*;
 /**
  * Service class.
  *
@@ -25,15 +23,11 @@ public class BetCalculationService {
         checkNotNull(sportEvents);
         AtomicInteger numberOfBet = new AtomicInteger(1);
         List<PossibleBetDescription> possibleBets = new LinkedList<>();
-        sportEvents.forEach(
-
-                event -> event.getBets().forEach(
-                        bet -> bet.getOutcomes().forEach(
-                                outcome -> outcome.getOutcomeOdd().stream()
+        sportEvents.forEach(event -> event.getBets().forEach(bet -> bet.getOutcomes().forEach(outcome -> outcome.getOutcomeOdd().stream()
                                         .filter(
-                                                outcomeOdd -> outcomeOdd.getValidFrom().isBefore(LocalDateTime.now()) &&
-                                                        (outcomeOdd.getValidTo() == null ||
-                                                                outcomeOdd.getValidTo().isAfter(LocalDateTime.now()))
+                                                outcomeOdd -> outcomeOdd.getValidFrom().isBefore(LocalDateTime.now())
+                                                        && (outcomeOdd.getValidTo() == null
+                                                        || outcomeOdd.getValidTo().isAfter(LocalDateTime.now()))
                                         ).forEach(
                                                 outcomeOdd -> possibleBets.add(
                                                         new PossibleBetDescription(
@@ -54,19 +48,17 @@ public class BetCalculationService {
     public void generateResults(List<SportEvent> sportEvents) {
         checkNotNull(sportEvents);
         Random rand = new Random();
-        sportEvents.forEach(
-                sportEvent -> {
+        sportEvents.forEach(sportEvent -> {
                     List<Outcome> realOutcomes = new ArrayList<>();
-
-                    sportEvent.getBets().forEach(
-                            bet -> {
-                                int winOutcome = rand.nextInt(bet.getOutcomes().size());
+                    sportEvent.getBets().forEach(bet -> {
+                     int winOutcome = rand.nextInt(bet.getOutcomes().size());
                                 realOutcomes.add(bet.getOutcomes().get(winOutcome));
                             }
 
                     );
                     sportEvent.setEventResult(new Result(realOutcomes));
-                }
+
+        }
         );
     }
 
@@ -79,7 +71,7 @@ public class BetCalculationService {
         checkNotNull(sportEvents);
         List<Outcome> realOutcomes = new ArrayList<>();
         sportEvents.stream().filter(sportEvent -> sportEvent.getEventResult() != null).forEach(
-                sportEvent -> realOutcomes.addAll(sportEvent.getEventResult().getRealOutcomes()));
+             sportEvent -> realOutcomes.addAll(sportEvent.getEventResult().getRealOutcomes()));
         return realOutcomes;
     }
 
@@ -88,10 +80,10 @@ public class BetCalculationService {
         realOutcomes.forEach(
                 outcome -> wagers.forEach(
                         wager -> {
-                            if (wager.processWin(outcome.getOutcomeOdd())) {
-                                prizes.add(wager.getAmount());
-                            }
+                    if (wager.processWin(outcome.getOutcomeOdd())) {
+                            prizes.add(wager.getAmount());
                         }
+                }
                 )
         );
         return prizes;

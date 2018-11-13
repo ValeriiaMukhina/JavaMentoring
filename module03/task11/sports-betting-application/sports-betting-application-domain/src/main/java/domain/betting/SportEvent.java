@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author  Valeriia Biruk
+ * Main class for sport event.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public abstract class SportEvent {
@@ -63,15 +65,13 @@ public abstract class SportEvent {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof SportEvent)) {
             return false;
         }
         SportEvent that = (SportEvent) o;
-        return Objects.equals(title, that.title) &&
-                Objects.equals(startDate, that.startDate) &&
-                Objects.equals(endDate, that.endDate) &&
-                Objects.equals(bets, that.bets) &&
-                Objects.equals(eventResult, that.eventResult);
+        return Objects.equals(getTitle(), that.getTitle())
+                && Objects.equals(getStartDate(), that.getStartDate())
+                && Objects.equals(getEndDate(), that.getEndDate());
     }
 
     @Override
@@ -81,12 +81,12 @@ public abstract class SportEvent {
 
     @Override
     public String toString() {
-        return "SportEvent{" +
-                "title='" + title + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", bets=" + bets +
-                ", eventResult=" + eventResult +
-                '}';
+        return "SportEvent{"
+                + "title='" + title + '\''
+                + ", startDate=" + startDate
+                + ", endDate=" + endDate
+                + ", bets=" + bets
+                + ", eventResult=" + eventResult
+                + '}';
     }
 }

@@ -3,7 +3,9 @@ package domain.user;
 import java.util.Objects;
 
 /**
- * @author  Valeriia Biruk
+ * User class.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public class User {
@@ -50,14 +52,12 @@ public class User {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof User)) {
             return false;
         }
         User user = (User) o;
-        return isEnabled == user.isEnabled &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(userGroup, user.userGroup);
+        return Objects.equals(getEmail(), user.getEmail())
+                && Objects.equals(getPassword(), user.getPassword());
     }
 
     @Override
@@ -67,11 +67,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", isEnabled=" + isEnabled +
-                ", userGroup=" + userGroup +
-                '}';
+        return "User{"
+                + "email='" + email + '\''
+                + ", password='" + password + '\''
+                + ", isEnabled=" + isEnabled
+                + ", userGroup=" + userGroup
+                + '}';
     }
 }

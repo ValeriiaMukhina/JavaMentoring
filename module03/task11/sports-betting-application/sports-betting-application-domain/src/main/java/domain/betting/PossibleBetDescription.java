@@ -1,13 +1,15 @@
 package domain.betting;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
 /**
- * @author  Valeriia Biruk
+ * pretty wrapper for all bet information to print.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public class PossibleBetDescription {
@@ -63,16 +65,13 @@ public class PossibleBetDescription {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof PossibleBetDescription)) {
             return false;
         }
         PossibleBetDescription that = (PossibleBetDescription) o;
-        return numberOfBet == that.numberOfBet &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(sportEvent, that.sportEvent) &&
-                Objects.equals(bet, that.bet) &&
-                Objects.equals(outcome, that.outcome) &&
-                Objects.equals(outcomeOdd, that.outcomeOdd);
+        return numberOfBet == that.numberOfBet
+                && Objects.equals(description, that.description)
+                && Objects.equals(sportEvent, that.sportEvent);
     }
 
     @Override

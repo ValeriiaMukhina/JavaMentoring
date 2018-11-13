@@ -1,13 +1,10 @@
 package domain.user.factories;
 
-
-import domain.user.User;
-
 /**
- * @author  Valeriia Biruk
+ * factory for user creation.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public interface UserFactory {
-
-    User getFromConsole();
 }

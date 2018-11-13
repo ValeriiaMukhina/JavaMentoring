@@ -4,19 +4,21 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author  Valeriia Biruk
+ * result of events.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public class Result {
 
     private List<Outcome> realOutcomes;
 
-    public List<Outcome> getRealOutcomes() {
-        return realOutcomes;
-    }
-
     public Result(List<Outcome> realOutcomes) {
         this.realOutcomes = realOutcomes;
+    }
+
+    public List<Outcome> getRealOutcomes() {
+        return realOutcomes;
     }
 
     @Override
@@ -38,8 +40,8 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Result{" +
-                "realOutcomes=" + realOutcomes +
-                '}';
+        return "Result{"
+                + "realOutcomes=" + realOutcomes
+                + '}';
     }
 }

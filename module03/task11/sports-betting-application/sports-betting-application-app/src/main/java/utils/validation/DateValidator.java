@@ -6,24 +6,26 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Strategy pattern used.
- * @author  Valeriia Biruk
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public class DateValidator implements InputValidator {
 
     @Override
     public boolean isValid(String data) {
-        LocalDate localDate;
+        LocalDate localDate = null;
+        boolean isValid = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            try {
-                localDate = LocalDate.parse(data, formatter);
-            } catch (DateTimeParseException e) {
-                return false;
-            }
-            if (localDate != null) {
-                return true;
-            }
-        return true;
+        try {
+            localDate = LocalDate.parse(data, formatter);
+        } catch (DateTimeParseException e) {
+            isValid = false;
+        }
+        if (localDate != null) {
+            isValid = true;
+        }
+        return isValid;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package domain.user;
 
-/**
+/** admins.
  * @author  Valeriia Biruk
  * @version 1.0
  */
