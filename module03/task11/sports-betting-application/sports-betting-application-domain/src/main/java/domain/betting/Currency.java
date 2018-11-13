@@ -1,6 +1,6 @@
 package domain.betting;
 
-/**
+/** Enum with all possible currency.
  * @author  Valeriia Biruk
  * @version 1.0
  */

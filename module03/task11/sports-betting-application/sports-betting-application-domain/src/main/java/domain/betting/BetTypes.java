@@ -1,6 +1,7 @@
 package domain.betting;
 
 /**
+ * Enum with all bet types.
  * @author  Valeriia Biruk
  * @version 1.0
  */

@@ -1,15 +1,25 @@
 package utils;
 
-import utils.validation.InputValidator;
-
 import java.util.Scanner;
 
+import utils.validation.InputValidator;
+
 /**
+ * Reader from console.
  * @author Valeriia Biruk
  * @version 1.0
  */
-public class ConsoleReader {
+public final class ConsoleReader {
 
+    private ConsoleReader() {
+    }
+    /**
+     * Reader from console.
+     * @author Valeriia Biruk
+     * @return String
+     * @param inputValidator interface
+     * @version 1.0
+     */
     public static String read(InputValidator inputValidator) {
         Scanner scan = new Scanner(System.in);
         Printer.printToConsole(inputValidator.message());

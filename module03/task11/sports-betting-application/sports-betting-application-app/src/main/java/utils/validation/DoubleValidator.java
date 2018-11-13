@@ -2,19 +2,22 @@ package utils.validation;
 
 /**
  * Strategy pattern used.
- * @author  Valeriia Biruk
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
 public class DoubleValidator implements InputValidator {
 
     @Override
     public boolean isValid(String data) {
+        boolean isValid;
         try {
             Double.parseDouble(data);
-            return true;
+            isValid = true;
         } catch (NumberFormatException e) {
-            return false;
+            isValid = false;
         }
+        return isValid;
     }
 
     @Override

@@ -9,9 +9,9 @@ public class CurrencyValidator implements InputValidator {
 
     @Override
     public boolean isValid(String data) {
-        return data.equalsIgnoreCase("EUR")
-                || data.equalsIgnoreCase("HUF") ||
-                data.equalsIgnoreCase("USD");
+        return "EUR".equalsIgnoreCase(data)
+                || "HUF".equalsIgnoreCase(data)
+                || "USD".equalsIgnoreCase(data);
     }
 
     @Override

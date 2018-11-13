@@ -7,15 +7,20 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author  Valeriia Biruk
+ * Domain Bet class.
+ *
+ * @author Valeriia Biruk
  * @version 1.0
  */
-public class Bet {
+public final class Bet {
 
     private SportEvent sportEvent;
     private String description;
     private List<Outcome> outcomes = new ArrayList<>();
     private BetTypes type;
+
+    private Bet() {
+    }
 
     public SportEvent getSportEvent() {
         return sportEvent;
@@ -58,10 +63,8 @@ public class Bet {
             return false;
         }
         Bet bet = (Bet) o;
-        return Objects.equals(sportEvent, bet.sportEvent) &&
-                Objects.equals(description, bet.description) &&
-                Objects.equals(outcomes, bet.outcomes) &&
-                type == bet.type;
+        return Objects.equals(sportEvent, bet.sportEvent)
+                && Objects.equals(outcomes, bet.outcomes);
     }
 
     @Override
@@ -71,17 +74,19 @@ public class Bet {
 
     @Override
     public String toString() {
-        return "Bet{" +
-                "sportEvent=" + sportEvent +
-                ", description='" + description + '\'' +
-                ", outcomes=" + outcomes +
-                ", type=" + type +
-                '}';
+        return "Bet{"
+                + "sportEvent=" + sportEvent
+                + ", description='" + description + '\''
+                + ", outcomes=" + outcomes
+                + ", type=" + type
+                + '}';
     }
 
-    private Bet() {
-    }
-
+    /**
+     * inner builder.
+     *
+     * @return builder.
+     */
     public static Builder newBuilder() {
         return new Bet().new Builder();
     }
@@ -94,27 +99,56 @@ public class Bet {
         private Builder() {
         }
 
+        /**
+         * inner builder.
+         *
+         * @param sportEvent needed to be non null
+         * @return builder.
+         */
         public Builder setSportEvent(SportEvent sportEvent) {
             Bet.this.sportEvent = checkNotNull(sportEvent);
             return this;
         }
 
+        /**
+         * inner builder.
+         *
+         * @param description is not required
+         * @return builder.
+         */
         public Builder setDescription(String description) {
             Bet.this.description = description;
             return this;
         }
 
+        /**
+         * inner builder.
+         *
+         * @param outcome should be defined
+         * @return builder.
+         */
         public Builder setOutcome(Outcome outcome) {
             checkNotNull(outcome);
             Bet.this.outcomes.add(outcome);
             return this;
         }
 
+        /**
+         * inner builder.
+         *
+         * @param betType is not required
+         * @return builder.
+         */
         public Builder setBetType(BetTypes betType) {
             Bet.this.type = betType;
             return this;
         }
 
+        /**
+         * final builder method to obtain class.
+         *
+         * @return Bet.
+         */
         public Bet build() {
             return Bet.this;
         }
