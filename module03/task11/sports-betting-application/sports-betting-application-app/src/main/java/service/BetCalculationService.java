@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkPositionIndex;
+
 /**
  * Service class.
  *
@@ -19,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BetCalculationService {
 
     public List<PossibleBetDescription> listAllBets(List<SportEvent> sportEvents) {
+        checkNotNull(sportEvents);
         AtomicInteger numberOfBet = new AtomicInteger(1);
         List<PossibleBetDescription> possibleBets = new LinkedList<>();
         sportEvents.forEach(
@@ -48,6 +52,7 @@ public class BetCalculationService {
     }
 
     public void generateResults(List<SportEvent> sportEvents) {
+        checkNotNull(sportEvents);
         Random rand = new Random();
         sportEvents.forEach(
                 sportEvent -> {
@@ -66,10 +71,12 @@ public class BetCalculationService {
     }
 
     public PossibleBetDescription getPossibleBetDescriptionByIndex(List<PossibleBetDescription> bets, int index) {
+        checkPositionIndex(index, bets.size());
         return bets.get(index - 1);
     }
 
     public List<Outcome> getRealOutcomes(List<SportEvent> sportEvents) {
+        checkNotNull(sportEvents);
         List<Outcome> realOutcomes = new ArrayList<>();
         sportEvents.stream().filter(sportEvent -> sportEvent.getEventResult() != null).forEach(
                 sportEvent -> realOutcomes.addAll(sportEvent.getEventResult().getRealOutcomes()));

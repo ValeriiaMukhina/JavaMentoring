@@ -10,7 +10,11 @@ import utils.Printer;
  * @version 1.0
  */
 public class AppRunner {
-
+    /**
+     * Main Application runner.
+     * @author  Valeriia Biruk
+     * @version 1.0
+     */
     public void start() {
 
         Printer.printToConsole("Welcome");

@@ -1,5 +1,7 @@
 package domain.betting;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -87,13 +89,13 @@ public class Bet {
     /**
      * inner builder.
      */
-    public class Builder {
+    public final class Builder {
 
         private Builder() {
         }
 
         public Builder setSportEvent(SportEvent sportEvent) {
-            Bet.this.sportEvent = sportEvent;
+            Bet.this.sportEvent = checkNotNull(sportEvent);
             return this;
         }
 
@@ -103,6 +105,7 @@ public class Bet {
         }
 
         public Builder setOutcome(Outcome outcome) {
+            checkNotNull(outcome);
             Bet.this.outcomes.add(outcome);
             return this;
         }

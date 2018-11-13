@@ -3,6 +3,8 @@ package domain.betting;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author  Valeriia Biruk
  * @version 1.0
@@ -29,7 +31,7 @@ public class OutcomeOdd {
     }
 
     public void setOddValue(Double oddValue) {
-        this.oddValue = oddValue;
+        this.oddValue = checkNotNull(oddValue);
     }
 
     public LocalDateTime getValidFrom() {

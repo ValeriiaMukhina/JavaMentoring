@@ -3,6 +3,9 @@ package domain.betting;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author  Valeriia Biruk
  * @version 1.0
@@ -17,10 +20,11 @@ public class PossibleBetDescription {
     private OutcomeOdd outcomeOdd;
 
     public PossibleBetDescription(int numberOfBet, SportEvent sportEvent, Bet bet, Outcome outcome, OutcomeOdd outcomeOdd) {
-        this.sportEvent = sportEvent;
-        this.bet = bet;
-        this.outcome = outcome;
-        this.outcomeOdd = outcomeOdd;
+        this.sportEvent = checkNotNull(sportEvent);
+        this.bet = checkNotNull(bet);
+        this.outcome = checkNotNull(outcome);
+        this.outcomeOdd = checkNotNull(outcomeOdd);
+        checkArgument(numberOfBet > 0, "Argument was %s but expected nonnegative", numberOfBet);
         this.numberOfBet = numberOfBet;
         StringBuilder descriptionBuilder = new StringBuilder(numberOfBet + ": Bet on ")
                 .append(sportEvent.getTitle())

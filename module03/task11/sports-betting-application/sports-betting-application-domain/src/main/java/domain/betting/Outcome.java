@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author  Valeriia Biruk
  * @version 1.0
@@ -73,6 +75,7 @@ public class Outcome {
         }
 
         public Builder setOdd(OutcomeOdd odd) {
+            checkNotNull(odd);
             Outcome.this.outcomeOdds.add(odd);
             return this;
         }

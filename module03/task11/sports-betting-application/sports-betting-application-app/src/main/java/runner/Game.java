@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Valeriia Biruk
  * @version 1.0
@@ -26,8 +28,8 @@ public class Game {
     private List<Wager> wagers = new ArrayList<>();
 
     public Game(Player player, List<SportEvent> sportEvents) {
-        this.player = player;
-        this.sportEvents = sportEvents;
+        this.player = checkNotNull(player);
+        this.sportEvents = checkNotNull(sportEvents);
     }
 
 
