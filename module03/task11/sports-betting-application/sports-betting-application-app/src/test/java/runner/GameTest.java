@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -27,7 +26,7 @@ import static org.mockito.Mockito.*;
 @PrepareForTest( { ConsoleReader.class })
 public class GameTest {
 
-    @Mock  Player player;
+    private Player player;
     private List<SportEvent> sportEvents;
     private Outcome outcome;
     private List<PossibleBetDescription> descriptions;
@@ -35,6 +34,10 @@ public class GameTest {
 
     @Before
     public void generateTestData() {
+        player = new Player();
+        player.setBalance(1000);
+        player.setCurrency(Currency.EUR);
+        player.setName("Test player");
         sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
                 .setTitle("Test Sport Event")
