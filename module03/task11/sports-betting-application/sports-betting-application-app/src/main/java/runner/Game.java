@@ -10,7 +10,6 @@ import domain.betting.Outcome;
 import domain.betting.OutcomeOdd;
 import domain.betting.PossibleBetDescription;
 import domain.betting.SportEvent;
-import domain.betting.State;
 import domain.betting.Wager;
 import domain.user.Player;
 import service.BetCalculationService;

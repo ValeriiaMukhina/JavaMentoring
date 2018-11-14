@@ -2,6 +2,9 @@ package utils;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import domain.betting.Outcome;
 /**
  * Wrapper for system out.
@@ -10,6 +13,8 @@ import domain.betting.Outcome;
  * @version 1.0
  */
 public final class Printer {
+
+    private static Logger logger = LoggerFactory.getLogger(Printer.class);
 
     private Printer() {
     }
@@ -20,7 +25,7 @@ public final class Printer {
      * @param message text to print on console.
      */
     public static void printToConsole(String message) {
-        System.out.println(message);
+        logger.info("{} \n", message);
     }
 
     /**
