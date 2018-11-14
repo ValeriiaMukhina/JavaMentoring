@@ -55,7 +55,7 @@ public class BetCalculationServiceTest {
         outcomes.add(outcome);
         sportEvents.get(0).setEventResult(new Result(outcomes));
         OutcomeOdd outcomeOdd = sportEvents.get(0).getBets().get(0).getOutcomes().get(0).getOutcomeOdd().get(0);
-        Wager wager = new Wager(player, outcomeOdd, 10.0, player.getCurrency(), LocalDateTime.now(), State.UNPROCESSED);
+        Wager wager = new Wager(player, outcomeOdd, 10.0, LocalDateTime.now());
         wagers.add(wager);
         //When
         List<Double> prizes = service.calculatedPrizes(outcomes, wagers);
@@ -72,7 +72,7 @@ public class BetCalculationServiceTest {
         outcomes.add(outcome);
         sportEvents.get(0).setEventResult(new Result(outcomes));
         OutcomeOdd outcomeOdd = sportEvents.get(0).getBets().get(0).getOutcomes().get(0).getOutcomeOdd().get(0);
-        Wager wager = new Wager(player, outcomeOdd, 10.0, player.getCurrency(), LocalDateTime.now(), State.UNPROCESSED);
+        Wager wager = new Wager(player, outcomeOdd, 10.0, LocalDateTime.now());
         wagers.add(wager);
         //When
         service.getRealOutcomes(sportEvents);

@@ -22,13 +22,13 @@ public class Wager {
     private State state;
     private Boolean isWin;
 
-    public Wager(Player player, OutcomeOdd outcomeOdd, double wage, Currency currency, LocalDateTime timestamp, State state) {
+    public Wager(Player player, OutcomeOdd outcomeOdd, double wage, LocalDateTime timestamp) {
         this.player = player;
         this.outcomeOdd = outcomeOdd;
         this.amount = wage;
-        this.currency = currency;
+        this.currency = player.getCurrency();
         this.timestamp = timestamp;
-        this.state = state;
+        this.state = State.UNPROCESSED;
     }
 
     public Player getPlayer() {

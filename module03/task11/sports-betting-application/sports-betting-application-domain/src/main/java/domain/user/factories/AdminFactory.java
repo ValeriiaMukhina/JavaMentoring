@@ -1,8 +1,4 @@
 package domain.user.factories;
-
-import domain.user.Admin;
-import domain.user.User;
-
 /**
  * Abstract Factory pattern used for admin creation.
  * @author  Valeriia Biruk
@@ -10,8 +6,4 @@ import domain.user.User;
  */
 public class AdminFactory implements UserFactory {
 
-    @Override
-    public User getFromConsole() {
-        return new Admin();
-    }
 }

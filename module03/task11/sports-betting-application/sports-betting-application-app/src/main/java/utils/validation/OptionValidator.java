@@ -17,15 +17,17 @@ public class OptionValidator implements InputValidator {
     @Override
     public boolean isValid(String data) {
         int val;
-        boolean isValid;
+        boolean isValid = false;
         if ("q".equals(data)) {
             isValid = true;
         }
-        try {
-            val = Integer.parseInt(data);
-            isValid = val <= optionMaxValue;
-        } catch (NumberFormatException e) {
-            isValid = false;
+        if(!isValid) {
+            try {
+                val = Integer.parseInt(data);
+                isValid = val <= optionMaxValue;
+            } catch (NumberFormatException e) {
+                isValid = false;
+            }
         }
         return isValid;
     }

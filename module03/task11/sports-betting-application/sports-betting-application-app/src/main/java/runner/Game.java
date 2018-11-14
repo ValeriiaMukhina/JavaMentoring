@@ -42,7 +42,6 @@ public class Game {
         boolean exit = false;
 
         List<PossibleBetDescription> possibleBetDescriptions = service.listAllBets(sportEvents);
-
         while (!exit) {
             int answer = askToChooseBet(possibleBetDescriptions);
             if (answer == 0) {
@@ -75,7 +74,7 @@ public class Game {
         } else {
             player.setBalance(player.getBalance() - wage);
             Printer.printToConsole("> Your balance is: " + player.getBalance() + player.getCurrency());
-            Wager wager = new Wager(player, outcomeOdd, wage, player.getCurrency(), LocalDateTime.now(), State.UNPROCESSED);
+            Wager wager = new Wager(player, outcomeOdd, wage, LocalDateTime.now());
             wagers.add(wager);
         }
     }
