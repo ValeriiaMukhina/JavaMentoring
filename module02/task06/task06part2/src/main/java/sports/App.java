@@ -8,7 +8,7 @@ import sports.runner.AppRunner;
  * @version 1.0
  */
 public class App {
-    public static void main(String[] args) {
+public static void main(String[] args) {
         new AppRunner().start();
-    }
-}
+        }
+        }
