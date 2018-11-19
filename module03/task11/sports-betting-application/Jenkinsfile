@@ -1,0 +1,37 @@
+node('TAF') {
+   properties([
+     parameters([
+       choice(
+         defaultValue: "devEpam",
+         choices: "devEpam\ndev\nfunc\nuat",
+         description: "",
+         name: 'ENV'
+       ),
+       string(
+         defaultValue: "Journey",
+         description: "",
+         name: 'Category'
+       ),
+     ])
+   ])
+   stage('Git checkout') {
+      checkout scm
+   }
+   stage('Build') {
+      // Run the maven build
+      if (isUnix()) {
+         sh "mvn -Dwebdriver.remote.url=http://ecsd003002fe.epam.com:4444/wd/hub clean verify serenity:aggregate -Dgroups=com.mckesson.categories.${params.Category} -Dtest.environment=${params.ENV}"
+      }
+   }
+   stage('Results') {
+     publishHTML (target: [
+      allowMissing: true,
+      alwaysLinkToLastBuild: true,
+      keepAll: true,
+      reportDir: 'target/site/serenity',
+      reportFiles: 'index.html',
+      reportName: "Serenity Report"
+    ])
+
+   }
+}
