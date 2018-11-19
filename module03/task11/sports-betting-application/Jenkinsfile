@@ -3,8 +3,4 @@ node('master') {
    stage('Git checkout') {
       checkout scm
    }
-   stage('Build') {
-      // Run the maven build
-      sh "mvn clean deploy"
-   }
 }
