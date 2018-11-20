@@ -6,7 +6,8 @@ node('master') {
    stage('Build') {
       // Run the maven build
       sh "ls"
-      sh "cd JavaMentoring/module03/task11/sports-betting-application"
+      sh "cd module03/task11/sports-betting-application/"
+      sh "ls"
       sh "mvn clean deploy"
    }
 }
