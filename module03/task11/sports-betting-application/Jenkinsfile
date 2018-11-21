@@ -5,6 +5,6 @@ node('master') {
    }
    stage('Build') {
       // Run the maven build
-      sh "ls && cd module03/task11/sports-betting-application/ && ls && mvn clean package"
+      sh "ls && cd module03/task11/sports-betting-application/ && ls && mvn clean deploy"
    }
 }
