@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 public class BetCalculationServiceTest {
     private List<SportEvent> sportEvents;
     private Outcome outcome;
+    private Outcome outcome2;
     private BetCalculationService service;
     private Player player;
 
@@ -32,10 +33,15 @@ public class BetCalculationServiceTest {
                 .setValue("test outcome")
                 .setOdd(new OutcomeOdd(5.0, LocalDateTime.of(2016, 9, 30, 19, 0)))
                 .build();
+        outcome2 = Outcome.newBuilder()
+                .setValue("test outcome2")
+                .setOdd(new OutcomeOdd(5.0, LocalDateTime.of(2016, 9, 30, 19, 0),LocalDateTime.of(2018, 9, 30, 19, 0)))
+                .build();
         Bet betFootball = Bet.newBuilder()
                 .setBetType(BetTypes.BETTING_FOR_WINNER)
                 .setDescription("--")
                 .setOutcome(outcome)
+                .setOutcome(outcome2)
                 .build();
         footballSportEvent.getBets().add(betFootball);
         sportEvents.add(footballSportEvent);
