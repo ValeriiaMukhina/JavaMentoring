@@ -1,0 +1,10 @@
+node('master') {
+
+   stage('Git checkout') {
+      checkout scm
+   }
+   stage('Build') {
+      // Run the maven build
+      sh "ls && cd module03/task11/sports-betting-application/ && ls && mvn clean deploy"
+   }
+}
