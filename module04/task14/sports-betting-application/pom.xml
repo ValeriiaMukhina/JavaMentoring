@@ -39,6 +39,7 @@
     <commons.collections.version>4.2</commons.collections.version>
     <commons.io.version>2.6</commons.io.version>
     <commons.lang.version>3.8.1</commons.lang.version>
+    <aspectj.version>1.9.2</aspectj.version>
 
     <jacoco.reportPath>${project.basedir}/../target/jacoco.exec</jacoco.reportPath>
   </properties>
@@ -109,6 +110,17 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${aspectj.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjtools</artifactId>
+      <version>${aspectj.version}</version>
     </dependency>
   </dependencies>
 

@@ -2,24 +2,33 @@ package runner;
 
 import domain.betting.*;
 import domain.user.Player;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.PossibleBetDescription;
 import utils.ConsoleReader;
+import utils.validation.OptionValidator;
 
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.mockito.Mockito.*;
 
-
-@RunWith(PowerMockRunner.class)
 @PrepareForTest( { ConsoleReader.class })
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
 public class GameTest {
 
     private Player player;
@@ -27,7 +36,15 @@ public class GameTest {
     private Outcome outcome;
     private List<PossibleBetDescription> descriptions;
 
-/*
+    @Autowired private PossibleBetDescription possibleBetDescription;
+    @Autowired private Game game;
+    @Autowired private OptionValidator optionValidator;
+
+    @BeforeClass
+    public static void setLocale() {
+        Locale.setDefault(Locale.US);
+    }
+
     @Before
     public void generateTestData() {
         player = new Player();
@@ -52,8 +69,7 @@ public class GameTest {
         footballSportEvent.getBets().add(betFootball);
         sportEvents.add(footballSportEvent);
         descriptions = new ArrayList<>();
-        PossibleBetDescription possibleBetDescription =
-                new PossibleBetDescription(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
+        possibleBetDescription.init(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
         descriptions.add(possibleBetDescription);
         player = mock(Player.class);
 
@@ -61,12 +77,11 @@ public class GameTest {
         when(player.getCurrency()).thenReturn(Currency.EUR);
         when(player.getBalance()).thenReturn(10.0);
     }
-/*
+
     @Test
     public void verifyExitFromGame() {
-        Game game = new Game(player,sportEvents);
         PowerMockito.mockStatic(ConsoleReader.class);
-        when(ConsoleReader.read(new OptionValidator(anyInt()))).thenReturn("0");
+        when(ConsoleReader.read(optionValidator)).thenReturn("0");
         //When
         game.start();
         //Then
@@ -75,14 +90,13 @@ public class GameTest {
 
     @Test
     public void verifyNewWagersGenerated() {
-        Game game = new Game(player,sportEvents);
         PowerMockito.mockStatic(ConsoleReader.class);
-        when(ConsoleReader.read(new OptionValidator(anyInt()))).thenReturn("1", "0");
+        when(ConsoleReader.read(optionValidator)).thenReturn("1", "0");
         //When
         game.start();
         //Then
         Assert.assertFalse(game.getWagers().isEmpty());
     }
 
-*/
+
 }

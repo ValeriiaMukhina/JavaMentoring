@@ -1,12 +1,11 @@
 package runner;
 
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.Locale;
 
 /**
  * Class to start application.
@@ -16,7 +15,7 @@ import java.util.Locale;
  */
 public final class App {
 
-    private final static Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
     private App() {
     }
@@ -29,11 +28,12 @@ public final class App {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
 
-        logger.info("Initializing application context \n");
+        LOGGER.debug("Initializing application context \n");
         ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        logger.info("Initialized application context");
+        LOGGER.debug("Initialized application context");
 
         AppRunner runner = ctx.getBean(AppRunner.class);
         runner.start();
+        ((AnnotationConfigApplicationContext) ctx).close();
     }
 }

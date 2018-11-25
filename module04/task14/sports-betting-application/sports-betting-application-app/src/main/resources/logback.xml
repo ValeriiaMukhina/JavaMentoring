@@ -44,7 +44,6 @@
 
     <root>
         <level value ="INFO" />
-        <appender-ref ref="console" />
         <appender-ref ref="file" />
     </root>
 
@@ -52,8 +51,9 @@
         <level value="ERROR"/>
     </logger>
 
-    <logger name="cleanCode">
-        <level value="INFO"/>
+    <logger name="runner" additivity = "false">
+        <level value="DEBUG"/>
+        <appender-ref ref="file" />
     </logger>
 
 </configuration>

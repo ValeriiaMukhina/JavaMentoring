@@ -1,10 +1,10 @@
 package runner;
 
-
-import domain.user.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
 import utils.Printer;
 
 import java.util.Locale;
@@ -15,15 +15,15 @@ import java.util.Locale;
  * @version 1.0
  */
 @Component
+@Lazy
 public class AppRunner {
     /**
      * Main Application runner.
      * @author  Valeriia Biruk
      * @version 1.0
      */
-    @Autowired Game game;
-    @Autowired
-    MessageSource messageSource;
+    @Autowired private Game game;
+    @Autowired private MessageSource messageSource;
 
     public void start() {
 

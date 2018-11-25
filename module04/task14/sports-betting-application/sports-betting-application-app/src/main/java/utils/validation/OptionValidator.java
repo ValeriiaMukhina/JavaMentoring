@@ -1,11 +1,11 @@
 package utils.validation;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import java.util.Locale;
 
 /**
  * Strategy pattern used.
@@ -17,8 +17,7 @@ import java.util.Locale;
 @Lazy
 public class OptionValidator implements InputValidator {
 
-    @Autowired
-    MessageSource messageSource;
+    @Autowired private MessageSource messageSource;
 
     private int optionMaxValue;
 

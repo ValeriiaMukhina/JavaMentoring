@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import domain.betting.Outcome;
 import domain.betting.Result;
 import domain.betting.SportEvent;
 import domain.betting.Wager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * Service class.

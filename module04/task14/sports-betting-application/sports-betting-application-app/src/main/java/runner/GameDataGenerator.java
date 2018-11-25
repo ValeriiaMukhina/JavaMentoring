@@ -31,9 +31,12 @@ public final class GameDataGenerator {
 
     @Autowired
     private MessageSource messageSource;
-    @Autowired private DoubleValidator doubleValidator;
-    @Autowired private CurrencyValidator currencyValidator;
-    @Autowired private DateValidator dateValidator;
+    @Autowired
+    private DoubleValidator doubleValidator;
+    @Autowired
+    private CurrencyValidator currencyValidator;
+    @Autowired
+    private DateValidator dateValidator;
 
     //CHECKSTYLE:OFF: checkstyle:magicnumber
     public List<SportEvent> createTestData() {

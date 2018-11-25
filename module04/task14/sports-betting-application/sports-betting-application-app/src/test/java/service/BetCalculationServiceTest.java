@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import runner.AppConfig;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,10 +27,12 @@ public class BetCalculationServiceTest {
     private List<SportEvent> sportEvents;
     private Outcome outcome;
     private Outcome outcome2;
+    @Autowired
     private BetCalculationService service;
     private Player player;
 
     @Autowired PossibleBetDescription possibleBetDescription;
+
 
     @BeforeClass
     public static void setLocale() {
@@ -62,9 +63,6 @@ public class BetCalculationServiceTest {
                 .build();
         footballSportEvent.getBets().add(betFootball);
         sportEvents.add(footballSportEvent);
-
-
-        service = new BetCalculationService();
         player = new Player();
         player.setBalance(1000);
         player.setCurrency(Currency.EUR);

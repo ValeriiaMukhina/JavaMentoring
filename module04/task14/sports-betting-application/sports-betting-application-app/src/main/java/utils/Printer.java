@@ -1,15 +1,15 @@
 package utils;
 
-import domain.betting.Outcome;
+import java.util.List;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Locale;
-
+import domain.betting.Outcome;
 /**
  * Wrapper for system out.
  *
@@ -22,10 +22,7 @@ public final class Printer {
     private static String suffix;
     private static String prefix;
 
-    private static Logger logger = LoggerFactory.getLogger(Printer.class);
-
-    private Printer() {
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(Printer.class);
 
     /**
      * System out println wrapper.
@@ -33,7 +30,7 @@ public final class Printer {
      * @param message text to print on console.
      */
     public static void printToConsole(String message) {
-        logger.info("{} \n", message);
+        System.out.println(message);
     }
 
     /**
