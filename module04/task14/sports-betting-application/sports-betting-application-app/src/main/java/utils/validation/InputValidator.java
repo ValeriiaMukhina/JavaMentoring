@@ -1,11 +1,14 @@
 package utils.validation;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Strategy pattern used.
  *
  * @author Valeriia Biruk
  * @version 1.0
  */
+@Component
 public interface InputValidator {
 
     /**

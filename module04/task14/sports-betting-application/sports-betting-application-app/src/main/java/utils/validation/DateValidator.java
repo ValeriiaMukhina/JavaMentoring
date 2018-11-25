@@ -1,8 +1,13 @@
 package utils.validation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * Strategy pattern used.
@@ -10,7 +15,11 @@ import java.time.format.DateTimeParseException;
  * @author Valeriia Biruk
  * @version 1.0
  */
+@Component
 public class DateValidator implements InputValidator {
+
+    @Autowired
+    MessageSource messageSource;
 
     @Override
     public boolean isValid(String data) {
@@ -30,11 +39,13 @@ public class DateValidator implements InputValidator {
 
     @Override
     public String errorMessage() {
-        return "Please enter a valid date.";
+        return messageSource.getMessage("validation.dateError", new Object[]{},
+                Locale.getDefault());
     }
 
     @Override
     public String message() {
-        return "Enter a date in format :'yyyy-MM-dd'";
+        return messageSource.getMessage("validation.dateMessage", new Object[]{},
+                Locale.getDefault());
     }
 }

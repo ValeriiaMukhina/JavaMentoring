@@ -3,23 +3,40 @@ package service;
 import domain.betting.*;
 import domain.user.Player;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import runner.AppConfig;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.Assert.*;
 
 /**
  * Unit test for BetCalculationService
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
 public class BetCalculationServiceTest {
+
     private List<SportEvent> sportEvents;
     private Outcome outcome;
     private Outcome outcome2;
     private BetCalculationService service;
     private Player player;
+
+    @Autowired PossibleBetDescription possibleBetDescription;
+
+    @BeforeClass
+    public static void setLocale() {
+        Locale.setDefault(Locale.US);
+    }
 
     @Before
     public void generateTestData() {
@@ -55,6 +72,7 @@ public class BetCalculationServiceTest {
 
     @Test
     public void testCalculatePrize() {
+
         //Given
         List<Wager> wagers = new ArrayList<>();
         List<Outcome> outcomes = new ArrayList<>();
@@ -91,8 +109,7 @@ public class BetCalculationServiceTest {
     public void testListAllBets() {
         //Given
         List<PossibleBetDescription> expected = new ArrayList<>();
-        PossibleBetDescription possibleBetDescription =
-                new PossibleBetDescription(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
+                possibleBetDescription.init(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
         expected.add(possibleBetDescription);
         //When Then
         assertEquals(expected, service.listAllBets(sportEvents));
@@ -110,8 +127,7 @@ public class BetCalculationServiceTest {
     public void testGetPossibleBetDescriptionByIndex() {
         //Given
         List<PossibleBetDescription> descriptions = new ArrayList<>();
-        PossibleBetDescription possibleBetDescription =
-                new PossibleBetDescription(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
+        possibleBetDescription.init(1, sportEvents.get(0), sportEvents.get(0).getBets().get(0), outcome, outcome.getOutcomeOdd().get(0) );
         descriptions.add(possibleBetDescription);
         //Then
         assertEquals(service.getPossibleBetDescriptionByIndex(descriptions,1), possibleBetDescription);

@@ -1,11 +1,21 @@
 package utils.validation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
+
+import java.util.Locale;
+
 /**
  * Strategy pattern used.
  * @author  Valeriia Biruk
  * @version 1.0
  */
+@Component
 public class CurrencyValidator implements InputValidator {
+
+    @Autowired
+    MessageSource messageSource;
 
     @Override
     public boolean isValid(String data) {
@@ -16,11 +26,13 @@ public class CurrencyValidator implements InputValidator {
 
     @Override
     public String errorMessage() {
-        return "Please enter EUR/HUF/USD value.";
+        return messageSource.getMessage("validation.currencyError", new Object[]{},
+                Locale.getDefault());
     }
 
     @Override
     public String message() {
-        return "Enter currency in format EUR/HUF/USD";
+        return messageSource.getMessage("validation.currencyMessage", new Object[]{},
+                Locale.getDefault());
     }
 }

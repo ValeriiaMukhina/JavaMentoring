@@ -1,27 +1,42 @@
 package utils.validation;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
 public class OptionValidatorTest {
+    @Autowired
+    OptionValidator optionValidator;
+
+    @Before
+    public void setMaxSize() {
+        optionValidator.setOptionMaxValue(8);
+    }
 
     @Test
     public void isValidBoundaryValue() {
-        Assert.assertTrue(new OptionValidator(8).isValid("8"));
+        Assert.assertTrue(
+                optionValidator.isValid("8"));
     }
 
     @Test
     public void isValidNegativeCase() {
-        Assert.assertFalse(new OptionValidator(8).isValid("9"));
+        Assert.assertFalse(optionValidator.isValid("9"));
     }
 
     @Test
     public void isValidPositiveCase() {
-        Assert.assertTrue(new OptionValidator(8).isValid("7"));
+        Assert.assertTrue(optionValidator.isValid("7"));
     }
 
     @Test
     public void isValidWithQuit() {
-        Assert.assertTrue(new OptionValidator(8).isValid("q"));
+        Assert.assertTrue(optionValidator.isValid("q"));
     }
 }

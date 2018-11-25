@@ -11,17 +11,22 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import domain.betting.Outcome;
-import domain.betting.PossibleBetDescription;
 import domain.betting.Result;
 import domain.betting.SportEvent;
 import domain.betting.Wager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * Service class.
  *
  * @author Valeriia Biruk
  * @version 1.0
  */
+@Service
 public class BetCalculationService {
+
+    @Autowired private PossibleBetDescription possibleBetDescription;
     /**
      * describe all bets.
      * @param  sportEvents all possible evens
@@ -38,7 +43,7 @@ public class BetCalculationService {
                                                         || outcomeOdd.getValidTo().isAfter(LocalDateTime.now()))
                                         ).forEach(
                                                 outcomeOdd -> possibleBets.add(
-                                                        new PossibleBetDescription(numberOfBet.getAndIncrement(), event, bet, outcome, outcomeOdd)
+                                                        possibleBetDescription.init(numberOfBet.getAndIncrement(), event, bet, outcome, outcomeOdd)
                                                 )
                                         )
                         )

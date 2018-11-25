@@ -24,6 +24,7 @@ public class PrinterTest {
         Assert.assertEquals(expectedValueToPrint.trim(), outContent.toString().trim());
     }
 
+    /*
     @Test
     public void printPrizesTest() {
         List<Double> prizes = Arrays.asList(4.0);
@@ -53,4 +54,5 @@ public class PrinterTest {
 
         Assert.assertEquals(expectedValueToPrint.trim(), outContent.toString().trim());
     }
+    */
 }
