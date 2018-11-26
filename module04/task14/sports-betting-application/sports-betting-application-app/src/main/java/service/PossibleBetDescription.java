@@ -1,16 +1,20 @@
 package service;
-
-import domain.betting.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Service;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
+
+import domain.betting.Bet;
+import domain.betting.BetTypes;
+import domain.betting.Outcome;
+import domain.betting.OutcomeOdd;
+import domain.betting.SportEvent;
 
 /**
  * pretty wrapper for all bet information to print.
@@ -22,7 +26,7 @@ import java.util.Objects;
 public class PossibleBetDescription {
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     private String description;
     private int numberOfBet;
@@ -31,6 +35,16 @@ public class PossibleBetDescription {
     private Outcome outcome;
     private OutcomeOdd outcomeOdd;
 
+    /**
+     * init method to create instance.
+     *
+     * @return Possible Bet Description instance
+     * @param numberOfBet number of bet
+     * @param sportEvent sport evant
+     * @param bet bet
+     * @param outcome outcome
+     * @param outcomeOdd outcome odd
+     */
     public PossibleBetDescription init(int numberOfBet, SportEvent sportEvent, Bet bet, Outcome outcome, OutcomeOdd outcomeOdd) {
         this.sportEvent = checkNotNull(sportEvent);
         this.bet = checkNotNull(bet);

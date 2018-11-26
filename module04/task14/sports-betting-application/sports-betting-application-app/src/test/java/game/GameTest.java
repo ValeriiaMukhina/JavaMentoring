@@ -1,4 +1,4 @@
-package runner;
+package game;
 
 import domain.betting.*;
 import domain.user.Player;
@@ -7,24 +7,23 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import runner.Game;
 import service.PossibleBetDescription;
 import utils.ConsoleReader;
 import utils.validation.OptionValidator;
-
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @PrepareForTest( { ConsoleReader.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -47,10 +46,6 @@ public class GameTest {
 
     @Before
     public void generateTestData() {
-        player = new Player();
-        player.setBalance(1000);
-        player.setCurrency(Currency.EUR);
-        player.setName("Test player");
         sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
                 .setTitle("Test Sport Event")

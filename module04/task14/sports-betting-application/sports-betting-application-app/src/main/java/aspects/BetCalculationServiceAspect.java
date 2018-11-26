@@ -1,18 +1,19 @@
 package aspects;
 
+import java.util.Arrays;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import runner.App;
 
-import java.util.Arrays;
+import runner.App;
 
 @Aspect
 public class BetCalculationServiceAspect {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(App.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
     @Pointcut("execution(* service.BetCalculationService.*(..))")
     public void log() {
@@ -20,14 +21,14 @@ public class BetCalculationServiceAspect {
 
     @Before("log()")
     public void printParameters(JoinPoint joinPoint) {
-        LOGGER.debug(joinPoint.getSignature().getName() + " is executing.");
+        LOGGER.debug("{} is executing.", joinPoint.getSignature().getName());
         Object[] args = joinPoint.getArgs();
-        LOGGER.debug("Arguments:" + Arrays.toString(args));
+        LOGGER.debug("Arguments: {}", Arrays.toString(args));
     }
 
     @AfterReturning(pointcut = "log()", returning = "result")
     public void printReturnValue(JoinPoint joinPoint, Object result) {
-        LOGGER.debug("Result: " + result);
+        LOGGER.debug("Result: {}", result);
     }
 
     @Around("log()")
@@ -35,7 +36,7 @@ public class BetCalculationServiceAspect {
         long start = System.currentTimeMillis();
         Object output = pjp.proceed();
         long elapsedTime = System.currentTimeMillis() - start;
-        LOGGER.debug("Method execution time: " + elapsedTime + " milliseconds.");
+        LOGGER.debug("Method execution time: {} milliseconds.", elapsedTime);
         return output;
     }
 }

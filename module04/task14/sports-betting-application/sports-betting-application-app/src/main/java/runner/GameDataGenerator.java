@@ -1,10 +1,18 @@
 package runner;
 
-import domain.betting.*;
-import domain.user.Player;
+import static domain.betting.Bet.newBuilder;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+
+import domain.betting.*;
+import domain.user.Player;
 import utils.ConsoleReader;
 import utils.DataUtils;
 import utils.Printer;
@@ -12,13 +20,6 @@ import utils.validation.CurrencyValidator;
 import utils.validation.DateValidator;
 import utils.validation.DoubleValidator;
 import utils.validation.InputValidator;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import static domain.betting.Bet.newBuilder;
 
 /**
  * Test data generator with Builder pattern.

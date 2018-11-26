@@ -1,13 +1,13 @@
 package utils.validation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
 
 /**
  * Strategy pattern used.
@@ -19,7 +19,7 @@ import java.util.Locale;
 public class DateValidator implements InputValidator {
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     @Override
     public boolean isValid(String data) {
