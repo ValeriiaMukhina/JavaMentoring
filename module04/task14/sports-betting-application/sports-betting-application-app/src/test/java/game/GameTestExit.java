@@ -1,13 +1,11 @@
 package game;
 
-import domain.user.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -29,10 +27,7 @@ import static org.mockito.Mockito.when;
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @PrepareForTest(ConsoleReader.class)
 @ContextConfiguration(classes = {TestConfig.class})
-public class GameTest {
-
-    @Mock
-    private Player player;
+public class GameTestExit {
 
     @Autowired
     @InjectMocks
@@ -53,14 +48,12 @@ public class GameTest {
     }
 
     @Test
-    public void verifyNewWagersGenerated() {
+    public void verifyExitFromGame() {
         PowerMockito.mockStatic(ConsoleReader.class);
-        when(ConsoleReader.read(optionValidator)).thenReturn("1", "0");
-        when(player.getBalance()).thenReturn(10.0);
-        when(ConsoleReader.read(doubleValidator)).thenReturn("1");
+        when(ConsoleReader.read(optionValidator)).thenReturn("0", "0");
         //When
         game.start();
         //Then
-        Assert.assertFalse(game.getWagers().isEmpty());
+        Assert.assertTrue(game.getWagers().isEmpty());
     }
 }

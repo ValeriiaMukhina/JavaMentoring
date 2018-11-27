@@ -3,14 +3,31 @@ package utils;
 import domain.betting.Outcome;
 import domain.betting.OutcomeOdd;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
 public class PrinterTest {
+
+    @Autowired
+    Printer printer;
+
+    @BeforeClass
+    public static void setLocale() {
+        Locale.setDefault(Locale.US);
+    }
 
     @Test
     public void printTest() {
@@ -24,7 +41,7 @@ public class PrinterTest {
         Assert.assertEquals(expectedValueToPrint.trim(), outContent.toString().trim());
     }
 
-    /*
+
     @Test
     public void printPrizesTest() {
         List<Double> prizes = Arrays.asList(4.0);
@@ -54,5 +71,5 @@ public class PrinterTest {
 
         Assert.assertEquals(expectedValueToPrint.trim(), outContent.toString().trim());
     }
-    */
+
 }

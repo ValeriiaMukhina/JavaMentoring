@@ -28,7 +28,7 @@ import utils.validation.InputValidator;
  * @version 1.0
  */
 @Component
-public final class GameDataGenerator {
+public class GameDataGenerator {
 
     @Autowired
     private MessageSource messageSource;
