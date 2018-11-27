@@ -32,12 +32,10 @@ public class TestConfig {
 
     @Mock  private Player player;
 
-
     public TestConfig() {
-        MockitoAnnotations.initMocks(this); //This is a key
+        MockitoAnnotations.initMocks(this);
     }
 
-    //You basically generate getters and add @Bean annotation everywhere
     @Bean
     public GameDataGenerator getGameDataGenerator() {
         return gameDataGenerator;
@@ -78,15 +76,13 @@ public class TestConfig {
 
     @Bean
     public Game getGame() {
-        List<SportEvent> sportEvents;
-        Outcome outcome;
-        sportEvents = new ArrayList<>();
+        List<SportEvent> sportEvents = new ArrayList<>();
         FootballSportEvent footballSportEvent = FootballSportEvent.newBuilder()
                 .setTitle("Test Sport Event")
                 .setStartDate(LocalDateTime.of(2016, 10, 7, 19, 0))
                 .setEndDate(LocalDateTime.of(2016, 10, 7, 21, 0))
                 .build();
-        outcome = Outcome.newBuilder()
+        Outcome  outcome = Outcome.newBuilder()
                 .setValue("test outcome")
                 .setOdd(new OutcomeOdd(5.0, LocalDateTime.of(2016, 9, 30, 19, 0)))
                 .build();
@@ -100,7 +96,6 @@ public class TestConfig {
         when(gameDataGenerator.getUserFromConsole()).thenReturn(player);
         when(gameDataGenerator.createTestData()).thenReturn(sportEvents);
         return new Game();
-
     }
 
     @Bean
