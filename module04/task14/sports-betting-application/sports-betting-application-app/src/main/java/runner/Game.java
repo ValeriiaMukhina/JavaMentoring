@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
+
 import domain.betting.Outcome;
 import domain.betting.OutcomeOdd;
 import domain.betting.SportEvent;
 import domain.betting.Wager;
 import domain.user.Player;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 import service.BetCalculationService;
 import service.PossibleBetDescription;
 import utils.ConsoleReader;
@@ -20,8 +23,6 @@ import utils.DataUtils;
 import utils.Printer;
 import utils.validation.DoubleValidator;
 import utils.validation.OptionValidator;
-
-import javax.annotation.PostConstruct;
 
 /** gambling game class.
  * @author Valeriia Biruk
@@ -48,7 +49,8 @@ public class Game {
     private BetCalculationService service;
 
     private List<Wager> wagers = new ArrayList<>();
-
+    /** init method to initialize bean.
+     */
     @PostConstruct
     public void init() {
         this.player = gameDataGenerator.getUserFromConsole();
