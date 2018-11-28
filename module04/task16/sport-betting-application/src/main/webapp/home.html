@@ -16,35 +16,69 @@
 </head>
 <body>
 
-<div class="container">
-  <h2>Account details</h2>
+<div class="container border border-primary rounded">
+  <h2 class="table-primary">Account details</h2>
   <form action="/action_page.php">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="name" class="form-control" id="name" placeholder="Arnold Schwarzenegger" name="name">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Name</span>
+      </div>
+      <input class="form-control" id="username" required="" type="text" placeholder="Arnold Schwarzenegger">
+      <div class="invalid-feedback" style="width: 100%;">
+        Your username is required.
+      </div>
     </div>
-    <div class="form-group">
-      <label for="birthday">Date of Birth:</label>
-      <input type="name" class="form-control" id="birthday" placeholder="1947-07-30" name="birthday">
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Date of Birth:</span>
+      </div>
+      <input class="form-control" id="birthday" required="" type="text" placeholder="1947-07-30">
+      <div class="invalid-feedback" style="width: 100%;">
+        Your date of Birth is required.
+      </div>
     </div>
-    <div class="form-group">
-      <label for="account">Account number:</label>
-      <input type="name" class="form-control" id="account" placeholder="12345678-12345678" name="account">
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Account number:</span>
+      </div>
+      <input class="form-control" id="account" required="" type="text" placeholder="12345678-12345678">
+      <div class="invalid-feedback" style="width: 100%;">
+        Your account number is required.
+      </div>
     </div>
-    <div class="form-group">
-      <label for="currency">Currency:</label>
-      <input type="name" class="form-control" id="currency" placeholder="USD" name="currency">
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Currency:</span>
+      </div>
+      <select class="custom-select d-block w-100" id="currencySelect" required="">
+        <option value="">USD</option>
+        <option>EUR</option>
+      </select>
+      </input>
+      <div class="invalid-feedback" style="width: 100%;">
+        Your currency is required.
+      </div>
     </div>
-    <div class="form-group">
-      <label for="balance">Balance:</label>
-      <input type="name" class="form-control" id="balance" placeholder="99999999" name="balance">
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Balance:</span>
+      </div>
+      <input class="form-control" id="balance" required="" type="text" placeholder="99999999">
+      <div class="invalid-feedback" style="width: 100%;">
+        Your balance is required.
+      </div>
     </div>
+
     <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
 
 
-<div class="container">
+<div class="container border border-primary rounded">
   <h2>Wagers</h2>
   <table class="table">
     <thead>
