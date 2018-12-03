@@ -20,13 +20,13 @@
 
 
 	<servlet>
-		<servlet-name>helloSpringServlet</servlet-name>
-		<servlet-class>com.epam.trainings.servlet.HelloSpringServlet</servlet-class>
+		<servlet-name>userAccountServlet</servlet-name>
+		<servlet-class>com.epam.trainings.servlet.UserAccountServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>helloSpringServlet</servlet-name>
-		<url-pattern>/helloSpring</url-pattern>
+		<servlet-name>userAccountServlet</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<jsp-config>
 		<jsp-property-group>

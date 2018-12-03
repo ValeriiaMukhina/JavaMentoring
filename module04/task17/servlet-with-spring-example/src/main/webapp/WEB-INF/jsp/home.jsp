@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
   <title>Sports bet</title>
@@ -7,6 +9,36 @@
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
+  <script>
+  function validate()
+  {
+   var username = document.accountInfo.username.value;
+   var birthday = document.accountInfo.birthday.value;
+   var account = document.accountInfo.account.value;
+   var currency = document.accountInfo.currencySelect.value;
+   var balance = document.accountInfo.balance.value;
+
+   if (username==null || username=="")
+   {
+   alert("User Name can't be blank");
+   return false;
+   }
+   else if (birthday==null || birthday=="")
+   {
+   alert("Date of birth can't be blank");
+   return false;
+   }
+   else if (account==null || account=="")
+   {
+   alert("Account number can't be blank");
+   return false;
+   }
+   else if (balance==null || balance=="")
+   {
+   alert("Balance can't be blank");
+   return false;
+   }
+  </script>
   <style>
   .fakeimg {
       height: 200px;
@@ -19,8 +51,8 @@
 <div class="card border-primary">
   <div class="card-header text-white bg-primary">Account details</div>
   <div class="card-body">
-    <form action="/action_page.php">
-      <div class="input-group form-group">
+    <form action="RegisterServlet" method="post" onsubmit="return validate()">
+      <div id="accountInfo" class="input-group form-group" >
         <div class="input-group-prepend">
           <span class="input-group-text">Name</span>
         </div>
