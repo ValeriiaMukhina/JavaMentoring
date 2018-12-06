@@ -13,7 +13,7 @@
    var username = document.accountInfo.username.value;
    var birthday = document.accountInfo.birthday.value;
    var account = document.accountInfo.account.value;
-   var currency = document.accountInfo.currencySelect.value;
+   var currency = document.accountInfo.currency.value;
    var balance = document.accountInfo.balance.value;
 
    if (username==null || username=="")
@@ -49,12 +49,12 @@
 <div class="card border-primary">
   <div class="card-header text-white bg-primary">Account details</div>
   <div class="card-body">
-    <form action="RegisterServlet" method="post" onsubmit="return validate()">
+    <form action="/home" method="post" onsubmit="return validate()">
       <div id="accountInfo" class="input-group form-group" >
         <div class="input-group-prepend">
           <span class="input-group-text">Name</span>
         </div>
-        <input class="form-control" id="username" required="" type="text" placeholder="Arnold Schwarzenegger">
+        <input class="form-control" id="username" name="username" required="" type="text" placeholder="Arnold Schwarzenegger">
         <div class="invalid-feedback" style="width: 100%;">
           Your username is required.
         </div>
@@ -64,7 +64,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Date of Birth:</span>
         </div>
-        <input class="form-control" id="birthday" required="" type="text" placeholder="1947-07-30">
+        <input class="form-control" id="birthday" name="birthday" required="" type="text" placeholder="1947-07-30">
         <div class="invalid-feedback" style="width: 100%;">
           Your date of Birth is required.
         </div>
@@ -74,7 +74,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Account number:</span>
         </div>
-        <input class="form-control" id="account" required="" type="text" placeholder="12345678-12345678">
+        <input class="form-control" id="account" name="account" required="" type="text" placeholder="12345678-12345678">
         <div class="invalid-feedback" style="width: 100%;">
           Your account number is required.
         </div>
@@ -83,7 +83,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Currency:</span>
         </div>
-        <select class="custom-select" id="currencySelect" required="">
+        <select class="custom-select" id="currency" name="currency" required="">
           <option value="USD">USD</option>
           <option value="EUR">EUR</option>
         </select>
@@ -96,7 +96,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Balance:</span>
         </div>
-        <input class="form-control" id="balance" required="" type="text" placeholder="99999999">
+        <input class="form-control" id="balance" name="balance" required="" type="text" placeholder="99999999">
         <div class="invalid-feedback" style="width: 100%;">
           Your balance is required.
         </div>

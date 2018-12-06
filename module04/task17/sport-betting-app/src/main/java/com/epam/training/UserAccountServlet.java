@@ -39,7 +39,6 @@ public class UserAccountServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Copying all the input parameters in to local variables
 		String username = request.getParameter("username");
 		String birthday = request.getParameter("birthday");
 		String account = request.getParameter("account");
@@ -47,7 +46,6 @@ public class UserAccountServlet extends HttpServlet {
 		String balance = request.getParameter("balance");
 
 		Player player = new Player();
-		//Using Java Beans - An easiest way to play with group of related data
 		player.setName(username);
 		player.setDateOfBirth(DataUtils.getDate(birthday));
 		player.setAccountNumber(account);
@@ -56,7 +54,6 @@ public class UserAccountServlet extends HttpServlet {
 
 		UserAccountDao registerDao = new UserAccountDao();
 
-		//The core Logic of the Registration application is present here. We are going to insert user data in to the database.
 		String userRegistered = registerDao.registerUser(player);
 
 		if(userRegistered.equals("SUCCESS"))   //On success, you can display a message to user on Home page
@@ -65,7 +62,6 @@ public class UserAccountServlet extends HttpServlet {
 		}
 		else   //On Failure, display a meaningful message to the User.
 		{
-			request.setAttribute("errMessage", userRegistered);
 			request.getRequestDispatcher("/hello-spring.jsp").forward(request, response);
 		}
 	}
